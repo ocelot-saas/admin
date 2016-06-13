@@ -3,6 +3,11 @@ language: node_js
 node_js:
 - "node"
 
+# The secure env variables are: GEMFURY_KEY
+env:
+  global:
+  - secure: "ThUUJiI7oPVYjQf9IdW4FuOCRjzPz3dw9GrQqIS9GiPxGJc9tsw7LWQLP/ofBdVTV4GnQm1U0QDCRLl2EvhUo6pjgDOj4pSK2Z5zCH2c1MZ6pd4rVp8F2NaQ11ya+bu3DboDIKYTM3nHFPthgvoCXKulJdDYuFyphwWrTFAeVpbXZW/Oe5Re80rQsiUUWwep0PXw6af2WdbT+KGOr1ArVEKWDlYLVRbS+7nyjO0RoQ5SeHhYJNNp7/JITE70ocaVPP8fh4KulKeJVZ/DpiscTEFU5DYxyDfAmTmX8XrlTTJF/7/9JI34HUFFDnT6YpUT1Dztrew5HwhjqAJlJjnPLPF4Ps4j6yh/bvPIqL206G3iMRkocXdAtQAJyDSex0UVUfinTVRhyKenn8MQ08l1x09tt+m1sdoR8f1oe2eBfwEp6QkjbqX7xxJBF/URyT1NV9z0279fGQsG9JEfbzkIL9GlAjKrnsQCecgUctIzJYUZhMgNgCOHCmqn+Xn5Nfg8XE+lSjovksAYvvaZwV/f7ehGJfsXoEsbJZF5n9dz57RuSn8QDuL1Pa8T5NcFMIwUUkMwzyooXPI/aRw3B5JUhApmmge9ZGneFdljE+xflZXhQO0UJiI56Gxg+mxnVsCks6tHURjR2IdNWmzocX4NzT0SfE+7LVgWjdtCnUF94M8="
+
 install:
 - npm install
 
@@ -10,3 +15,8 @@ script:
 - npm run-script test-travis
 
 after_success: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: bin/togemfury.sh
