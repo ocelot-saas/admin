@@ -4,7 +4,8 @@
   "description": "The admin interface users use to manage their account with us, as an NPM package.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "./node_modules/mocha/bin/mocha ./tests/*.js",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./tests/*.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/ocelot-saas/admin/issues"
   },
-  "homepage": "https://github.com/ocelot-saas/admin#readme"
+  "homepage": "https://github.com/ocelot-saas/admin#readme",
+  "devDependencies": {
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.5.3"
+  }
 }
