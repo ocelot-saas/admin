@@ -1,5 +1,5 @@
 var assert = require('assert');
-var fizzbuzz = require('../');
+var fizzbuzz = require('../src/fizz.js');
  
 describe('fizzbuzz', function() {
         it('returns null when passed a non-number', function() {
