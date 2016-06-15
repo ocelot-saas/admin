@@ -8,8 +8,8 @@
     "prestart": "bower install",
     "start": "npm install",
     "poststart": "gulp",
-    "test": "./node_modules/webpack/bin/webpack.js --config webpack.config.tests.js && ./node_modules/mocha/bin/mocha ./build/tests.bundle.js",
-    "test-travis": "./node_modules/webpack/bin/webpack.js --config webpack.config.tests.js && ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./tests/*.js"
+    "test": "gulp build:tests --config webpack.config.tests.js && ./node_modules/mocha/bin/mocha ./dist/jstests/tests.bundle.js",
+    "test-travis": "gulp build:tests && ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./tests/*.js"
   },
   "repository": {
     "type": "git",

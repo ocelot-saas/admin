@@ -37,6 +37,7 @@ var ignored_files = '!' + hidden_files;
 // MAIN PATHS
 var paths = {
     app: 'src/',
+    tests: 'tests/',
     dist: 'dist/',
     markup: 'jade/',
     styles: 'sass/',
@@ -62,8 +63,14 @@ var vendor = {
 // SOURCES CONFIG
 var source = {
     scripts: {
-        app: [paths.app + paths.scripts + '**/*.{jsx,js}'],
-        entry: [paths.app + paths.scripts + 'App.jsx']
+	app: {
+	    src: [paths.app + paths.scripts + '**/*.{jsx,js}'],
+	    entry: [paths.app + paths.scripts + 'App.jsx']
+	},
+	tests: {
+	    src: [paths.tests + '*.{jsx,js}'],
+	    entry: [paths.tests + 'app.js']
+	}
     },
     templates: {
         index: paths.app + 'index.html'
@@ -82,7 +89,10 @@ var source = {
 
 // BUILD TARGET CONFIG
 var build = {
-    scripts: paths.dist + 'js',
+    scripts: {
+	app: paths.dist + 'js',
+	tests: paths.dist + 'jstests'
+    },
     styles: paths.dist + 'css',
     images: paths.dist + 'img',
     fonts: paths.dist + 'fonts',
@@ -109,6 +119,8 @@ var webpackConfig = require(
     './webpack.config.dev'
 );
 
+var testsWebpackConfig = require('./webpack.config.tests');
+
 var bundler = webpack(webpackConfig);
 
 //---------------
@@ -120,7 +132,7 @@ var bundler = webpack(webpackConfig);
 gulp.task('scripts:app', function() {
     log('Building scripts..');
     // Minify and copy all JavaScript (except vendor scripts)
-    return gulp.src(source.scripts.entry)
+    return gulp.src(source.scripts.app.entry)
         .pipe($.if(useSourceMaps, $.sourcemaps.init()))
         .pipe(
             webpackStream(webpackConfig)
@@ -131,8 +143,18 @@ gulp.task('scripts:app', function() {
         })))
         .on("error", handleError)
         .pipe($.if(useSourceMaps, $.sourcemaps.write()))
-        .pipe(gulp.dest(build.scripts))
+        .pipe(gulp.dest(build.scripts.app))
         .pipe( $.if(isProduction, reload({ stream: true})) );
+});
+
+// JS TESTS
+gulp.task('scripts:tests', function() {
+    log('Building test scripts..');
+
+    return gulp.src(source.scripts.tests.entry)
+	.pipe(webpackStream(testsWebpackConfig))
+        .on('error', handleError)
+        .pipe(gulp.dest(build.scripts.tests));
 });
 
 // VENDOR BUILD
@@ -162,7 +184,7 @@ gulp.task('vendor', function() {
         .pipe(jsFilter)
         .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))
         .pipe($.concat(vendor.bundle.js))
-        .pipe(gulp.dest(build.scripts))
+        .pipe(gulp.dest(build.scripts.app))
         .pipe(jsFilter.restore())
         .pipe(cssFilter)
         .pipe($.if(isProduction, $.cssnano(cssnanoOpts)))
@@ -256,7 +278,7 @@ gulp.task('templates:index', function() {
 gulp.task('watch', function() {
     log('Watching source files..');
 
-    gulp.watch(source.scripts.app, ['scripts:app']);
+    gulp.watch(source.scripts.app.src, ['scripts:app']);
     gulp.watch(source.styles.watch, ['styles:app', 'styles:app:rtl']);
     gulp.watch(source.styles.themes, ['styles:themes']);
     gulp.watch(source.templates.index, ['templates:index']);
@@ -288,7 +310,7 @@ gulp.task('browsersync', function() {
             baseDir: paths.dist,
             middleware: middlewares
         },
-        files: [source.scripts.app]
+	files: [source.scripts.app.src]
     });
 
 });
@@ -298,9 +320,14 @@ gulp.task('browsersync', function() {
 //---------------
 
 // build for production (no watch)
-gulp.task('build', gulpsync.sync([
+gulp.task('build:app', gulpsync.sync([
     'vendor',
-    'assets'
+    'assets:app'
+]));
+
+// Build test cases.
+gulp.task('build:tests', gulpsync.sync([
+    'assets:tests'
 ]));
 
 // Server for development
@@ -318,11 +345,11 @@ gulp.task('usesources', function() {
 // default (no minify)
 gulp.task('default', gulpsync.sync([
     'vendor',
-    'assets',
+    'assets:app',
     'watch'
 ]));
 
-gulp.task('assets', [
+gulp.task('assets:app', [
     'fonts',
     'images',
     'server-assets',
@@ -331,6 +358,10 @@ gulp.task('assets', [
     'styles:app:rtl',
     'styles:themes',
     'templates:index'
+]);
+
+gulp.task('assets:tests', [
+    'scripts:tests',
 ]);
 
 // Remove all files from dist folder
