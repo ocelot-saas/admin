@@ -16,3 +16,6 @@
 
 # Output of coverage tools.
 /coverage/
+
+# Anything containing .DS_Store
+.DS_Store
