@@ -4,15 +4,16 @@
 # Compiled python modules.
 *.pyc
 
-# Setuptools distribution folder.
+# Setuptools distribution folder as well as gulp output files.
 /dist/
 
 # Python egg metadata, regenerated from source files by setuptools.
 /src/*.egg-info
 /src/*.egg
 
-# Node packages
+# Node and bower packages
 /node_modules/
+/bower_components/
 
 # Output of coverage tools.
 /coverage/
