@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: [
-        path.resolve(__dirname, 'master/jsx/App')
+        path.resolve(__dirname, 'src/jsx/App')
     ],
     output: {
         path: path.resolve(__dirname, 'build'),

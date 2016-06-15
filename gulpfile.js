@@ -36,7 +36,7 @@ var ignored_files = '!' + hidden_files;
 
 // MAIN PATHS
 var paths = {
-    app: 'master/',
+    app: 'src/',
     dist: 'dist/',
     markup: 'jade/',
     styles: 'sass/',
