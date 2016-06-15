@@ -1,20 +1,11 @@
 {
-  "name": "Angle",
-  "version": "0.0.0",
-  "authors": [
-    "@themicon_co"
-  ],
-  "description": "Angle - Bootstrap Admin App + jQuery",
+  "name": "admin",
+  "version": "0.0.2",
+  "description": "The admin interface users use to manage their account with us, as an NPM package.",
+  "author": "Horia Coman <horia141@gmail.com>",
   "main": "index.html",
-  "keywords": [
-    "bootstrap",
-    "jquery",
-    "admin",
-    "theme",
-    "dashboard"
-  ],
-  "license": "http://support.wrapbootstrap.com/knowledge_base/topics/usage-licenses",
-  "homepage": "http://themicon.co",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/ocelot-saas/admin#readme",
   "private": true,
   "ignore": [
     "**/.*"
