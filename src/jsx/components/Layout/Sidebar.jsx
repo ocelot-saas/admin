@@ -87,10 +87,24 @@ class Sidebar extends React.Component {
                                 <span data-localize="sidebar.heading.HEADER">Main Navigation</span>
                             </li>
 
+                            <li className={ this.routeActive('dashboard') ? 'active' : '' }>
+                                <Link to="dashboard" title="Dashboard">
+                                <em className="icon-grid"></em>
+                                <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                                </Link>
+                            </li>
+
                             <li className={ this.routeActive('singleview') ? 'active' : '' }>
                                 <Link to="singleview" title="Single View">
                                 <em className="icon-grid"></em>
                                 <span data-localize="sidebar.nav.SINGLEVIEW">Single View</span>
+                                </Link>
+                            </li>
+
+                            <li className={ this.routeActive('special') ? 'active' : '' }>
+                                <Link to="special" title="Special">
+                                <em className="icon-grid"></em>
+                                <span data-localize="sidebar.nav.SPECIAL">Special</span>
                                 </Link>
                             </li>
 

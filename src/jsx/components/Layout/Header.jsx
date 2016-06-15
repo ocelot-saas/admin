@@ -6,23 +6,16 @@ import { NavDropdown, MenuItem } from 'react-bootstrap';
 class Header extends React.Component {
 
     componentDidMount() {
-
         HeaderRun();
-
-    }
-
-    toggleUserblock(e) {
-        e.preventDefault();
-        pubsub.publish('toggleUserblock');
     }
 
     render() {
         const ddAlertTitle = (
             <span>
-                <em className="icon-bell"></em>
-                <span className="label label-danger">11</span>
+                <em className="icon-settings"></em>
             </span>
         )
+
         return (
             <header className="topnavbar-wrapper">
                 { /* START Top Navbar */ }
@@ -53,14 +46,6 @@ class Header extends React.Component {
                                     <em className="fa fa-navicon"></em>
                                 </a>
                             </li>
-                            { /* START User avatar toggle */ }
-                            <li>
-                                { /* Button used to collapse the left sidebar. Only visible on tablet and desktops */ }
-                                <a id="user-block-toggle" href="#" onClick={ this.toggleUserblock }>
-                                    <em className="icon-user"></em>
-                                </a>
-                            </li>
-                            { /* END User avatar toggle */ }
                         </ul>
                         { /* END Left navbar */ }
                         { /* START Right Navbar */ }
@@ -71,22 +56,20 @@ class Header extends React.Component {
                                     <em className="icon-magnifier"></em>
                                 </a>
                             </li>
+                            { /* Fullscreen (only desktops) */ }
+                            <li className="visible-lg">
+                                <a href="#" data-toggle-fullscreen="">
+                                    <em className="fa fa-expand"></em>
+                                </a>
+                            </li>
                             { /* START Alert menu */ }
                             <NavDropdown noCaret eventKey={ 3 } title={ ddAlertTitle } id="basic-nav-dropdown" >
-                                <MenuItem className="animated flipInX" eventKey={3.1}>Login</MenuItem>
                                 <MenuItem className="animated flipInX" eventKey={3.2}>Profile</MenuItem>
                                 <MenuItem className="animated flipInX" eventKey={3.3}>Dashboard</MenuItem>
                                 <MenuItem divider />
                                 <MenuItem className="animated flipInX" eventKey={3.3}>Logout</MenuItem>
                             </NavDropdown>
                             { /* END Alert menu */ }
-                            { /* START Offsidebar button */ }
-                            <li>
-                                <a href="#" data-toggle-state="offsidebar-open" data-no-persist="true">
-                                    <em className="icon-notebook"></em>
-                                </a>
-                            </li>
-                            { /* END Offsidebar menu */ }
                         </ul>
                         { /* END Right Navbar */ }
                     </div>

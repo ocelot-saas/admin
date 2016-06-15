@@ -1,14 +1,3 @@
-/*!
- *
- * Angle - Bootstrap Admin App + ReactJS
- *
- * Version: 3.3.1
- * Author: @themicon_co
- * Website: http://themicon.co
- * License: https://wrapbootstrap.com/help/licenses
- *
- */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, hashHistory, browserHistory, IndexRoute } from 'react-router';
@@ -36,8 +25,8 @@ ReactDOM.render(
             {/* Default route*/}
             <IndexRoute component={SingleView} />
 
-            <Route path="singleview" component={SingleView}/>
-            <Route path="submenu" component={SubMenu}/>
+            <Route path="singleview" component={SingleView} />
+            <Route path="submenu" component={SubMenu} />
 
         </Route>
 
