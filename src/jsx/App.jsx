@@ -9,7 +9,6 @@ import Base from './components/Layout/Base';
 import BasePage from './components/Layout/BasePage';
 
 import SingleView from './components/SingleView/SingleView';
-import SubMenu from './components/SubMenu/SubMenu';
 
 // Init translation system
 initTranslation();
@@ -25,7 +24,6 @@ ReactDOM.render(
             <IndexRoute component={SingleView} />
 
             <Route path="singleview" component={SingleView} />
-            <Route path="submenu" component={SubMenu} />
 
         </Route>
 
