@@ -3,7 +3,6 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Header from './Header'
 import Sidebar from './Sidebar'
-import Offsidebar from './Offsidebar'
 import Footer from './Footer'
 
 class Base extends React.Component {
@@ -29,8 +28,6 @@ class Base extends React.Component {
                 <Header />
 
                 <Sidebar />
-
-                <Offsidebar />
 
                 <ReactCSSTransitionGroup
                   component="section"
