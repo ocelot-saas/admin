@@ -60,29 +60,28 @@ class Sidebar extends React.Component {
                 { /* START Sidebar (left) */ }
                 <div className="aside-inner">
                     <nav data-sidebar-anyclick-close="" className="sidebar">
+
                         { /* START sidebar nav */ }
                         <ul className="nav">
-                            { /* START user info */ }
+
+                            { /* User info */ }
                             <li className="has-user-block">
-                                <Collapse id="user-block" in={ this.state.userBlockCollapse }>
-                                    <div className="item user-block">
-                                        { /* User picture */ }
-                                        <div className="user-block-picture">
-                                            <div className="user-block-status">
-                                                <img src="img/user/02.jpg" alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
-                                                <div className="circle circle-success circle-lg"></div>
-                                            </div>
-                                        </div>
-                                        { /* Name and Job */ }
-                                        <div className="user-block-info">
-                                            <span className="user-block-name">Hello, Mike</span>
-                                            <span className="user-block-role">Designer</span>
+                                <div className="item user-block">
+                                    { /* User picture */ }
+                                    <div className="user-block-picture">
+                                        <div className="user-block-status">
+                                            <img src="img/user/02.jpg" alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
+                                            <div className="circle circle-success circle-lg"></div>
                                         </div>
                                     </div>
-                                </Collapse>
+                                    { /* Name and Job */ }
+                                    <div className="user-block-info">
+                                        <span className="user-block-name">Hello, Mike</span>
+                                        <span className="user-block-role">Designer</span>
+                                    </div>
+                                </div>
                             </li>
-                            { /* END user info */ }
-                            { /* Iterates over all sidebar items */ }
+
                             <li className="nav-heading ">
                                 <span data-localize="sidebar.heading.HEADER">Navigation</span>
                             </li>
