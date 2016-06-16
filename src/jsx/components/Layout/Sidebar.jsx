@@ -1,35 +1,15 @@
 import React from 'react';
 import { Router, Route, Link, History } from 'react-router';
-import pubsub from 'pubsub-js';
-import { Collapse } from 'react-bootstrap';
 import SidebarRun from './Sidebar.run';
 
 class Sidebar extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-
-        this.state = {
-            userBlockCollapse: false,
-            collapse: {
-                singleview: this.routeActive(['singleview']),
-                submenu: this.routeActive(['submenu'])
-            }
-        };
-        this.pubsub_token = pubsub.subscribe('toggleUserblock', () => {
-            this.setState({
-                userBlockCollapse: !this.state.userBlockCollapse
-            });
-        });
     };
 
     componentDidMount() {
         SidebarRun();
-    }
-
-    componentWillUnmount() {
-        // React removed me from the DOM, I have to unsubscribe from the pubsub using my token
-        pubsub.unsubscribe(this.pubsub_token);
     }
 
     routeActive(paths) {
@@ -41,19 +21,6 @@ class Sidebar extends React.Component {
         return false;
     }
 
-    toggleItemCollapse(stateName) {
-        var newCollapseState = {};
-        for (let c in this.state.collapse) {
-            if (this.state.collapse[c] === true && c !== stateName)
-                this.state.collapse[c] = false;
-        }
-        this.setState({
-            collapse: {
-                [stateName]: !this.state.collapse[stateName]
-            }
-        });
-    }
-
     render() {
         return (
             <aside className='aside'>
@@ -61,7 +28,7 @@ class Sidebar extends React.Component {
                 <div className="aside-inner">
                     <nav data-sidebar-anyclick-close="" className="sidebar">
 
-                        { /* START sidebar nav */ }
+                        { /* START Sidebar nav */ }
                         <ul className="nav">
 
                             { /* User info */ }
@@ -86,55 +53,55 @@ class Sidebar extends React.Component {
                                 <span data-localize="sidebar.heading.HEADER">Navigation</span>
                             </li>
 
-			    { /* Dashboard */ }
-			    <li className={ this.routeActive('dashboard') ? 'active' : '' }>
+                            { /* Dashboard */ }
+                            <li className={ this.routeActive('dashboard') ? 'active' : '' }>
                                 <Link to="dashboard" title="Dashboard">
                                   <em className="icon-speedometer"></em>
                                   <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
                                 </Link>
                             </li>
 
-			    { /* Users */}
-			    <li className={ this.routeActive('users') ? 'active' : '' }>
+                            { /* Users */}
+                            <li className={ this.routeActive('users') ? 'active' : '' }>
                                 <Link to="users" title="Users">
                                   <em className="icon-people"></em>
                                   <span data-localize="sidebar.nav.USERS">Users</span>
                                 </Link>
                             </li>
 
-			    { /* Restaurant */}
-			    <li className={ this.routeActive('restaurant') ? 'active' : '' }>
+                            { /* Restaurant */}
+                            <li className={ this.routeActive('restaurant') ? 'active' : '' }>
                                 <Link to="restaurant" title="Restaurant">
                                   <em className="icon-cup"></em>
                                   <span data-localize="sidebar.nav.RESTAURANT">Restaurant</span>
                                 </Link>
                             </li>
 
-			    { /* Menu */}
-			    <li className={ this.routeActive('menu') ? 'active' : '' }>
+                            { /* Menu */}
+                            <li className={ this.routeActive('menu') ? 'active' : '' }>
                                 <Link to="menu" title="Menu">
                                   <em className="icon-book-open"></em>
                                   <span data-localize="sidebar.nav.MENU">Menu</span>
                                 </Link>
                             </li>
 
-			    { /* Orders */}
-			    <li className={ this.routeActive('orders') ? 'active' : '' }>
+                            { /* Orders */}
+                            <li className={ this.routeActive('orders') ? 'active' : '' }>
                                 <Link to="orders" title="Orders">
                                   <em className="icon-list"></em>
                                   <span data-localize="sidebar.nav.ORDERS">Orders</span>
                                 </Link>
                             </li>
 
-			    { /* Reports */}
-			    <li className={ this.routeActive('reports') ? 'active' : '' }>
+                            { /* Reports */}
+                            <li className={ this.routeActive('reports') ? 'active' : '' }>
                                 <Link to="reports" title="Reports">
                                   <em className="icon-graph"></em>
                                   <span data-localize="sidebar.nav.REPORTS">Reports</span>
                                 </Link>
                             </li>
                         </ul>
-                        { /* END sidebar nav */ }
+                        { /* END Sidebar nav */ }
                     </nav>
                 </div>
                 { /* END Sidebar (left) */ }
