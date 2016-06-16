@@ -12,5 +12,6 @@
   "bower_components/animate.css/animate.min.css",
   "bower_components/jquery-localize-i18n/dist/jquery.localize.js",
   "bower_components/simple-line-icons/css/simple-line-icons.css",
-  "bower_components/simple-line-icons/fonts/*"
+  "bower_components/simple-line-icons/fonts/*",
+  "bower_components/screenfull/dist/screenfull.js"
 ]
