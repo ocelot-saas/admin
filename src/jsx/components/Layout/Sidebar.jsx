@@ -84,48 +84,56 @@ class Sidebar extends React.Component {
                             { /* END user info */ }
                             { /* Iterates over all sidebar items */ }
                             <li className="nav-heading ">
-                                <span data-localize="sidebar.heading.HEADER">Main Navigation</span>
+                                <span data-localize="sidebar.heading.HEADER">Navigation</span>
                             </li>
 
-                            <li className={ this.routeActive('dashboard') ? 'active' : '' }>
+			    { /* Dashboard */ }
+			    <li className={ this.routeActive('dashboard') ? 'active' : '' }>
                                 <Link to="dashboard" title="Dashboard">
-                                <em className="icon-grid"></em>
-                                <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                                  <em className="icon-speedometer"></em>
+                                  <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
                                 </Link>
                             </li>
 
-                            <li className={ this.routeActive('singleview') ? 'active' : '' }>
-                                <Link to="singleview" title="Single View">
-                                <em className="icon-grid"></em>
-                                <span data-localize="sidebar.nav.SINGLEVIEW">Single View</span>
+			    { /* Users */}
+			    <li className={ this.routeActive('users') ? 'active' : '' }>
+                                <Link to="users" title="Users">
+                                  <em className="icon-people"></em>
+                                  <span data-localize="sidebar.nav.USERS">Users</span>
                                 </Link>
                             </li>
 
-                            <li className={ this.routeActive('special') ? 'active' : '' }>
-                                <Link to="special" title="Special">
-                                <em className="icon-grid"></em>
-                                <span data-localize="sidebar.nav.SPECIAL">Special</span>
+			    { /* Restaurant */}
+			    <li className={ this.routeActive('restaurant') ? 'active' : '' }>
+                                <Link to="restaurant" title="Restaurant">
+                                  <em className="icon-cup"></em>
+                                  <span data-localize="sidebar.nav.RESTAURANT">Restaurant</span>
                                 </Link>
                             </li>
 
-                            <li className={ this.routeActive(['submenu']) ? 'active' : '' }>
-                                <div className="nav-item" onClick={ this.toggleItemCollapse.bind(this, 'submenu') }>
-                                    <div className="pull-right label label-info">1</div>
-                                    <em className="icon-speedometer"></em>
-                                    <span data-localize="sidebar.nav.MENU">Menu</span>
-                                </div>
-                                <Collapse in={ this.state.collapse.submenu } timeout={ 100 }>
-                                    <ul id="submenu" className="nav sidebar-subnav">
-                                        <li className="sidebar-subnav-header">Submenu</li>
-                                        <li className={ this.routeActive('submenu') ? 'active' : '' }>
-                                            <Link to="submenu" title="Submenu">
-                                            <span data-localize="sidebar.nav.SUBMENU">Submenu</span>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </Collapse>
+			    { /* Menu */}
+			    <li className={ this.routeActive('menu') ? 'active' : '' }>
+                                <Link to="menu" title="Menu">
+                                  <em className="icon-book-open"></em>
+                                  <span data-localize="sidebar.nav.MENU">Menu</span>
+                                </Link>
                             </li>
 
+			    { /* Orders */}
+			    <li className={ this.routeActive('orders') ? 'active' : '' }>
+                                <Link to="orders" title="Orders">
+                                  <em className="icon-list"></em>
+                                  <span data-localize="sidebar.nav.ORDERS">Orders</span>
+                                </Link>
+                            </li>
+
+			    { /* Reports */}
+			    <li className={ this.routeActive('reports') ? 'active' : '' }>
+                                <Link to="reports" title="Reports">
+                                  <em className="icon-graph"></em>
+                                  <span data-localize="sidebar.nav.REPORTS">Reports</span>
+                                </Link>
+                            </li>
                         </ul>
                         { /* END sidebar nav */ }
                     </nav>
