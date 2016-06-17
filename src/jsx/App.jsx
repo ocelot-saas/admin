@@ -8,7 +8,7 @@ import initLoadCss from './components/Common/load-css';
 import Base from './components/Layout/Base';
 import BasePage from './components/Layout/BasePage';
 
-import SingleView from './components/SingleView/SingleView';
+import Dashboard from './components/Dashboard';
 
 // Init translation system
 initTranslation();
@@ -21,9 +21,8 @@ ReactDOM.render(
         <Route path="/" component={Base}>
 
             {/* Default route*/}
-            <IndexRoute component={SingleView} />
-
-            <Route path="singleview" component={SingleView} />
+            <IndexRoute component={Dashboard} />
+	    <Route path="dashboard" component={Dashboard} />
 
         </Route>
 
