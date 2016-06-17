@@ -6,9 +6,10 @@ class Orders extends React.Component {
   render() {
     return (
       <ContentWrapper>
-        <div className="content-heading">
+        <h3>
           Orders
-	</div>
+          <small>All the orders</small>
+        </h3>
       </ContentWrapper>
     );
   }

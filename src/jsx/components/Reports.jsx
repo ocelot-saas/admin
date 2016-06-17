@@ -6,9 +6,10 @@ class Reports extends React.Component {
   render() {
     return (
       <ContentWrapper>
-        <div className="content-heading">
+        <h3>
           Reports
-	</div>
+          <small>Insights into the state of your restaurant</small>
+        </h3>
       </ContentWrapper>
     );
   }

@@ -6,9 +6,10 @@ class Restaurant extends React.Component {
   render() {
     return (
       <ContentWrapper>
-        <div className="content-heading">
+        <h3>
           Restaurant
-	</div>
+          <small>Manage your restaurant</small>
+        </h3>
       </ContentWrapper>
     );
   }
