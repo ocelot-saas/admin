@@ -37,14 +37,14 @@ class Sidebar extends React.Component {
                                     { /* User picture */ }
                                     <div className="user-block-picture">
                                         <div className="user-block-status">
-                                            <img src="img/user/02.jpg" alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
+                                            <img src="img/user.png" alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
                                             <div className="circle circle-success circle-lg"></div>
                                         </div>
                                     </div>
                                     { /* Name and Job */ }
                                     <div className="user-block-info">
-                                        <span className="user-block-name">Hello, Mike</span>
-                                        <span className="user-block-role">Designer</span>
+                                        <span className="user-block-name">Hello, Horia</span>
+                                        <span className="user-block-role">Administrator</span>
                                     </div>
                                 </div>
                             </li>
