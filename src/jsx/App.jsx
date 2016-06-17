@@ -9,6 +9,11 @@ import Base from './components/Layout/Base';
 import BasePage from './components/Layout/BasePage';
 
 import Dashboard from './components/Dashboard';
+import Menu from './components/Menu';
+import Orders from './components/Orders';
+import Reports from './components/Reports';
+import Restaurant from './components/Restaurant';
+import Users from './components/Users';
 
 // Init translation system
 initTranslation();
@@ -20,9 +25,16 @@ ReactDOM.render(
 
         <Route path="/" component={Base}>
 
-            {/* Default route*/}
+            {/* Default route */}
             <IndexRoute component={Dashboard} />
+
+	    {/* Routes, in sorted order */}
 	    <Route path="dashboard" component={Dashboard} />
+	    <Route path="menu" component={Menu} />
+	    <Route path="orders" component={Orders} />
+	    <Route path="reports" component={Reports} />
+	    <Route path="restaurant" component={Restaurant} />
+	    <Route path="users" component={Users} />
 
         </Route>
 
