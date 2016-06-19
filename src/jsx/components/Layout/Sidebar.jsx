@@ -90,6 +90,18 @@ class Sidebar extends React.Component {
                             </li>
 
                             <li className="nav-heading ">
+                                <span data-localize="sidebar.heading.PLATFORMS">Platforms</span>
+                            </li>
+
+                            { /* Platforms */}
+                            <li className={ this.routeActive('platforms') ? 'active' : '' }>
+                                <Link to="platforms" title="Platforms">
+                                  <em className="icon-rocket"></em>
+                                  <span data-localize="sidebar.nav.PLATFORMS">Platforms</span>
+                                </Link>
+                            </li>
+
+                            <li className="nav-heading ">
                                 <span data-localize="sidebar.heading.HEADER">Users</span>
                             </li>
 

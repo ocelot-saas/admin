@@ -13,6 +13,7 @@ import General from './components/General';
 import Menu from './components/Menu';
 import Offers from './components/Offers';
 import Orders from './components/Orders';
+import Platforms from './components/Platforms';
 import Reports from './components/Reports';
 
 // Init translation system
@@ -34,6 +35,7 @@ ReactDOM.render(
 	    <Route path="menu" component={Menu} />
 	    <Route path="offers" component={Offers} />
 	    <Route path="orders" component={Orders} />
+	    <Route path="platforms" component={Platforms} />
 	    <Route path="reports" component={Reports} />
 
         </Route>
