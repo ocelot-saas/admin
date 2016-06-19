@@ -9,11 +9,11 @@ import Base from './components/Layout/Base';
 import BasePage from './components/Layout/BasePage';
 
 import Dashboard from './components/Dashboard';
+import General from './components/General';
 import Menu from './components/Menu';
+import Offers from './components/Offers';
 import Orders from './components/Orders';
 import Reports from './components/Reports';
-import Restaurant from './components/Restaurant';
-import Users from './components/Users';
 
 // Init translation system
 initTranslation();
@@ -30,11 +30,11 @@ ReactDOM.render(
 
 	    {/* Routes, in sorted order */}
 	    <Route path="dashboard" component={Dashboard} />
+	    <Route path="general" component={General} />
 	    <Route path="menu" component={Menu} />
+	    <Route path="offers" component={Offers} />
 	    <Route path="orders" component={Orders} />
 	    <Route path="reports" component={Reports} />
-	    <Route path="restaurant" component={Restaurant} />
-	    <Route path="users" component={Users} />
 
         </Route>
 

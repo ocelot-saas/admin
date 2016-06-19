@@ -50,7 +50,7 @@ class Sidebar extends React.Component {
                             </li>
 
                             <li className="nav-heading ">
-                                <span data-localize="sidebar.heading.HEADER">Navigation</span>
+                                <span data-localize="sidebar.heading.HEADER">Overview</span>
                             </li>
 
                             { /* Dashboard */ }
@@ -61,19 +61,15 @@ class Sidebar extends React.Component {
                                 </Link>
                             </li>
 
-                            { /* Users */}
-                            <li className={ this.routeActive('users') ? 'active' : '' }>
-                                <Link to="users" title="Users">
-                                  <em className="icon-people"></em>
-                                  <span data-localize="sidebar.nav.USERS">Users</span>
-                                </Link>
+                            <li className="nav-heading ">
+                                <span data-localize="sidebar.heading.HEADER">Restaurant</span>
                             </li>
 
-                            { /* Restaurant */}
-                            <li className={ this.routeActive('restaurant') ? 'active' : '' }>
-                                <Link to="restaurant" title="Restaurant">
+                            { /* General */}
+                            <li className={ this.routeActive('general') ? 'active' : '' }>
+                                <Link to="general" title="General">
                                   <em className="icon-cup"></em>
-                                  <span data-localize="sidebar.nav.RESTAURANT">Restaurant</span>
+                                  <span data-localize="sidebar.nav.GENERAL">General</span>
                                 </Link>
                             </li>
 
@@ -85,12 +81,28 @@ class Sidebar extends React.Component {
                                 </Link>
                             </li>
 
+                            { /* Offers */}
+                            <li className={ this.routeActive('offers') ? 'active' : '' }>
+                                <Link to="offers" title="Offers">
+                                  <em className="icon-emotsmile"></em>
+                                  <span data-localize="sidebar.nav.OFFERS">Offers</span>
+                                </Link>
+                            </li>
+
+                            <li className="nav-heading ">
+                                <span data-localize="sidebar.heading.HEADER">Users</span>
+                            </li>
+
                             { /* Orders */}
                             <li className={ this.routeActive('orders') ? 'active' : '' }>
                                 <Link to="orders" title="Orders">
                                   <em className="icon-list"></em>
                                   <span data-localize="sidebar.nav.ORDERS">Orders</span>
                                 </Link>
+                            </li>
+
+                            <li className="nav-heading ">
+                                <span data-localize="sidebar.heading.HEADER">Analytics</span>
                             </li>
 
                             { /* Reports */}

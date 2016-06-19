@@ -1,18 +1,18 @@
 import React from 'react';
 import ContentWrapper from './Layout/ContentWrapper';
 
-class Restaurant extends React.Component {
+class General extends React.Component {
 
   render() {
     return (
       <ContentWrapper>
         <h3>
-          Restaurant
-          <small>Manage your restaurant</small>
+          General
+          <small>Restaurant general settings</small>
         </h3>
       </ContentWrapper>
     );
   }
 }
 
-export default Restaurant;
+export default General;
