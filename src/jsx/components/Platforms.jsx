@@ -1,6 +1,6 @@
 import React from 'react';
 import ContentWrapper from './Layout/ContentWrapper';
-import { Grid, Row, Col, Panel, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Panel, Button, Input } from 'react-bootstrap';
 
 class Platforms extends React.Component {
 
@@ -16,10 +16,22 @@ class Platforms extends React.Component {
             <div className="panel panel-default">
               <div className="panel-heading">Website</div>
               <div className="panel-body">
-                <p>Details about site</p>
+	        <form className="form-horizontal">
+		  <div className="form-group">
+		    <label className="col-lg-2 control-label">Domain Name</label>
+		    <Col lg={ 10 }>
+		      <Input standalone type="text" required="required" placeholder="Domain Name" className="form-control" addonAfter="@ocelot.com" />
+		    </Col>
+		  </div>
+		</form>
               </div>
               <div className="panel-footer">
-                <Button bsStyle="primary">Save</Button>
+                <Button bsClass="btn btn-labeled btn-primary mr">
+		  <span className="btn-label"><i className="fa fa-check"></i></span> Save
+		</Button>
+                <Button bsClass="btn btn-labeled mr">
+		  <span className="btn-label"><i className="fa fa-times"></i></span> Revert
+		</Button>
               </div>
             </div>
           </Col>
@@ -33,7 +45,12 @@ class Platforms extends React.Component {
                 <p>Details about site</p>
               </div>
               <div className="panel-footer">
-                <Button bsStyle="primary">Save</Button>
+                <Button bsClass="btn btn-labeled btn-primary mr">
+		  <span className="btn-label"><i className="fa fa-check"></i></span> Save
+		</Button>
+                <Button bsClass="btn btn-labeled mr">
+		  <span className="btn-label"><i className="fa fa-times"></i></span> Revert
+		</Button>
 	      </div>
             </div>          
           </Col>
@@ -47,7 +64,12 @@ class Platforms extends React.Component {
                 <p>Details about site</p>
               </div>
               <div className="panel-footer">
-                <Button bsStyle="primary">Save</Button>
+                <Button bsClass="btn btn-labeled btn-primary mr">
+		  <span className="btn-label"><i className="fa fa-check"></i></span> Save
+		</Button>
+                <Button bsClass="btn btn-labeled mr">
+		  <span className="btn-label"><i className="fa fa-times"></i></span> Revert
+		</Button>
               </div>
             </div>          
           </Col>
