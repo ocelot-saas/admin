@@ -10,12 +10,17 @@ class General extends React.Component {
       name: 'Horia\'s Kitchen',
       desc: 'Fancy french restaurant',
       address: 'Sector 2, Bucharest',
+      monFriNonStop: false,
+      monFriStart: '07:00 AM',
+      monFriEnd: '10:00 PM',
     };
   }
 
   componentDidMount() {
-    $('#dtp-mon-fri-start').datetimepicker({format: 'LT'});
+    $('#dtp-mon-fri-start').datetimepicker({format: 'hh:mm A'});
+    $('#dtp-mon-fri-start').on('dp.change', this.handleMonFriStartChange.bind(this));
     $('#dtp-mon-fri-stop').datetimepicker({format: 'LT'});
+    $('#dtp-mon-fri-stop').on('dp.change', this.handleMonFriStopChange.bind(this));
     $('#dtp-sat-start').datetimepicker({format: 'LT'});
     $('#dtp-sat-stop').datetimepicker({format: 'LT'});
     $('#dtp-sun-start').datetimepicker({format: 'LT'});
@@ -37,6 +42,42 @@ class General extends React.Component {
   handleAddressChange(e) {
     this.setState({
       address: e.target.value
+    });
+  }
+
+  handleMonFriNonStopChange(e) {
+    this.setState({
+      monFriNonStop: e.target.checked
+    });
+  }
+
+  handleMonFriStartChange(e) {
+    var monFriStart;
+    if (e.hasOwnProperty('date')) {
+      // Set through datetimepicker.
+      monFriStart = e.date.format('hh:mm A');
+    } else {
+      // Set through manually editing the field.
+      monFriStart = e.target.value;
+    }
+
+    this.setState({
+      monFriStart: monFriStart
+    });
+  }
+
+  handleMonFriEndChange(e) {
+    var monFriEnd;
+    if (e.hasOwnProperty('date')) {
+      // Set through datetimepicker.
+      monFriEnd = e.date.format('hh:mm A');
+    } else {
+      // Set through manually editing the field.
+      monFriEnd = e.target.value;
+    }
+
+    this.setState({
+      monFriEnd: monFriEnd
     });
   }
 
@@ -121,14 +162,23 @@ class General extends React.Component {
                     <Col lg={ 2 } xs={ 4 }>
                       <div className="checkbox c-checkbox">
                         <label>
-                          <input standalone type="checkbox" />
+                          <input
+			    standalone
+			    type="checkbox"
+			    checked={ this.state.monFriNonStop }
+			    onChange={ this.handleMonFriNonStopChange.bind(this) } />
                           <em className="fa fa-check"></em>Non-stop
 			</label>
                       </div>
                     </Col>
 		    <Col lg={ 4 } xs={ 4 }>
                       <div id="dtp-mon-fri-start" className="input-group date">
-                        <input type="text" className="form-control" />
+                        <input
+			  type="text"
+			  disabled={ this.state.monFriNonStop }
+			  value={ this.state.monFriStart }
+			  onChange={ this.handleMonFriStartChange.bind(this) }
+			  className="form-control" />
                         <span className="input-group-addon">
                           <span className="fa fa-clock-o"></span>
                         </span>
@@ -136,7 +186,12 @@ class General extends React.Component {
 		    </Col>
 		    <Col lg={ 4 } xs={ 4 }>
                       <div id="dtp-mon-fri-stop" className="input-group date">
-                        <input type="text" className="form-control" />
+                        <input
+			  type="text"
+			  disabled={ this.state.monFriNonStop }
+			  value={ this.state.monFriEnd }
+			  onChange={ this.handleMonFriEndChange.bind(this) }
+			  className="form-control" />
                         <span className="input-group-addon">
                           <span className="fa fa-clock-o"></span>
                         </span>
