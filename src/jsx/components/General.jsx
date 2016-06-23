@@ -2,6 +2,7 @@ import React from 'react';
 import ContentWrapper from './Layout/ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from 'react-bootstrap';
 import HoursRange from './HoursRange';
+import ImageGallery from './ImageGallery';
 
 class General extends React.Component {
 
@@ -162,7 +163,9 @@ class General extends React.Component {
           <Col sm={ 12 }>
             <div className="panel panel-default">
               <div className="panel-heading">Pictures</div>
-              <div className="panel-body">Stuff</div>
+              <div className="panel-body">
+	        <ImageGallery />
+	      </div>
               <div className="panel-footer">
                 <Button bsClass="btn btn-labeled btn-primary mr">
 		  <span className="btn-label"><i className="fa fa-check"></i></span> Save
