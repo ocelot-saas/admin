@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ocelot-saas/admin#readme",
   "dependencies": {
+    "bootstrap-tagsinput": "^0.7.1",
     "classnames": "^2.2.3",
     "dropzone": "^4.3.0",
     "history": "^2.0.0-rc2",

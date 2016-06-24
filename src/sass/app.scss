@@ -32,9 +32,12 @@
 
 // Form elements
 @import "app/form-elements";
+@import "app/form-tags";
 
 // Utilities 
 @import "app/utils";
 
 // Print CSS
 @import "app/print";
+
+@import "bootstrap-tagsinput";

@@ -3,6 +3,7 @@ import ContentWrapper from './Layout/ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from 'react-bootstrap';
 import HoursRange from './HoursRange';
 import ImageGallery from './ImageGallery';
+import 'bootstrap-tagsinput';
 
 class General extends React.Component {
 
@@ -28,6 +29,10 @@ class General extends React.Component {
 	end: '10:00 PM'
       }
     };
+  }
+
+  componentDidMount() {
+    $("[data-role='tagsinput']").tagsinput()
   }
 
   handleNameChange(e) {
@@ -94,6 +99,15 @@ class General extends React.Component {
 			className="form-control" />
 		    </Col>
 		  </div>
+
+                  <div className="form-group">
+                    <label className="col-lg-2 control-label">
+		       Keywords
+                    </label>
+                    <Col lg={ 10 }>
+                       <input type="text" data-role="tagsinput" defaultValue="italian,family friendly,dog friendly" className="form-control" />
+                    </Col>
+                  </div>
 
 		  <div className="form-group">
 		    <label className="col-lg-2 control-label">Address</label>
