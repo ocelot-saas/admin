@@ -13,6 +13,7 @@ import General from './components/General';
 import Menu from './components/Menu';
 import Offers from './components/Offers';
 import Orders from './components/Orders';
+import Order from './components/Order';
 import Platforms from './components/Platforms';
 import Reports from './components/Reports';
 
@@ -35,6 +36,7 @@ ReactDOM.render(
 	    <Route path="menu" component={Menu} />
 	    <Route path="offers" component={Offers} />
 	    <Route path="orders" component={Orders} />
+	    <Route path="order/:orderId" component={Order} />
 	    <Route path="platforms" component={Platforms} />
 	    <Route path="reports" component={Reports} />
 
