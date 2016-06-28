@@ -24,8 +24,7 @@
     "jquery-localize-i18n": "*",
     "simple-line-icons": "2.2.3",
     "moment": "2.11.1",
-    "eonasdan-bootstrap-datetimepicker": "4.17.37",
-    "datatables": "1.10.10"
+    "eonasdan-bootstrap-datetimepicker": "4.17.37"
   },
   "resolutions": {
     "jquery": "2.2.0",
