@@ -11,7 +11,6 @@ import BasePage from './components/Layout/BasePage';
 import Dashboard from './components/Dashboard';
 import General from './components/General';
 import Menu from './components/Menu';
-import Offers from './components/Offers';
 import Orders from './components/Orders';
 import Order from './components/Order';
 import Platforms from './components/Platforms';
@@ -38,7 +37,6 @@ ReactDOM.render(
 	    <Route path="/dashboard" component={Dashboard} />
 	    <Route path="/general" component={General} />
 	    <Route path="/menu" component={Menu} />
-	    <Route path="/offers" component={Offers} />
 	    <Route path="/orders/:orderId" component={Order} />
 	    <Route path="/orders" component={Orders} />
 	    <Route path="/platforms" component={Platforms} />

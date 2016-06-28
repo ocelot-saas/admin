@@ -81,14 +81,6 @@ class Sidebar extends React.Component {
                                 </Link>
                             </li>
 
-                            { /* Offers */}
-                            <li className={ this.routeActive('offers') ? 'active' : '' }>
-                                <Link to="/offers" title="Offers">
-                                  <em className="icon-emotsmile"></em>
-                                  <span data-localize="sidebar.nav.OFFERS">Offers</span>
-                                </Link>
-                            </li>
-
                             <li className="nav-heading ">
                                 <span data-localize="sidebar.heading.PLATFORMS">Platforms</span>
                             </li>
