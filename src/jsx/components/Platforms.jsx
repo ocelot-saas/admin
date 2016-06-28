@@ -2,12 +2,6 @@ import React from 'react';
 import ContentWrapper from './Layout/ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input } from 'react-bootstrap';
 
-var CallCenterStates = {
-  NONE: 0,
-  EXTERNAL: 1,
-  OCELOT: 2
-};
-
 class Platforms extends React.Component {
 
   constructor(props, context) {
@@ -17,8 +11,11 @@ class Platforms extends React.Component {
         domainName: 'bakery-1'
       },
       callCenter: {
-        active: CallCenterStates.EXTERNAL,
+        phoneNumber: '',
       },
+      emailCenter: {
+        email: 'contact',
+      }
     };
   }
 
@@ -30,18 +27,18 @@ class Platforms extends React.Component {
     });
   }
 
-  handleCallCenterNoneChange(e) {
+  handlePhoneNumberChange(e) {
     this.setState({
       callCenter: {
-        active: CallCenterStates.NONE
+        phoneNumber: e.target.value
       }
     });
   }
 
-  handleCallCenterExternalChange(e) {
+  handleEmailChange(e) {
     this.setState({
-      callCenter: {
-        active: CallCenterStates.EXTERNAL
+      emailCenter: {
+        email: e.target.value
       }
     });
   }
@@ -70,7 +67,7 @@ class Platforms extends React.Component {
 			required="required"
 			placeholder="Domain Name"
 			className="form-control"
-			addonAfter="@ocelot.com" />
+			addonAfter=".ocelot.com" />
 		    </Col>
 		  </div>
 		</form>
@@ -94,20 +91,16 @@ class Platforms extends React.Component {
               <div className="panel-body">
 	        <form className="form-horizontal">
 		  <div className="form-group">
-		    <label className="col-lg-2 control-label">Type</label>
+		    <label className="col-lg-2 control-label">Phone Number</label>
 		    <Col lg={ 10 }>
-                      <ButtonGroup>
-                        <Button
-			  active={ this.state.callCenter.active === CallCenterStates.NONE }
-			  onClick={ this.handleCallCenterNoneChange.bind(this) }>
-			  None
-			</Button>
-                        <Button
-			  active={ this.state.callCenter.active === CallCenterStates.EXTERNAL }
-			  onClick={ this.handleCallCenterExternalChange.bind(this) }>
-			  External
- 			</Button>
-                      </ButtonGroup>
+		      <Input
+		        standalone
+			type="text"
+			value={ this.state.callCenter.phoneNumber }
+			onChange={ this.handlePhoneNumberChange.bind(this) }
+			required="required"
+			placeholder="Phone Number"
+			className="form-control" />
 		    </Col>
 		  </div>
 		</form>
@@ -129,7 +122,22 @@ class Platforms extends React.Component {
             <div className="panel panel-default">
               <div className="panel-heading">Email Center</div>
               <div className="panel-body">
-                <p>Details about site</p>
+	        <form className="form-horizontal">
+		  <div className="form-group">
+		    <label className="col-lg-2 control-label">Email</label>
+		    <Col lg={ 10 }>
+		      <Input
+		        standalone
+			type="text"
+			value={ this.state.emailCenter.email }
+			onChange={ this.handleEmailChange.bind(this) }
+			required="required"
+			placeholder="Email"
+			className="form-control"
+			addonAfter={ `@${ this.state.website.domainName }.ocelot.com` } />
+		    </Col>
+		  </div>
+		</form>
               </div>
               <div className="panel-footer">
                 <Button bsClass="btn btn-labeled btn-primary mr">
