@@ -13,19 +13,19 @@ class ImageGallery extends React.Component {
     super(props, context);
     this.state = {
       images: [{
-        url: 'img/mood01.jpg',
+        url: '/img/mood01.jpg',
 	source: Source.ALREADY_EXISTS
       }, {
-        url: 'img/mood02.jpg',
+        url: '/img/mood02.jpg',
 	source: Source.ALREADY_EXISTS
       }, {
-        url: 'img/mood03.jpg',
+        url: '/img/mood03.jpg',
 	source: Source.ALREADY_EXISTS
       }, {
-        url: 'img/mood04.jpg',
+        url: '/img/mood04.jpg',
 	source: Source.ALREADY_EXISTS
       }, {
-        url: 'img/mood05.jpg',
+        url: '/img/mood05.jpg',
 	source: Source.ALREADY_EXISTS
       }]
     };

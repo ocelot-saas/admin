@@ -2,7 +2,7 @@
 // -----------------------------------
 
 const preferredLang = 'en';
-const pathPrefix    = 'server/i18n'; // folder of json files
+const pathPrefix    = '/server/i18n'; // folder of json files
 const packName      = 'site';
 const storageKey    = 'jq-appLang';
 

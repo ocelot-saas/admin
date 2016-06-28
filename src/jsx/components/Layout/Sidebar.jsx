@@ -37,7 +37,7 @@ class Sidebar extends React.Component {
                                     { /* User picture */ }
                                     <div className="user-block-picture">
                                         <div className="user-block-status">
-                                            <img src="img/user.png" alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
+                                            <img src="/img/user.png" alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
                                             <div className="circle circle-success circle-lg"></div>
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@ class Sidebar extends React.Component {
 
                             { /* Dashboard */ }
                             <li className={ this.routeActive('dashboard') ? 'active' : '' }>
-                                <Link to="dashboard" title="Dashboard">
+                                <Link to="/dashboard" title="Dashboard">
                                   <em className="icon-speedometer"></em>
                                   <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
                                 </Link>
@@ -67,7 +67,7 @@ class Sidebar extends React.Component {
 
                             { /* General */}
                             <li className={ this.routeActive('general') ? 'active' : '' }>
-                                <Link to="general" title="General">
+                                <Link to="/general" title="General">
                                   <em className="icon-cup"></em>
                                   <span data-localize="sidebar.nav.GENERAL">General</span>
                                 </Link>
@@ -75,7 +75,7 @@ class Sidebar extends React.Component {
 
                             { /* Menu */}
                             <li className={ this.routeActive('menu') ? 'active' : '' }>
-                                <Link to="menu" title="Menu">
+                                <Link to="/menu" title="Menu">
                                   <em className="icon-book-open"></em>
                                   <span data-localize="sidebar.nav.MENU">Menu</span>
                                 </Link>
@@ -83,7 +83,7 @@ class Sidebar extends React.Component {
 
                             { /* Offers */}
                             <li className={ this.routeActive('offers') ? 'active' : '' }>
-                                <Link to="offers" title="Offers">
+                                <Link to="/offers" title="Offers">
                                   <em className="icon-emotsmile"></em>
                                   <span data-localize="sidebar.nav.OFFERS">Offers</span>
                                 </Link>
@@ -95,7 +95,7 @@ class Sidebar extends React.Component {
 
                             { /* Platforms */}
                             <li className={ this.routeActive('platforms') ? 'active' : '' }>
-                                <Link to="platforms" title="Platforms">
+                                <Link to="/platforms" title="Platforms">
                                   <em className="icon-rocket"></em>
                                   <span data-localize="sidebar.nav.PLATFORMS">Platforms</span>
                                 </Link>
@@ -107,7 +107,7 @@ class Sidebar extends React.Component {
 
                             { /* Orders */}
                             <li className={ this.routeActive('orders') ? 'active' : '' }>
-                                <Link to="orders" title="Orders">
+                                <Link to="/orders" title="Orders">
                                   <em className="icon-list"></em>
                                   <span data-localize="sidebar.nav.ORDERS">Orders</span>
                                 </Link>
@@ -119,7 +119,7 @@ class Sidebar extends React.Component {
 
                             { /* Reports */}
                             <li className={ this.routeActive('reports') ? 'active' : '' }>
-                                <Link to="reports" title="Reports">
+                                <Link to="/reports" title="Reports">
                                   <em className="icon-graph"></em>
                                   <span data-localize="sidebar.nav.REPORTS">Reports</span>
                                 </Link>

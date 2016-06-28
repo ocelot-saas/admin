@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link, hashHistory, browserHistory, IndexRedirect } from 'react-router';
+import { Router, Route, Link, IndexRedirect, browserHistory } from 'react-router';
 
 import initTranslation from './components/Common/localize';
 import initLoadCss from './components/Common/load-css';
@@ -31,14 +31,14 @@ ReactDOM.render(
             <IndexRedirect to="/dashboard" />
 
 	    {/* Routes, in sorted order */}
-	    <Route path="dashboard" component={Dashboard} />
-	    <Route path="general" component={General} />
-	    <Route path="menu" component={Menu} />
-	    <Route path="offers" component={Offers} />
-	    <Route path="orders" component={Orders} />
-	    <Route path="order/:orderId" component={Order} />
-	    <Route path="platforms" component={Platforms} />
-	    <Route path="reports" component={Reports} />
+	    <Route path="/dashboard" component={Dashboard} />
+	    <Route path="/general" component={General} />
+	    <Route path="/menu" component={Menu} />
+	    <Route path="/offers" component={Offers} />
+	    <Route path="/orders/:orderId" component={Order} />
+	    <Route path="/orders" component={Orders} />
+	    <Route path="/platforms" component={Platforms} />
+	    <Route path="/reports" component={Reports} />
 
         </Route>
 

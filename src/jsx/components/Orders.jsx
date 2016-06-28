@@ -4,22 +4,12 @@ import { Table } from 'react-bootstrap';
 
 class Orders extends React.Component {
 
-  componentDidMount() {
-    $('#orders-datatable').dataTable({
-      'paging': true, // Table pagination
-      'ordering': true, // Column ordering
-      'info': true, // Bottom left status text
-      // Text translation options
-      // Note the required keywords between underscores (e.g _MENU_)
-      oLanguage: {
-        sSearch: 'Search all columns:',
-        sLengthMenu: '_MENU_ records per page',
-        info: 'Showing page _PAGE_ of _PAGES_',
-        zeroRecords: 'Nothing found - sorry',
-        infoEmpty: 'No records available',
-        infoFiltered: '(filtered from _MAX_ total records)'
-      }
-    });
+  constructor(props, context) {
+    super(props, context);
+  }
+
+  handleClickToOrder(orderId, e) {
+    this.context.router.push(`/orders/${orderId}`);
   }
 
   render() {
@@ -41,12 +31,12 @@ class Orders extends React.Component {
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0001') }>
 	      <td className="orders-data-cell">0001</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -60,12 +50,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0002') }>
 	      <td className="orders-data-cell">0002</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -79,12 +69,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0003') }>
 	      <td className="orders-data-cell">0003</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -98,12 +88,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0004') }>
 	      <td className="orders-data-cell">0004</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -117,12 +107,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0005') }>
 	      <td className="orders-data-cell">0005</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -136,12 +126,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0006') }>
 	      <td className="orders-data-cell">0006</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -155,12 +145,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0007') }>
 	      <td className="orders-data-cell">0007</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -174,12 +164,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0008') }>
 	      <td className="orders-data-cell">0008</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -193,12 +183,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0009') }>
 	      <td className="orders-data-cell">0009</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -212,12 +202,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0010') }>
 	      <td className="orders-data-cell">0010</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -231,12 +221,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0011') }>
 	      <td className="orders-data-cell">0011</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -250,12 +240,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0012') }>
 	      <td className="orders-data-cell">0012</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -269,12 +259,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0013') }>
 	      <td className="orders-data-cell">0013</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -288,12 +278,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0014') }>
 	      <td className="orders-data-cell">0014</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -307,12 +297,12 @@ class Orders extends React.Component {
 	      <td className="orders-data-cell">Some food</td>
 	    </tr>
 
-	    <tr>
+	    <tr onClick={ this.handleClickToOrder.bind(this, '0015') }>
 	      <td className="orders-data-cell">0015</td>
 	      <td className="orders-data-cell">
                 <div className="media-box">
 		  <div className="pull-left">
-                    <img src="img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
+                    <img src="/img/user1.jpg" className="img-responsive media-box-object img-circle thumb32" />
 		  </div>
                   <div className="media-box-body clearfix">
 		    <strong className="media-box-heading text-primary">
@@ -330,6 +320,10 @@ class Orders extends React.Component {
       </ContentWrapper>
     );
   }
+}
+
+Orders.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default Orders;

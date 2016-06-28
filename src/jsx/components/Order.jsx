@@ -6,6 +6,7 @@ class Order extends React.Component {
     return (
       <ContentWrapper>
         <h3>
+	  {/* parse orderId */}
           Order {this.props.params.orderId}
           <small>Horia</small>
         </h3>
