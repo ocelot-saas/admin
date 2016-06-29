@@ -18,6 +18,8 @@ import Platforms from './components/Platforms';
 import Reports from './components/Reports';
 
 import Login from './components/Login';
+import Register from './components/Register';
+import Recover from './components/Recover';
 
 // Init translation system
 initTranslation();
@@ -46,6 +48,8 @@ ReactDOM.render(
 
         <Route path="/" component={BasePage}>
             <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+            <Route path="/recover" component={Recover}/>
         </Route>
 
         {/* Not found handler */}
