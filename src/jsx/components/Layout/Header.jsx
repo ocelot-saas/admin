@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import pubsub from 'pubsub-js';
 import HeaderRun from './Header.run'
 import { NavDropdown, MenuItem } from 'react-bootstrap';
@@ -65,9 +66,13 @@ class Header extends React.Component {
                             { /* START Alert menu */ }
                             <NavDropdown noCaret eventKey={ 3 } title={ ddAlertTitle } id="basic-nav-dropdown" >
                                 <MenuItem className="animated flipInX" eventKey={3.2}>Profile</MenuItem>
-                                <MenuItem className="animated flipInX" eventKey={3.3}>Dashboard</MenuItem>
+                                <MenuItem className="animated flipInX" eventKey={3.3}>
+				  <Link to="/dashboard" title="Dashboard">Dashboard</Link>
+				</MenuItem>
                                 <MenuItem divider />
-                                <MenuItem className="animated flipInX" eventKey={3.3}>Logout</MenuItem>
+                                <MenuItem className="animated flipInX" eventKey={3.3}>
+				  <Link to="/login" title="Login">Logout</Link>
+				</MenuItem>
                             </NavDropdown>
                             { /* END Alert menu */ }
                         </ul>

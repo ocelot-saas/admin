@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Link, History } from 'react-router';
+import { Link } from 'react-router';
 import SidebarRun from './Sidebar.run';
 
 class Sidebar extends React.Component {

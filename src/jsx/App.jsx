@@ -17,6 +17,8 @@ import Order from './components/Order';
 import Platforms from './components/Platforms';
 import Reports from './components/Reports';
 
+import Login from './components/Login';
+
 // Init translation system
 initTranslation();
 // Init css loader (for themes)
@@ -40,6 +42,10 @@ ReactDOM.render(
 	    <Route path="/platforms" component={Platforms} />
 	    <Route path="/reports" component={Reports} />
 
+        </Route>
+
+        <Route path="/" component={BasePage}>
+            <Route path="/login" component={Login}/>
         </Route>
 
         {/* Not found handler */}
