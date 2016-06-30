@@ -12,6 +12,10 @@ class Menu extends React.Component {
     this.context.router.push(`/menu/sections/${sectionId}`);
   }
 
+  handleClickToFoodItem(foodItemId, e) {
+    this.context.router.push(`/menu/fooditem/${foodItemId}`);
+  }
+
   render() {
     return (
       <ContentWrapper>
@@ -141,7 +145,7 @@ class Menu extends React.Component {
               <div className="panel-body">
                 <div className="list-group">
 
-                  <div className="media p mt0 list-group-item">
+                  <div className="media p mt0 list-group-item" onClick={ this.handleClickToFoodItem.bind(this, '1') }>
 		    <span className="close">&times;</span>
                     <span className="pull-left">
                       <img src="/img/mood04.jpg" className="media-object img-circle thumb32" />
@@ -175,7 +179,7 @@ class Menu extends React.Component {
 		    </Row>
                   </div>
 
-                  <div className="media p mt0 list-group-item">
+                  <div className="media p mt0 list-group-item" onClick={ this.handleClickToFoodItem.bind(this, '2') }>
 		    <span className="close">&times;</span>
                     <span className="pull-left">
                       <img src="/img/mood05.jpg" className="media-object img-circle thumb32" />
@@ -209,7 +213,7 @@ class Menu extends React.Component {
 		    </Row>
                   </div>
 
-                  <div className="media p mt0 list-group-item">
+                  <div className="media p mt0 list-group-item" onClick={ this.handleClickToFoodItem.bind(this, '3') }>
 		    <span className="close">&times;</span>
                     <span className="pull-left">
                       <img src="/img/mood01.jpg" className="media-object img-circle thumb32" />
@@ -243,7 +247,7 @@ class Menu extends React.Component {
 		    </Row>
                   </div>
 
-                  <div className="media p mt0 list-group-item">
+                  <div className="media p mt0 list-group-item" onClick={ this.handleClickToFoodItem.bind(this, '4') }>
 		    <span className="close">&times;</span>
                     <span className="pull-left">
                       <img src="/img/mood02.jpg" className="media-object img-circle thumb32" />
