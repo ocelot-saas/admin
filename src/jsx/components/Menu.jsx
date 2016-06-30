@@ -36,7 +36,7 @@ class Menu extends React.Component {
                   <div className="media p mt0 list-group-item" onClick={ this.handleClickToSection.bind(this, '1') }>
 		    <span className="close">&times;</span>
                     <span className="pull-left">
-                      <img src="img/mood01.jpg" className="media-object img-circle thumb32" />
+                      <img src="/img/mood01.jpg" className="media-object img-circle thumb32" />
                     </span>
 		    <Row>
 		      <Col md={ 3 }>
@@ -63,7 +63,7 @@ class Menu extends React.Component {
                   <div className="media p mt0 list-group-item" onClick={ this.handleClickToSection.bind(this, '2') }>
 		    <span className="close">&times;</span>
                     <span className="pull-left">
-                      <img src="img/mood02.jpg" className="media-object img-circle thumb32" />
+                      <img src="/img/mood02.jpg" className="media-object img-circle thumb32" />
                     </span>
 		    <Row>
 		      <Col md={ 3 }>
@@ -90,7 +90,7 @@ class Menu extends React.Component {
                   <div className="media p mt0 list-group-item" onClick={ this.handleClickToSection.bind(this, '3') }>
 		    <span className="close">&times;</span>
                     <span className="pull-left">
-                      <img src="img/mood03.jpg" className="media-object img-circle thumb32" />
+                      <img src="/img/mood03.jpg" className="media-object img-circle thumb32" />
                     </span>
 		    <Row>
 		      <Col md={ 3 }>
@@ -144,7 +144,7 @@ class Menu extends React.Component {
                   <div className="media p mt0 list-group-item">
 		    <span className="close">&times;</span>
                     <span className="pull-left">
-                      <img src="img/mood04.jpg" className="media-object img-circle thumb32" />
+                      <img src="/img/mood04.jpg" className="media-object img-circle thumb32" />
                     </span>
 		    <Row>
 		      <Col md={ 3 }>
@@ -178,7 +178,7 @@ class Menu extends React.Component {
                   <div className="media p mt0 list-group-item">
 		    <span className="close">&times;</span>
                     <span className="pull-left">
-                      <img src="img/mood05.jpg" className="media-object img-circle thumb32" />
+                      <img src="/img/mood05.jpg" className="media-object img-circle thumb32" />
                     </span>
 		    <Row>
 		      <Col md={ 3 }>
@@ -212,7 +212,7 @@ class Menu extends React.Component {
                   <div className="media p mt0 list-group-item">
 		    <span className="close">&times;</span>
                     <span className="pull-left">
-                      <img src="img/mood01.jpg" className="media-object img-circle thumb32" />
+                      <img src="/img/mood01.jpg" className="media-object img-circle thumb32" />
                     </span>
 		    <Row>
 		      <Col md={ 3 }>
@@ -246,7 +246,7 @@ class Menu extends React.Component {
                   <div className="media p mt0 list-group-item">
 		    <span className="close">&times;</span>
                     <span className="pull-left">
-                      <img src="img/mood02.jpg" className="media-object img-circle thumb32" />
+                      <img src="/img/mood02.jpg" className="media-object img-circle thumb32" />
                     </span>
 		    <Row>
 		      <Col md={ 3 }>
