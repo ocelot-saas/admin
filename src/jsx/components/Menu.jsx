@@ -4,6 +4,14 @@ import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl, Table }
 
 class Menu extends React.Component {
 
+  constructor(props, context) {
+    super(props, context);
+  }
+
+  handleClickToSection(sectionId, e) {
+    this.context.router.push(`/menu/sections/${sectionId}`);
+  }
+
   render() {
     return (
       <ContentWrapper>
@@ -24,7 +32,8 @@ class Menu extends React.Component {
 
 	      <div className="panel-body">
                 <div className="list-group">
-                  <div className="media p mt0 list-group-item">
+
+                  <div className="media p mt0 list-group-item" onClick={ this.handleClickToSection.bind(this, '1') }>
 		    <span className="close">&times;</span>
                     <span className="pull-left">
                       <img src="img/mood01.jpg" className="media-object img-circle thumb32" />
@@ -51,7 +60,7 @@ class Menu extends React.Component {
 		    </Row>
                   </div>
 
-                  <div className="media p mt0 list-group-item">
+                  <div className="media p mt0 list-group-item" onClick={ this.handleClickToSection.bind(this, '2') }>
 		    <span className="close">&times;</span>
                     <span className="pull-left">
                       <img src="img/mood02.jpg" className="media-object img-circle thumb32" />
@@ -78,7 +87,7 @@ class Menu extends React.Component {
 		    </Row>
                   </div>
 
-                  <div className="media p mt0 list-group-item">
+                  <div className="media p mt0 list-group-item" onClick={ this.handleClickToSection.bind(this, '3') }>
 		    <span className="close">&times;</span>
                     <span className="pull-left">
                       <img src="img/mood03.jpg" className="media-object img-circle thumb32" />
@@ -283,6 +292,10 @@ class Menu extends React.Component {
       </ContentWrapper>
     );
   }
+}
+
+Menu.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default Menu;
