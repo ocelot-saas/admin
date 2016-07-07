@@ -4,7 +4,7 @@ MAINTAINER Horia Coman <horia141@gmail.com>
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-            nodejs \
+            nodejs-legacy \
             npm && \
     apt-get clean
 
