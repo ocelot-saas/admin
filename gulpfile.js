@@ -305,6 +305,7 @@ gulp.task('browsersync', function() {
     }
 
     browserSync({
+        open: false,
         notify: false,
         server: {
             baseDir: paths.dist,
