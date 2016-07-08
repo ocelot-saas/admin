@@ -63,14 +63,14 @@ var vendor = {
 // SOURCES CONFIG
 var source = {
     scripts: {
-	app: {
-	    src: [paths.app + paths.scripts + '**/*.{jsx,js}'],
-	    entry: [paths.app + paths.scripts + 'App.jsx']
-	},
-	tests: {
-	    src: [paths.tests + '*.{jsx,js}'],
-	    entry: [paths.tests + 'app.js']
-	}
+        app: {
+            src: [paths.app + paths.scripts + '**/*.{jsx,js}'],
+            entry: [paths.app + paths.scripts + 'App.jsx']
+        },
+        tests: {
+            src: [paths.tests + '*.{jsx,js}'],
+            entry: [paths.tests + 'app.js']
+        }
     },
     templates: {
         index: paths.app + 'index.html'
@@ -90,8 +90,8 @@ var source = {
 // BUILD TARGET CONFIG
 var build = {
     scripts: {
-	app: paths.dist + 'js',
-	tests: paths.dist + 'jstests'
+        app: paths.dist + 'js',
+        tests: paths.dist + 'jstests'
     },
     styles: paths.dist + 'css',
     images: paths.dist + 'img',
@@ -152,7 +152,7 @@ gulp.task('scripts:tests', function() {
     log('Building test scripts..');
 
     return gulp.src(source.scripts.tests.entry)
-	.pipe(webpackStream(testsWebpackConfig))
+        .pipe(webpackStream(testsWebpackConfig))
         .on('error', handleError)
         .pipe(gulp.dest(build.scripts.tests));
 });
@@ -306,12 +306,13 @@ gulp.task('browsersync', function() {
 
     browserSync({
         open: false,
+        port: 10000,
         notify: false,
         server: {
             baseDir: paths.dist,
             middleware: middlewares
         },
-	files: [source.scripts.app.src]
+        files: [source.scripts.app.src]
     });
 
 });
