@@ -5,8 +5,8 @@ node_js:
 
 cache:
   directories:
-  - $HOME/node_modules
-  - $HOME/bower_components
+  - node_modules
+  - bower_components
 
 install:
 - npm install --progress=false

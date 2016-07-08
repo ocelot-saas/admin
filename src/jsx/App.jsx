@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link, IndexRedirect, browserHistory } from 'react-router';
+import { Router, Route, Link, IndexRedirect, Redirect, browserHistory } from 'react-router';
 
 import initTranslation from './components/Common/localize';
 import initLoadCss from './components/Common/load-css';
@@ -29,6 +29,8 @@ initLoadCss();
 
 ReactDOM.render(
   <Router history={browserHistory}>
+
+    <Redirect from="/index.html" to="/" />
 
     <Route path="/" component={Base}>
 
