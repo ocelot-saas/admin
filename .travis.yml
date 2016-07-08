@@ -10,6 +10,7 @@ cache:
 
 install:
 - npm install --progress=false
+- npm run-script prestart
 
 script:
 - npm run-script test-travis
@@ -20,7 +21,6 @@ after_success:
 before_deploy:
 - gulp build:app
 
-# Notice the S3 deployer runs a full build task!
 deploy:
 - provider: script
   skip_cleanup: true

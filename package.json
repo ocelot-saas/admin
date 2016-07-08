@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "The admin interface users use to manage their account with us, as an NPM package.",
   "author": "Horia Coman <horia141@gmail.com>",
   "scripts": {
