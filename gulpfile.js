@@ -116,7 +116,7 @@ var cssnanoOpts = {
 var webpackConfig = require(
     isProduction ?
     './webpack.config.prod' :
-    './webpack.config.dev'
+    './webpack.config.local'
 );
 
 var testsWebpackConfig = require('./webpack.config.tests');
