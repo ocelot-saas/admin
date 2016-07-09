@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, IndexRedirect, Redirect, browserHistory } from 'react-router';
 
-import initTranslation from './components/Common/localize';
+import initTranslation from './common/localize';
 
 import Base from './components/Layout/Base';
 import BasePage from './components/Layout/BasePage';

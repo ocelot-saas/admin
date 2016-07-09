@@ -1,4 +1,4 @@
-import * as CONST from '../Common/constants';
+import * as CONST from '../../common/constants';
 
 export default () => {
 
