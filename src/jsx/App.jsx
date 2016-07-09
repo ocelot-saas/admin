@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Router, Route, Link, IndexRedirect, Redirect, browserHistory } from 'react-router';
 
 import initTranslation from './components/Common/localize';
-import initLoadCss from './components/Common/load-css';
 
 import Base from './components/Layout/Base';
 import BasePage from './components/Layout/BasePage';
@@ -24,8 +23,6 @@ import Recover from './components/Recover';
 
 // Init translation system
 initTranslation();
-// Init css loader (for themes)
-initLoadCss();
 
 ReactDOM.render(
     <Router history={browserHistory}>
