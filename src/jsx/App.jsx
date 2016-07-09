@@ -28,37 +28,37 @@ initTranslation();
 initLoadCss();
 
 ReactDOM.render(
-  <Router history={browserHistory}>
+    <Router history={browserHistory}>
 
-    <Redirect from="/index.html" to="/" />
+        <Redirect from="/index.html" to="/" />
 
-    <Route path="/" component={Base}>
+        <Route path="/" component={Base}>
 
-      {/* Default route */}
-      <IndexRedirect to="/dashboard" />
+            {/* Default route */}
+            <IndexRedirect to="/dashboard" />
 
-      {/* Routes, in sorted order */}
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/general" component={General} />
-      <Route path="/menu" component={Menu} />
-      <Route path="/menu/sections/:sectionId" component={Section} />
-      <Route path="/menu/fooditem/:foodItemId" component={FoodItem} />
-      <Route path="/orders/:orderId" component={Order} />
-      <Route path="/orders" component={Orders} />
-      <Route path="/platforms" component={Platforms} />
-      <Route path="/reports" component={Reports} />
+            {/* Routes, in sorted order */}
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/general" component={General} />
+            <Route path="/menu" component={Menu} />
+            <Route path="/menu/sections/:sectionId" component={Section} />
+            <Route path="/menu/fooditem/:foodItemId" component={FoodItem} />
+            <Route path="/orders/:orderId" component={Order} />
+            <Route path="/orders" component={Orders} />
+            <Route path="/platforms" component={Platforms} />
+            <Route path="/reports" component={Reports} />
 
-    </Route>
+        </Route>
 
-    <Route path="/" component={BasePage}>
-      <Route path="/login" component={Login}/>
-      <Route path="/register" component={Register}/>
-      <Route path="/recover" component={Recover}/>
-    </Route>
+        <Route path="/" component={BasePage}>
+            <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
+            <Route path="/recover" component={Recover}/>
+        </Route>
 
-    {/* Not found handler */}
-    {/*<Route path="*" component={NotFound}/>*/}
+        {/* Not found handler */}
+        {/*<Route path="*" component={NotFound}/>*/}
 
-  </Router>,
-  document.getElementById('app')
+    </Router>,
+         document.getElementById('app')
 );

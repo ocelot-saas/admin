@@ -48,10 +48,10 @@ $sidebar-label-color:             $sidebar-item-color;
 
 body,
 .wrapper > section {
-  background-color: $content-bg;
+    background-color: $content-bg;
 }
 .wrapper > .aside { 
-  background-color: $aside-bg;
+    background-color: $aside-bg;
 }
 /* ========================================================================
    Component: top-navbar
@@ -61,40 +61,40 @@ body,
 // ------------------------------
 
 .topnavbar {
-  background-color: #fff;
-  .navbar-header {
-    background-color: $nav-header-bg;
-    @include gradient-horizontal($nav-top-bg-start, $nav-top-bg-end);
-    @media only screen and (min-width: $mq-tablet) {
-      background-image: none;
+    background-color: #fff;
+    .navbar-header {
+        background-color: $nav-header-bg;
+        @include gradient-horizontal($nav-top-bg-start, $nav-top-bg-end);
+        @media only screen and (min-width: $mq-tablet) {
+            background-image: none;
+        }
     }
-  }
-  
-  .navbar-nav > li > a,
-  .navbar-nav > .open > a {
-    color: $nav-top-item-mobile;
-    &:hover, &:focus {
-      color: $nav-top-item-mobile-active;
+    
+    .navbar-nav > li > a,
+    .navbar-nav > .open > a {
+        color: $nav-top-item-mobile;
+        &:hover, &:focus {
+                     color: $nav-top-item-mobile-active;
+                 }
     }
-  }
 
-  // Navbar link active style
-  .navbar-nav > .active > a,
-  .navbar-nav > .open   > a {
-    &, &:hover, &:focus {
-      background-color: transparent;
+    // Navbar link active style
+    .navbar-nav > .active > a,
+    .navbar-nav > .open   > a {
+        &, &:hover, &:focus {
+                        background-color: transparent;
+                    }
     }
-  }
 
-  // the button to toggle search
-  .navbar-nav > li > [data-toggle='navbar-search'] {
-    color: $nav-top-item-desktop;
-  }
-  
-  .nav-wrapper {
-    background-color: $nav-top-bg;
-    @include gradient-horizontal($nav-top-bg-start, $nav-top-bg-end);
-  }
+    // the button to toggle search
+    .navbar-nav > li > [data-toggle='navbar-search'] {
+        color: $nav-top-item-desktop;
+    }
+    
+    .nav-wrapper {
+        background-color: $nav-top-bg;
+        @include gradient-horizontal($nav-top-bg-start, $nav-top-bg-end);
+    }
 }
 
 // Navbar Desktop styles
@@ -102,26 +102,26 @@ body,
 
 @media only screen and (min-width: $mq-tablet) {
 
-  // Navbar top styles
-  .topnavbar {
-    background-color: $nav-top-bg;
-    @include gradient-horizontal($nav-top-bg-start, $nav-top-bg-end);
+    // Navbar top styles
+    .topnavbar {
+        background-color: $nav-top-bg;
+        @include gradient-horizontal($nav-top-bg-start, $nav-top-bg-end);
 
-    .navbar-nav > .open > a {
-      &, &:hover, &:focus {
-        box-shadow: 0 -3px 0 rgba(255,255,255,.5) inset;
-      }
-    }
+        .navbar-nav > .open > a {
+            &, &:hover, &:focus {
+                            box-shadow: 0 -3px 0 rgba(255,255,255,.5) inset;
+                        }
+        }
 
-    .navbar-nav > li > a,
-    .navbar-nav > .open > a {
-      color: $nav-top-item-desktop;
-      &:hover, &:focus {
-        color: $nav-top-item-mobile-active;
-      }
-    }
+        .navbar-nav > li > a,
+        .navbar-nav > .open > a {
+            color: $nav-top-item-desktop;
+            &:hover, &:focus {
+                         color: $nav-top-item-mobile-active;
+                     }
+        }
 
-  } // .topnavbar
+    } // .topnavbar
 
 }
 
@@ -130,70 +130,70 @@ body,
  ========================================================================== */
 
 .sidebar {
-  background-color: $sidebar-bg; 
+    background-color: $sidebar-bg; 
 
-  .nav-heading {
-    color: $sidebar-heading-color;
-  }
-
-  // Items
-  .nav {
-    > li {
-      > a,
-      > .nav-item {
-        color: $sidebar-item-color;
-        &:focus, &:hover {
-          color: $sidebar-item-color-active;
-        }
-        // Item icon
-        > em {
-          color: $sidebar-icon-color;
-        }
-      }
-
-      // Active item state
-      &.active,
-      &.open {
-        &,
-        > a,
-        .nav {
-          background-color: $sidebar-item-bg-active;
-          color: $sidebar-item-color-active;
-        }
-        > a > em {
-          color: $sidebar-icon-color-active;
-        }  
-      }
-      &.active {
-        border-left-color: $sidebar-item-color-active;
-      }
+    .nav-heading {
+        color: $sidebar-heading-color;
     }
-  }
+
+    // Items
+    .nav {
+        > li {
+            > a,
+            > .nav-item {
+                color: $sidebar-item-color;
+                &:focus, &:hover {
+                             color: $sidebar-item-color-active;
+                         }
+                // Item icon
+                > em {
+                    color: $sidebar-icon-color;
+                }
+            }
+
+            // Active item state
+            &.active,
+            &.open {
+                &,
+                > a,
+                .nav {
+                    background-color: $sidebar-item-bg-active;
+                    color: $sidebar-item-color-active;
+                }
+                > a > em {
+                    color: $sidebar-icon-color-active;
+                }  
+            }
+            &.active {
+                border-left-color: $sidebar-item-color-active;
+            }
+        }
+    }
 }
 
 .sidebar-subnav {
-  background-color: $sidebar-bg;
-  > .sidebar-subnav-header {
-    color: $sidebar-item-color;
-  }
-  > li  {
-    > a,
-    > .nav-item {
-      color: $sidebar-item-color;
-      &:focus, &:hover {
-        color: $sidebar-item-color-active;
-      }
+    background-color: $sidebar-bg;
+    > .sidebar-subnav-header {
+        color: $sidebar-item-color;
     }
-
-    &.active {
-      > a,
-      > .nav-item {
-        color: $sidebar-icon-color-active;
-        &:after {
-          border-color: $sidebar-bullet-color-active;
-          background-color: $sidebar-bullet-color-active;
+    > li  {
+        > a,
+        > .nav-item {
+            color: $sidebar-item-color;
+            &:focus, &:hover {
+                         color: $sidebar-item-color-active;
+                     }
         }
-      }
-    }
-  } // li
+
+        &.active {
+            > a,
+            > .nav-item {
+                color: $sidebar-icon-color-active;
+                &:after {
+                    border-color: $sidebar-bullet-color-active;
+                    background-color: $sidebar-bullet-color-active;
+                }
+            }
+        }
+    } // li
 }

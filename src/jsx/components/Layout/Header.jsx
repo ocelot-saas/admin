@@ -67,12 +67,12 @@ class Header extends React.Component {
                             <NavDropdown noCaret eventKey={ 3 } title={ ddAlertTitle } id="basic-nav-dropdown" >
                                 <MenuItem className="animated flipInX" eventKey={3.2}>Profile</MenuItem>
                                 <MenuItem className="animated flipInX" eventKey={3.3}>
-				  <Link to="/dashboard" title="Dashboard">Dashboard</Link>
-				</MenuItem>
+                                    <Link to="/dashboard" title="Dashboard">Dashboard</Link>
+                                </MenuItem>
                                 <MenuItem divider />
                                 <MenuItem className="animated flipInX" eventKey={3.3}>
-				  <Link to="/login" title="Login">Logout</Link>
-				</MenuItem>
+                                    <Link to="/login" title="Login">Logout</Link>
+                                </MenuItem>
                             </NavDropdown>
                             { /* END Alert menu */ }
                         </ul>
@@ -91,7 +91,7 @@ class Header extends React.Component {
                 </nav>
                 { /* END Top Navbar */ }
             </header>
-            );
+        );
     }
 
 }

@@ -30,14 +30,14 @@ class Base extends React.Component {
                 <Sidebar />
 
                 <ReactCSSTransitionGroup
-                  component="section"
-                  transitionName={animationName}
-                  transitionEnterTimeout={500}
-                  transitionLeaveTimeout={500}
+                    component="section"
+                    transitionName={animationName}
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
                 >
-                  {React.cloneElement(this.props.children, {
-                    key: Math.random()
-                  })}
+                    {React.cloneElement(this.props.children, {
+                         key: Math.random()
+                     })}
                 </ReactCSSTransitionGroup>
 
                 <Footer />

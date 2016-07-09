@@ -56,8 +56,8 @@ class Sidebar extends React.Component {
                             { /* Dashboard */ }
                             <li className={ this.routeActive('dashboard') ? 'active' : '' }>
                                 <Link to="/dashboard" title="Dashboard">
-                                  <em className="icon-speedometer"></em>
-                                  <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                                    <em className="icon-speedometer"></em>
+                                    <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
                                 </Link>
                             </li>
 
@@ -68,16 +68,16 @@ class Sidebar extends React.Component {
                             { /* General */}
                             <li className={ this.routeActive('general') ? 'active' : '' }>
                                 <Link to="/general" title="General">
-                                  <em className="icon-cup"></em>
-                                  <span data-localize="sidebar.nav.GENERAL">General</span>
+                                    <em className="icon-cup"></em>
+                                    <span data-localize="sidebar.nav.GENERAL">General</span>
                                 </Link>
                             </li>
 
                             { /* Menu */}
                             <li className={ this.routeActive('menu') ? 'active' : '' }>
                                 <Link to="/menu" title="Menu">
-                                  <em className="icon-book-open"></em>
-                                  <span data-localize="sidebar.nav.MENU">Menu</span>
+                                    <em className="icon-book-open"></em>
+                                    <span data-localize="sidebar.nav.MENU">Menu</span>
                                 </Link>
                             </li>
 
@@ -88,8 +88,8 @@ class Sidebar extends React.Component {
                             { /* Platforms */}
                             <li className={ this.routeActive('platforms') ? 'active' : '' }>
                                 <Link to="/platforms" title="Platforms">
-                                  <em className="icon-rocket"></em>
-                                  <span data-localize="sidebar.nav.PLATFORMS">Platforms</span>
+                                    <em className="icon-rocket"></em>
+                                    <span data-localize="sidebar.nav.PLATFORMS">Platforms</span>
                                 </Link>
                             </li>
 
@@ -100,8 +100,8 @@ class Sidebar extends React.Component {
                             { /* Orders */}
                             <li className={ this.routeActive('orders') ? 'active' : '' }>
                                 <Link to="/orders" title="Orders">
-                                  <em className="icon-list"></em>
-                                  <span data-localize="sidebar.nav.ORDERS">Orders</span>
+                                    <em className="icon-list"></em>
+                                    <span data-localize="sidebar.nav.ORDERS">Orders</span>
                                 </Link>
                             </li>
 
@@ -112,8 +112,8 @@ class Sidebar extends React.Component {
                             { /* Reports */}
                             <li className={ this.routeActive('reports') ? 'active' : '' }>
                                 <Link to="/reports" title="Reports">
-                                  <em className="icon-graph"></em>
-                                  <span data-localize="sidebar.nav.REPORTS">Reports</span>
+                                    <em className="icon-graph"></em>
+                                    <span data-localize="sidebar.nav.REPORTS">Reports</span>
                                 </Link>
                             </li>
                         </ul>
@@ -122,7 +122,7 @@ class Sidebar extends React.Component {
                 </div>
                 { /* END Sidebar (left) */ }
             </aside>
-            );
+        );
     }
 
 }

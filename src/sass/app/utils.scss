@@ -1,7 +1,7 @@
 /* ========================================================================
      Component: utils
  ========================================================================== */
- 
+
 // Margins
 // --------------------
 
@@ -113,13 +113,13 @@
 // Border Radius Clear
 
 .radius-clear {
-  border-radius: 0 !important;
+    border-radius: 0 !important;
 }
 
 // Box Shadow Clear
 
 .shadow-clear {
-  box-shadow: 0 0 0 #000 !important;
+    box-shadow: 0 0 0 #000 !important;
 }
 
 // Text helpers
@@ -182,7 +182,7 @@
 
 
 .bg-cover {
-  background-size: cover;
+    background-size: cover;
 }
 
 // Common thumbnail sizes (ideal for images)
@@ -201,37 +201,37 @@
 // Vertical align helpers
 
 .align-middle {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 .align-top {
-  vertical-align: top;
+    vertical-align: top;
 }
 .align-bottom {
-  vertical-align: bottom;
+    vertical-align: bottom;
 }
 
 
 // Background image
 .bg-center {
-  background-position: center center;
-  background-size: cover;
+    background-position: center center;
+    background-size: cover;
 }
 
 // List
 .list-icon {
-  em {
-    font-size: 14px;
-    width: 40px;
-    vertical-align: middle;
-    margin: 0;
-    display: inline-block;
-    text-align: center;
-    @include transition(all .2s);
-    line-height: 30px;
-  }
-  div:hover em {
-    @include scale(3, 3)
-  }
+    em {
+        font-size: 14px;
+        width: 40px;
+        vertical-align: middle;
+        margin: 0;
+        display: inline-block;
+        text-align: center;
+        @include transition(all .2s);
+        line-height: 30px;
+    }
+    div:hover em {
+        @include scale(3, 3)
+    }
 }
 
 // Components size
@@ -251,88 +251,88 @@
 // Extra labels
 
 .label-inverse {
-  @include label-variant($brand-inverse);
+    @include label-variant($brand-inverse);
 }
 
 .label-green {
-  @include label-variant($brand-green);
+    @include label-variant($brand-green);
 }
 
 .label-pink {
-  @include label-variant($brand-pink);
+    @include label-variant($brand-pink);
 }
 
 .label-purple {
-  @include label-variant($brand-purple);
+    @include label-variant($brand-purple);
 }
 
 
 // Extra alert
 
 .alert-purple {
-  @include alert-variant($brand-purple, $brand-purple, #fff);
+    @include alert-variant($brand-purple, $brand-purple, #fff);
 }
 .alert-green {
-  @include alert-variant($brand-green, $brand-green, #fff);
+    @include alert-variant($brand-green, $brand-green, #fff);
 }
 .alert-pink {
-  @include alert-variant($brand-pink, $brand-pink, #fff);
+    @include alert-variant($brand-pink, $brand-pink, #fff);
 }
 .alert-inverse {
-  @include alert-variant($brand-inverse, $brand-inverse, #fff);
+    @include alert-variant($brand-inverse, $brand-inverse, #fff);
 }
 
 // Simulate clickable element
 .clickable {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 // Absolute center element
 // ----------------------------------- 
 
 .abs-center-container {
-  position: relative;
+    position: relative;
 }
 .abs-center {
-  // width: 50%;
-  height: 50%;
-  overflow: auto;
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  
-  &.abs-fixed {
-    position: fixed;
-    z-index: 999;
-  }
-  
-  &.abs-right {
-    left: auto; right: 20px;
-    text-align: right;
-  }
+    // width: 50%;
+    height: 50%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    
+    &.abs-fixed {
+        position: fixed;
+        z-index: 999;
+    }
+    
+    &.abs-right {
+        left: auto; right: 20px;
+        text-align: right;
+    }
 
-  &.abs-left {
-    right: auto; left: 20px;
-    text-align: left;
-  }
+    &.abs-left {
+        right: auto; left: 20px;
+        text-align: left;
+    }
 }
 
 @media (max-height: 720px) {
-  .abs-center {
-    position: relative;
-  }
+    .abs-center {
+        position: relative;
+    }
 }
 
 
 .link-unstyled {
-  text-decoration: none !important;
-  outline: none !important;
+    text-decoration: none !important;
+    outline: none !important;
 }
 
 .no-resize {
-  resize: none;
-  max-width: 100%;
-  min-width: 100%;
+    resize: none;
+    max-width: 100%;
+    min-width: 100%;
 }
 
 /** 
@@ -345,16 +345,16 @@
 
 .hover-visible {
 
-  .hover-hidden {
-    display: none;
-  }
+    .hover-hidden {
+        display: none;
+    }
 
-  &:hover .hover-hidden {
-    display: block;
-  }
-  &:hover .hover-inline {
-    display: inline-block;
-  }
+    &:hover .hover-hidden {
+        display: block;
+    }
+    &:hover .hover-inline {
+        display: inline-block;
+    }
 }
 
 //
@@ -376,27 +376,27 @@
 // Clear the floats
 .media-box,
 .media-box-body {
-  overflow: hidden;
-  zoom: 1;
+    overflow: hidden;
+    zoom: 1;
 }
 
 // Proper spacing between instances of .media-box
 .media-box,
 .media-box .media-box {
-  margin-top: 15px;
+    margin-top: 15px;
 }
 .media-box:first-child {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 // For images and videos, set to block
 .media-box-object {
-  display: block;
+    display: block;
 }
 
 // Reset margins on headings for tighter default spacing
 .media-box-heading {
-  margin: 0 0 5px;
+    margin: 0 0 5px;
 }
 
 
@@ -404,12 +404,12 @@
 // -------------------------
 
 .media-box {
-  > .pull-left {
-    margin-right: 10px;
-  }
-  > .pull-right {
-    margin-left: 10px;
-  }
+    > .pull-left {
+        margin-right: 10px;
+    }
+    > .pull-right {
+        margin-left: 10px;
+    }
 }
 
 
@@ -418,6 +418,6 @@
 
 // Undo default ul/ol styles
 .media-box-list {
-  padding-left: 0;
-  list-style: none;
+    padding-left: 0;
+    list-style: none;
 }

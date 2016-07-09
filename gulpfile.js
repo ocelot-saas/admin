@@ -115,8 +115,8 @@ var cssnanoOpts = {
 
 var webpackConfig = require(
     isProduction ?
-    './webpack.config.prod' :
-    './webpack.config.local'
+        './webpack.config.prod' :
+        './webpack.config.local'
 );
 
 var testsWebpackConfig = require('./webpack.config.tests');
@@ -178,8 +178,8 @@ gulp.task('vendor', function() {
     var vendorSrc = JSON.parse(fs.readFileSync(vendor.source, 'utf8'));
 
     return gulp.src(vendorSrc, {
-            base: 'bower_components'
-        })
+        base: 'bower_components'
+    })
         .pipe($.expectFile(vendorSrc))
         .pipe(jsFilter)
         .pipe($.if(isProduction, $.uglify(vendorUglifyOpts)))
