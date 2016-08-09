@@ -2,6 +2,7 @@ import Auth0 from 'auth0-js'
 import Auth0Lock from 'auth0-lock'
 import decode from 'jwt-decode';
 import { EventEmitter } from 'events'
+import { APP_COLORS} from './common/constants';
 
 export default class AuthService extends EventEmitter {
     
@@ -13,7 +14,11 @@ export default class AuthService extends EventEmitter {
             domain: domain
         })
         this.lock = new Auth0Lock(clientId, domain, {
-            closable: false
+            closable: false,
+            theme: {
+                logo: '/img/logo-single.png',
+                primaryColor: APP_COLORS['primary']
+            }
         })
 
         const authResult = this.auth0.parseHash(window.location.hash)
