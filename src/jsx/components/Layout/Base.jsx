@@ -13,9 +13,9 @@ class Base extends React.Component {
 
         return (
             <div className="wrapper">
-                <Header auth={this.props.route.auth} />
+                <Header auth={ this.props.route.auth } />
 
-                <Sidebar />
+                <Sidebar auth={ this.props.route.auth }/>
 
                 <ReactCSSTransitionGroup
                     component="section"

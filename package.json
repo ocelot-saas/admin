@@ -27,6 +27,7 @@
         "classnames": "^2.2.3",
         "dropzone": "^4.3.0",
         "history": "^2.0.0-rc2",
+        "jwt-decode": "^2.0.1",
         "pubsub-js": "^1.5.3",
         "react": "^15.3.0",
         "react-addons-css-transition-group": "^15.3.0",

@@ -1,8 +1,13 @@
 import Auth0 from 'auth0-js'
 import Auth0Lock from 'auth0-lock'
+import decode from 'jwt-decode';
+import { EventEmitter } from 'events'
 
-export default class AuthService {
+export default class AuthService extends EventEmitter {
+    
     constructor(clientId, domain) {
+        super();
+
         this.auth0 = new Auth0({
             clientID: clientId,
             domain: domain
@@ -15,7 +20,16 @@ export default class AuthService {
 
         if (authResult) {
             if (authResult.idToken) {
-                this.setToken(authResult.idToken)
+                this._setToken(authResult.idToken)
+
+                this.lock.getProfile(authResult.idToken, (error, profile) => {
+                    if (error) {
+                        console.log('Error loading the Profile', error)
+                        return;
+                    }
+
+                    this.setProfile(profile)
+                })
             }
         }
 
@@ -38,18 +52,56 @@ export default class AuthService {
     }
 
     loggedIn() {
-        return !!this.getToken()
+        const token = this._getToken()
+        return !!token && !isTokenExpired(token)
     }
 
-    setToken(idToken) {
+    setProfile(profile){
+        localStorage.setItem('profile', JSON.stringify(profile))
+        this.emit('profile_updated', profile)
+    }
+
+    getProfile(){
+        const profile = localStorage.getItem('profile')
+        return profile ? JSON.parse(localStorage.profile) : {}
+    }
+
+    _setToken(idToken) {
         localStorage.setItem('id_token', idToken)
     }
 
-    getToken() {
+    _getToken() {
         return localStorage.getItem('id_token')
     }
 
     logout() {
         localStorage.removeItem('id_token');
+        localStorage.removeItem('profile');
     }
+}
+
+
+function getTokenExpirationDate(token) {
+    const decoded = decode(token)
+    
+    if(!decoded.exp) {
+        return null
+    }
+
+    const date = new Date(0) // The 0 here is the key, which sets the date to the epoch
+    date.setUTCSeconds(decoded.exp)
+    
+    return date
+}
+
+
+function isTokenExpired(token) {
+    const date = getTokenExpirationDate(token)
+    const offsetSeconds = 0
+    
+    if (date === null) {
+        return false
+    }
+
+    return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)))
 }

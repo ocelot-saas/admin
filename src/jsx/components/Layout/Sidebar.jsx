@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import SidebarRun from './Sidebar.run';
+import AuthService from '../../AuthService';
 
 class Sidebar extends React.Component {
 
     constructor(props, context) {
         super(props, context);
-    };
+        
+        this.state = {
+            profile: props.auth.getProfile()
+        }
+
+        this.onNewProfile = this.onNewProfile.bind(this);
+        props.auth.on('profile_updated', this.onNewProfile);
+    }
 
     componentDidMount() {
         SidebarRun();
+    }
+
+    componentWillUnmount() {
+        this.props.auth.removeListener('profile_updated', this.onNewProfile);
+    }
+
+    onNewProfile(newProfile) {
+        this.setState({
+            profile: newProfile
+        });
     }
 
     routeActive(paths) {
@@ -37,13 +55,13 @@ class Sidebar extends React.Component {
                                     { /* User picture */ }
                                     <div className="user-block-picture">
                                         <div className="user-block-status">
-                                            <img src="/img/user.png" alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
+                                            <img src={ this.state.profile.picture } alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
                                             <div className="circle circle-success circle-lg"></div>
                                         </div>
                                     </div>
                                     { /* Name and Job */ }
                                     <div className="user-block-info">
-                                        <span className="user-block-name">Hello, Horia</span>
+                                        <span className="user-block-name">Hello, { this.state.profile.given_name }</span>
                                         <span className="user-block-role">Administrator</span>
                                     </div>
                                 </div>
@@ -128,9 +146,11 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.contextTypes = {
-    router: () => {
-        return React.PropTypes.func.isRequired;
-    }
-};
+    router: PropTypes.func.isRequired
+}
+
+Sidebar.propTypes = {
+    auth: PropTypes.instanceOf(AuthService)
+}
 
 export default Sidebar;

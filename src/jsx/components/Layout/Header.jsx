@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import pubsub from 'pubsub-js';
 import HeaderRun from './Header.run'
 import { NavDropdown, MenuItem } from 'react-bootstrap';
+import AuthService from '../../AuthService';
 
 class Header extends React.Component {
-
+    
     componentDidMount() {
         HeaderRun();
     }
@@ -99,5 +100,10 @@ class Header extends React.Component {
     }
 
 }
+
+Header.propTypes = {
+    auth: PropTypes.instanceOf(AuthService)
+}
+
 
 export default Header;
