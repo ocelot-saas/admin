@@ -5,7 +5,9 @@ class BasePage extends React.Component {
     render() {
         return (
             <div className="wrapper">
-                {this.props.children}
+                {React.cloneElement(this.props.children, {
+                     auth: this.props.route.auth
+                })}
             </div>
         );
     }

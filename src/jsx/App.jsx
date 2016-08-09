@@ -18,8 +18,16 @@ import Platforms from './components/Platforms';
 import Reports from './components/Reports';
 
 import Login from './components/Login';
-import Register from './components/Register';
-import Recover from './components/Recover';
+import AuthService from './AuthService';
+
+// Init auth system
+const auth = new AuthService('jhoF46qs7sSf3wcPP1lKrYRD1TSgNTZO', 'ocelot-saas.eu.auth0.com');
+
+const requireAuth = (nextState, replace) => {
+    if (!auth.loggedIn()) {
+        replace({ pathname: '/login' })
+    }
+}
 
 // Init translation system
 initTranslation();
@@ -29,33 +37,31 @@ ReactDOM.render(
 
         <Redirect from="/index.html" to="/" />
 
-        <Route path="/" component={Base}>
+        <Route path="/" component={Base} auth={auth}>
 
             {/* Default route */}
             <IndexRedirect to="/dashboard" />
 
             {/* Routes, in sorted order */}
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/general" component={General} />
-            <Route path="/menu" component={Menu} />
-            <Route path="/menu/sections/:sectionId" component={Section} />
-            <Route path="/menu/fooditem/:foodItemId" component={FoodItem} />
-            <Route path="/orders/:orderId" component={Order} />
-            <Route path="/orders" component={Orders} />
-            <Route path="/platforms" component={Platforms} />
-            <Route path="/reports" component={Reports} />
+            <Route path="/dashboard" component={Dashboard} onEnter={requireAuth} />
+            <Route path="/general" component={General} onEnter={requireAuth} />
+            <Route path="/menu" component={Menu} onEnter={requireAuth} />
+            <Route path="/menu/sections/:sectionId" component={Section} onEnter={requireAuth} />
+            <Route path="/menu/fooditem/:foodItemId" component={FoodItem} onEnter={requireAuth} />
+            <Route path="/orders/:orderId" component={Order} onEnter={requireAuth} />
+            <Route path="/orders" component={Orders} onEnter={requireAuth} />
+            <Route path="/platforms" component={Platforms} onEnter={requireAuth} />
+            <Route path="/reports" component={Reports} onEnter={requireAuth} />
 
         </Route>
 
-        <Route path="/" component={BasePage}>
-            <Route path="/login" component={Login}/>
-            <Route path="/register" component={Register}/>
-            <Route path="/recover" component={Recover}/>
+        <Route path="/" component={BasePage} auth={auth}>
+            <Route path="login" component={Login} />
         </Route>
 
         {/* Not found handler */}
         {/*<Route path="*" component={NotFound}/>*/}
 
     </Router>,
-         document.getElementById('app')
+    document.getElementById('app')
 );
