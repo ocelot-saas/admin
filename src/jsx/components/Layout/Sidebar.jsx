@@ -61,7 +61,7 @@ class Sidebar extends React.Component {
                                     </div>
                                     { /* Name and Job */ }
                                     <div className="user-block-info">
-                                        <span className="user-block-name">Hello, { this.state.profile.given_name }</span>
+                                        <span className="user-block-name">Hello, { this.state.profile.name }</span>
                                         <span className="user-block-role">Administrator</span>
                                     </div>
                                 </div>
