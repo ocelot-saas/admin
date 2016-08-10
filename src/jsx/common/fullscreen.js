@@ -1,3 +1,6 @@
+import screenfull from 'screenfull';
+
+
 // FULLSCREEN
 // -----------------------------------
 
