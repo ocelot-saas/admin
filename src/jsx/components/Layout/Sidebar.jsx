@@ -9,11 +9,11 @@ class Sidebar extends React.Component {
         super(props, context);
         
         this.state = {
-            profile: props.auth.getProfile()
+            user: props.auth.getUser()
         }
 
-        this.onNewProfile = this.onNewProfile.bind(this);
-        props.auth.on('profile_updated', this.onNewProfile);
+        this.onNewUser = this.onNewUser.bind(this);
+        props.auth.on('user_updated', this.onNewUser);
     }
 
     componentDidMount() {
@@ -21,12 +21,12 @@ class Sidebar extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.auth.removeListener('profile_updated', this.onNewProfile);
+        this.props.auth.removeListener('user_updated', this.onNewUser);
     }
 
-    onNewProfile(newProfile) {
+    onNewUser(newUser) {
         this.setState({
-            profile: newProfile
+            user: newUser
         });
     }
 
@@ -55,13 +55,13 @@ class Sidebar extends React.Component {
                                     { /* User picture */ }
                                     <div className="user-block-picture">
                                         <div className="user-block-status">
-                                            <img src={ this.state.profile.picture } alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
+                                            <img src={ this.state.user.pictureUrl } alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
                                             <div className="circle circle-success circle-lg"></div>
                                         </div>
                                     </div>
                                     { /* Name and Job */ }
                                     <div className="user-block-info">
-                                        <span className="user-block-name">Hello, { this.state.profile.name }</span>
+                                        <span className="user-block-name">Hello, { this.state.user.name }</span>
                                         <span className="user-block-role">Administrator</span>
                                     </div>
                                 </div>

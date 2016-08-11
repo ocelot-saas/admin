@@ -6,7 +6,7 @@ import { APP_COLORS} from './common/constants';
 
 export default class AuthService extends EventEmitter {
     
-    constructor(clientId, domain) {
+    constructor(clientId, domain, identityServiceDomain) {
         super();
 
         this.auth0 = new Auth0({
@@ -24,17 +24,18 @@ export default class AuthService extends EventEmitter {
         const authResult = this.auth0.parseHash(window.location.hash)
 
         if (authResult) {
-            if (authResult.idToken) {
+            if (authResult.accessToken && authResult.idToken) {
                 this._setToken(authResult.idToken)
 
-                this.lock.getProfile(authResult.idToken, (error, profile) => {
-                    if (error) {
-                        console.log('Error loading the Profile', error)
-                        return;
-                    }
-
-                    this.setProfile(profile)
-                })
+                $.post({
+                    url: `http://${identityServiceDomain}/user`,
+                    dataType: 'json',
+                    headers: {'Authorization': `Bearer ${authResult.accessToken}`}
+                }).done((userResponse) => {
+                    this.setUser(userResponse.user)
+                }).fail((error) => {
+                    console.log('Error loading the User', error)                        
+                });
             }
         }
 
@@ -61,14 +62,14 @@ export default class AuthService extends EventEmitter {
         return !!token && !isTokenExpired(token)
     }
 
-    setProfile(profile){
-        localStorage.setItem('profile', JSON.stringify(profile))
-        this.emit('profile_updated', profile)
+    setUser(user){
+        localStorage.setItem('user', JSON.stringify(user))
+        this.emit('user_updated', user)
     }
 
-    getProfile(){
-        const profile = localStorage.getItem('profile')
-        return profile ? JSON.parse(localStorage.profile) : {}
+    getUser(){
+        const user = localStorage.getItem('user')
+        return user ? JSON.parse(localStorage.user) : {}
     }
 
     _setToken(idToken) {
@@ -81,7 +82,7 @@ export default class AuthService extends EventEmitter {
 
     logout() {
         localStorage.removeItem('id_token');
-        localStorage.removeItem('profile');
+        localStorage.removeItem('user');
     }
 }
 

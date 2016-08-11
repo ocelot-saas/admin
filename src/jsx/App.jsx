@@ -21,7 +21,7 @@ import Login from './components/Login';
 import AuthService from './AuthService';
 
 // Init auth system
-const auth = new AuthService('jhoF46qs7sSf3wcPP1lKrYRD1TSgNTZO', 'ocelot-saas.eu.auth0.com');
+const auth = new AuthService('jhoF46qs7sSf3wcPP1lKrYRD1TSgNTZO', 'ocelot-saas.eu.auth0.com', 'localhost:10001');
 
 const requireAuth = (nextState, replace) => {
     if (!auth.loggedIn()) {
