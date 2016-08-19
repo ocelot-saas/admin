@@ -4,6 +4,8 @@ import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from '
 import { HoursRange, ExtractHours } from './HoursRange';
 import 'bootstrap-tagsinput';
 
+import { inventoryService } from './../Services';
+
 class CreateOrg extends React.Component {
     
     // opState can be:
@@ -11,6 +13,7 @@ class CreateOrg extends React.Component {
     // - SHOW_OPENING_HOURS: show the opening hours screen
     // - CREATING_ORG: the org and restaurant are being created
     // - CREATING_ORG_FAILED: the org and restaurant creation failed
+
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -85,7 +88,19 @@ class CreateOrg extends React.Component {
             }
         };
 
-        console.log(JSON.stringify(orgCreationRequest));
+        inventoryService
+            .createOrgOnService(orgCreationRequest)
+            .then((org) => {
+                this.context.router.push('/dashboard');
+            })
+            .catch((error) => {
+                console.log('An error', error);
+                this.setState({
+                    opState: 'CREATING_ORG_FAILED'
+                });
+            });
+
+        this.setState({opState: 'CREATING_ORG'});
     }
 
     render() {
@@ -209,10 +224,30 @@ class CreateOrg extends React.Component {
                     </Row>
                 </ContentWrapper>
             );
+        } else if (this.state.opState == 'CREATING_ORG') {
+            return (
+                <div className="app-loading">
+                    <div className="line-scale">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            );
+        } else if (this.state.opState == 'CREATING_ORG_FAILED') {
+            return (
+                <div>Creating org failed</div>
+            );            
         } else {
             throw 'Invalid opState';
         };
     }
+}
+
+CreateOrg.contextTypes = {
+    router: React.PropTypes.object.isRequired
 }
 
 export default CreateOrg;

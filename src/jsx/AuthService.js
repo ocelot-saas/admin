@@ -9,7 +9,7 @@ export default class AuthService {
         this.auth0 = new Auth0({
             clientID: clientId,
             domain: domain
-        })
+        });
         
         this.lock = new Auth0Lock(clientId, domain, {
             closable: false,
@@ -17,7 +17,7 @@ export default class AuthService {
                 logo: '/img/logo-single.png',
                 primaryColor: APP_COLORS['primary']
             }
-        })
+        });
 
         const authResult = this.auth0.parseHash(window.location.hash)
 
@@ -47,12 +47,12 @@ export default class AuthService {
     }
 
     loggedIn() {
-        const token = this._getAccessToken()
+        const token = this.getAccessToken()
         return !!token;
     }
 
     getUserFromService() {
-        var accessToken = this._getAccessToken();
+        var accessToken = this.getAccessToken();
         return new Promise(
             (resolve, reject) => {
                 $.get({
@@ -89,7 +89,7 @@ export default class AuthService {
         localStorage.setItem('access_token', accessToken)
     }
 
-    _getAccessToken() {
+    getAccessToken() {
         return localStorage.getItem('access_token')
     }
 }

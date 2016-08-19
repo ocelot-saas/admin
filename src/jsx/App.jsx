@@ -18,7 +18,7 @@ import Platforms from './components/Platforms';
 import Reports from './components/Reports';
 import CreateOrg from './components/CreateOrg';
 
-import AuthService from './AuthService';
+import { authService } from './Services';
 
 // Init translation system
 initTranslation();
@@ -34,19 +34,14 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        this.auth = new AuthService(
-            'jhoF46qs7sSf3wcPP1lKrYRD1TSgNTZO',
-            'ocelot-saas.eu.auth0.com',
-            'localhost:10001');
-
         this.state = {
-            opState: this.auth.loggedIn() ? 'LOADING_USER' : 'SHOW_LOGIN_SCREEN',
+            opState: authService.loggedIn() ? 'LOADING_USER' : 'SHOW_LOGIN_SCREEN',
             user: null
         };
     }
 
     logout() {
-        this.auth.logout();
+        authService.logout();
         this.setState({
             opState: 'SHOW_LOGIN_SCREEN',
             user: null
@@ -57,9 +52,9 @@ class App extends React.Component {
         if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
             // Call this here as well, since componentDidUpdate() is not called
             // on the first render.
-            this.auth.showLoginWidget();
+            authService.showLoginWidget();
         } else if (this.state.opState == 'LOADING_USER') {
-            this.auth.getUserFromService()
+            authService.getUserFromService()
                 .then((user) => {
                     this.setState({
                         opState: 'READY',
@@ -89,7 +84,7 @@ class App extends React.Component {
         // we truly want to show the widget, once the DOM has been updated by React, so
         // the transitions are nicer.
         if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
-            this.auth.showLoginWidget();
+            authService.showLoginWidget();
         }
     }
 
