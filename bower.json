@@ -1,6 +1,6 @@
 {
     "name": "admin",
-    "version": "0.0.22",
+    "version": "0.0.23",
     "description": "The admin interface users use to manage their account with us, as an NPM package.",
     "author": "Horia Coman <horia141@gmail.com>",
     "main": "index.html",
@@ -20,6 +20,7 @@
         "fontawesome": "4.5.0",
         "jquery": "2.2.0",
         "animate.css": "3.5.1",
+	"loaders.css": "0.1.1",	
         "modernizr": "https://modernizr.com/download?backgroundsize-bgpositionshorthand-bgpositionxy-bgrepeatspace_bgrepeatround-bgsizecover-borderradius-cssanimations-csscalc-csstransforms-csstransforms3d-csstransitions-flexboxtweener-fontface-inlinesvg-localstorage-multiplebgs-preserve3d-sessionstorage-smil-svgclippaths-svgfilters-svgforeignobject-todataurljpeg_todataurlpng_todataurlwebp-setclasses&q=background.zip",
         "animo.js": "ThrivingKings/animo.js#1.0.2",
         "jquery-localize-i18n": "*",
