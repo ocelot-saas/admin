@@ -5,29 +5,8 @@ import AuthService from '../../AuthService';
 
 class Sidebar extends React.Component {
 
-    constructor(props, context) {
-        super(props, context);
-        
-        this.state = {
-            user: props.auth.getUser()
-        }
-
-        this.onNewUser = this.onNewUser.bind(this);
-        props.auth.on('user_updated', this.onNewUser);
-    }
-
     componentDidMount() {
         SidebarRun();
-    }
-
-    componentWillUnmount() {
-        this.props.auth.removeListener('user_updated', this.onNewUser);
-    }
-
-    onNewUser(newUser) {
-        this.setState({
-            user: newUser
-        });
     }
 
     routeActive(paths) {
@@ -55,13 +34,13 @@ class Sidebar extends React.Component {
                                     { /* User picture */ }
                                     <div className="user-block-picture">
                                         <div className="user-block-status">
-                                            <img src={ this.state.user.pictureUrl } alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
+                                            <img src={ this.props.user.pictureUrl } alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
                                             <div className="circle circle-success circle-lg"></div>
                                         </div>
                                     </div>
                                     { /* Name and Job */ }
                                     <div className="user-block-info">
-                                        <span className="user-block-name">Hello, { this.state.user.name }</span>
+                                        <span className="user-block-name">Hello, { this.props.user.name }</span>
                                         <span className="user-block-role">Administrator</span>
                                     </div>
                                 </div>
@@ -147,10 +126,6 @@ class Sidebar extends React.Component {
 
 Sidebar.contextTypes = {
     router: PropTypes.func.isRequired
-}
-
-Sidebar.propTypes = {
-    auth: PropTypes.instanceOf(AuthService)
 }
 
 export default Sidebar;

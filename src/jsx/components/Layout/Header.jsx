@@ -11,7 +11,7 @@ class Header extends React.Component {
     }
 
     logout() {
-        this.props.auth.logout();
+        // TODO(horia141): actually do this, call callback
     }
 
     render() {

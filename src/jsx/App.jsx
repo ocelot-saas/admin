@@ -20,48 +20,110 @@ import Reports from './components/Reports';
 import Login from './components/Login';
 import AuthService from './AuthService';
 
-// Init auth system
-const auth = new AuthService('jhoF46qs7sSf3wcPP1lKrYRD1TSgNTZO', 'ocelot-saas.eu.auth0.com', 'localhost:10001');
-
-const requireAuth = (nextState, replace) => {
-    if (!auth.loggedIn()) {
-        replace({ pathname: '/login' })
-    }
-}
-
 // Init translation system
 initTranslation();
 
+class App extends React.Component {
+
+    // States are:
+    //   SHOW_LOGIN_SCREEN -- AuthService says we're not logged in -show login widget
+    //   LOADING_USER -- Logged in, and will load the user data from base
+    //   LOADING_USER_FAILED -- Couldn't load the user data, show an error
+    //   READY -- Loaded user data, app can continue
+
+    constructor(props) {
+        super(props);
+
+        this.auth = new AuthService(
+            'jhoF46qs7sSf3wcPP1lKrYRD1TSgNTZO',
+            'ocelot-saas.eu.auth0.com',
+            'localhost:10001');
+
+        this.state = {
+            opState: this.auth.loggedIn() ? 'LOADING_USER' : 'SHOW_LOGIN_SCREEN',
+            user: null
+        };
+    }
+
+    componentDidMount() {
+        if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
+            this.auth.showLoginWidget();
+        } else if (this.state.opState == 'LOADING_USER') {
+            this.auth.getUserFromService()
+                .then((user) => {
+                    this.setState({
+                        opState: 'READY',
+                        user: user
+                    });
+                })
+                .catch((error) => {
+                    console.log('An error', error);
+                    this.setState({
+                        opState: 'LOADING_USER_FAILED',
+                        user: null
+                    });
+                });
+        } else {
+            throw 'Invalid opState'
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.state.opState == 'LOADING_USER') {
+            // TODO(horia141): Cancel request
+        }
+    }
+    
+    render() {
+        if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
+            return (
+                <BasePage>
+                    <Login></Login>
+                </BasePage>
+            );
+        } else if (this.state.opState == 'LOADING_USER') {
+            return (
+                <BasePage>
+                    <div>Loading</div>
+                </BasePage>
+            );
+        } else if (this.state.opState == 'LOADING_USER_FAILED') {
+            return (
+                <BasePage>
+                    <div>Loading Failed</div>
+                </BasePage>
+            );
+        } else if (this.state.opState == 'READY') {
+            return (
+                <Router history={browserHistory}>
+        
+                    <Redirect from="/index.html" to="/" />
+        
+                    <Route path="/" component={Base} user={this.state.user}>
+            
+                        <IndexRedirect to="/dashboard" />
+            
+                        <Route path="/dashboard" component={Dashboard} />
+                        <Route path="/general" component={General} />
+                        <Route path="/menu" component={Menu} />
+                        <Route path="/menu/sections/:sectionId" component={Section} />
+                        <Route path="/menu/fooditem/:foodItemId" component={FoodItem} />
+                        <Route path="/orders/:orderId" component={Order} />
+                        <Route path="/orders" component={Orders} />
+                        <Route path="/platforms" component={Platforms} />
+                        <Route path="/reports" component={Reports} />
+            
+                    </Route>
+        
+                </Router>
+            );
+        } else {
+            throw 'Invalid opState';
+        }
+    }
+}
+
 ReactDOM.render(
-    <Router history={browserHistory}>
-
-        <Redirect from="/index.html" to="/" />
-
-        <Route path="/" component={Base} auth={auth}>
-
-            {/* Default route */}
-            <IndexRedirect to="/dashboard" />
-
-            {/* Routes, in sorted order */}
-            <Route path="/dashboard" component={Dashboard} onEnter={requireAuth} />
-            <Route path="/general" component={General} onEnter={requireAuth} />
-            <Route path="/menu" component={Menu} onEnter={requireAuth} />
-            <Route path="/menu/sections/:sectionId" component={Section} onEnter={requireAuth} />
-            <Route path="/menu/fooditem/:foodItemId" component={FoodItem} onEnter={requireAuth} />
-            <Route path="/orders/:orderId" component={Order} onEnter={requireAuth} />
-            <Route path="/orders" component={Orders} onEnter={requireAuth} />
-            <Route path="/platforms" component={Platforms} onEnter={requireAuth} />
-            <Route path="/reports" component={Reports} onEnter={requireAuth} />
-
-        </Route>
-
-        <Route path="/" component={BasePage} auth={auth}>
-            <Route path="login" component={Login} />
-        </Route>
-
-        {/* Not found handler */}
-        {/*<Route path="*" component={NotFound}/>*/}
-
-    </Router>,
+    <App></App>,
     document.getElementById('app')
 );

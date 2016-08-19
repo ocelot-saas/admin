@@ -1,18 +1,16 @@
 import Auth0 from 'auth0-js'
 import Auth0Lock from 'auth0-lock'
-import decode from 'jwt-decode';
-import { EventEmitter } from 'events'
 import { APP_COLORS} from './common/constants';
 
-export default class AuthService extends EventEmitter {
+
+export default class AuthService {
     
     constructor(clientId, domain, identityServiceDomain) {
-        super();
-
         this.auth0 = new Auth0({
             clientID: clientId,
             domain: domain
         })
+        
         this.lock = new Auth0Lock(clientId, domain, {
             closable: false,
             theme: {
@@ -25,24 +23,15 @@ export default class AuthService extends EventEmitter {
 
         if (authResult) {
             if (authResult.accessToken && authResult.idToken) {
-                this._setToken(authResult.idToken)
-
-                $.post({
-                    url: `http://${identityServiceDomain}/user`,
-                    dataType: 'json',
-                    headers: {'Authorization': `Bearer ${authResult.accessToken}`}
-                }).done((userResponse) => {
-                    this.setUser(userResponse.user)
-                }).fail((error) => {
-                    console.log('Error loading the User', error)                        
-                });
+                this._setAccessToken(authResult.accessToken)
             }
         }
 
         this.lock.on('authorization_error', this._authorizationError.bind(this))
         this.lock.on('unrecoverable_error', this._unrecoverableError.bind(this))
 
-        this.login = this.login.bind(this)
+        this.showLoginWidget = this.showLoginWidget.bind(this)
+        this._identityServiceDomain = identityServiceDomain
     }
 
     _authorizationError(error) {
@@ -53,61 +42,54 @@ export default class AuthService extends EventEmitter {
         console.log('Unrecoverable Error', error)
     }    
 
-    login() {
+    showLoginWidget() {
         this.lock.show()
     }
 
     loggedIn() {
-        const token = this._getToken()
-        return !!token && !isTokenExpired(token)
+        const token = this._getAccessToken()
+        return !!token;
     }
 
-    setUser(user){
-        localStorage.setItem('user', JSON.stringify(user))
-        this.emit('user_updated', user)
+    getUserFromService() {
+        var accessToken = this._getAccessToken();
+        return new Promise(
+            (resolve, reject) => {
+                $.get({
+                    url: `http://${this._identityServiceDomain}/user`,
+                    dataType: 'json',
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((userResponse) => {
+                    resolve(userResponse.user);
+                }).fail((xhr) => {
+                    if (xhr.status == 404) {
+                        $.post({
+                            url: `http://${this._identityServiceDomain}/user`,
+                            dataType: 'json',
+                            headers: {'Authorization': `Bearer ${accessToken}`}
+                        }).done((userResponse) => {
+                            resolve(userResponse.user);
+                        }).fail(() => {
+                            reject(xhr.status);
+                            console.log('Error loading the User');
+                        })
+                    } else {
+                        reject(xhr.status);
+                        console.log('Error loading the User')
+                    }
+                });
+            });
     }
 
-    getUser(){
-        const user = localStorage.getItem('user')
-        return user ? JSON.parse(localStorage.user) : {}
+    _setAccessToken(accessToken) {
+        localStorage.setItem('access_token', accessToken)
     }
 
-    _setToken(idToken) {
-        localStorage.setItem('id_token', idToken)
-    }
-
-    _getToken() {
-        return localStorage.getItem('id_token')
+    _getAccessToken() {
+        return localStorage.getItem('access_token')
     }
 
     logout() {
-        localStorage.removeItem('id_token');
-        localStorage.removeItem('user');
+        localStorage.removeItem('acess_token');
     }
-}
-
-
-function getTokenExpirationDate(token) {
-    const decoded = decode(token)
-    
-    if(!decoded.exp) {
-        return null
-    }
-
-    const date = new Date(0) // The 0 here is the key, which sets the date to the epoch
-    date.setUTCSeconds(decoded.exp)
-    
-    return date
-}
-
-
-function isTokenExpired(token) {
-    const date = getTokenExpirationDate(token)
-    const offsetSeconds = 0
-    
-    if (date === null) {
-        return false
-    }
-
-    return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)))
 }
