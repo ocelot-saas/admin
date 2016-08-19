@@ -13,9 +13,9 @@ class Base extends React.Component {
 
         return (
             <div className="wrapper">
-                <Header user={ this.props.route.user } />
+                <Header user={this.props.route.user} onLogoutClick={this.props.route.onLogoutClick} />
 
-                <Sidebar user={ this.props.route.user }/>
+                <Sidebar user={this.props.route.user}/>
 
                 <ReactCSSTransitionGroup
                     component="section"

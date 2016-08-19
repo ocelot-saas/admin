@@ -81,15 +81,15 @@ export default class AuthService {
             });
     }
 
+    logout() {
+        localStorage.removeItem('acess_token');
+    }
+
     _setAccessToken(accessToken) {
         localStorage.setItem('access_token', accessToken)
     }
 
     _getAccessToken() {
         return localStorage.getItem('access_token')
-    }
-
-    logout() {
-        localStorage.removeItem('acess_token');
     }
 }

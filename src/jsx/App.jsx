@@ -45,8 +45,18 @@ class App extends React.Component {
         };
     }
 
+    logout() {
+        this.auth.logout();
+	this.setState({
+	    opState: 'SHOW_LOGIN_SCREEN',
+	    user: null
+	});
+    }
+
     componentDidMount() {
         if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
+	    // Call this here as well, since componentDidUpdate() is not called
+	    // on the first render.
             this.auth.showLoginWidget();
         } else if (this.state.opState == 'LOADING_USER') {
             this.auth.getUserFromService()
@@ -73,7 +83,16 @@ class App extends React.Component {
             // TODO(horia141): Cancel request
         }
     }
-    
+
+    componentDidUpdate() {
+        // This is called every time the state/props change, post-render. This is where
+	// we truly want to show the widget, once the DOM has been updated by React, so
+	// the transitions are nicer.
+        if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
+	    this.auth.showLoginWidget();
+	}
+    }
+
     render() {
         if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
             return (
@@ -99,7 +118,7 @@ class App extends React.Component {
         
                     <Redirect from="/index.html" to="/" />
         
-                    <Route path="/" component={Base} user={this.state.user}>
+                    <Route path="/" component={Base} user={this.state.user} onLogoutClick={this.logout.bind(this)}>
             
                         <IndexRedirect to="/dashboard" />
             
@@ -124,6 +143,6 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-    <App></App>,
+    <App />,
     document.getElementById('app')
 );

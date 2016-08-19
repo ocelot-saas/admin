@@ -10,10 +10,6 @@ class Header extends React.Component {
         HeaderRun();
     }
 
-    logout() {
-        // TODO(horia141): actually do this, call callback
-    }
-
     render() {
         const ddAlertTitle = (
             <span>
@@ -74,8 +70,8 @@ class Header extends React.Component {
                                     <Link to="/dashboard" title="Dashboard">Dashboard</Link>
                                 </MenuItem>
                                 <MenuItem divider />
-                                <MenuItem className="animated flipInX" eventKey={3.3} onSelect={this.logout.bind(this)}>
-                                    <Link to="/login" title="Login">Logout</Link>
+                                <MenuItem className="animated flipInX" eventKey={3.3} onSelect={this.props.onLogoutClick}>
+                                    <a>Logout</a>
                                 </MenuItem>
                             </NavDropdown>
                             { /* END Alert menu */ }
