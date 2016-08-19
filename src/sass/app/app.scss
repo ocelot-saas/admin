@@ -1,0 +1,14 @@
+/* ========================================================================
+     Component: app
+ ========================================================================== */
+
+.app-loading {
+    height: 100vh;
+    text-align: center;
+}
+
+.line-scale {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}

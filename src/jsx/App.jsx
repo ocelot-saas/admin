@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, IndexRedirect, Redirect, browserHistory } from 'react-router';
-import { Panel } from 'react-bootstrap';
 
 import initTranslation from './common/localize';
 
@@ -104,7 +103,7 @@ class App extends React.Component {
         } else if (this.state.opState == 'LOADING_USER') {
             return (
                 <BasePage>
-		    <Panel className="loader-demo">
+	           <div className="app-loading">
                        <div className="line-scale">
                            <div></div>
                            <div></div>
@@ -112,7 +111,7 @@ class App extends React.Component {
                            <div></div>
                            <div></div>
                        </div>
-                   </Panel>
+		   </div>
                 </BasePage>
             );
         } else if (this.state.opState == 'LOADING_USER_FAILED') {
