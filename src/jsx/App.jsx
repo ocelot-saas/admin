@@ -16,6 +16,7 @@ import Orders from './components/Orders';
 import Order from './components/Order';
 import Platforms from './components/Platforms';
 import Reports from './components/Reports';
+import CreateOrg from './components/CreateOrg';
 
 import AuthService from './AuthService';
 
@@ -143,6 +144,7 @@ class App extends React.Component {
 
                     <Route path="/" component={BasePage}>
                         <Redirect from="/login" to="/" />
+			<Route path="/create-org" component={CreateOrg} />
                     </Route>
         
                 </Router>

@@ -2,13 +2,11 @@ import React from 'react';
 import ContentWrapper from './Layout/ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from 'react-bootstrap';
 import HoursRange from './HoursRange';
-import ImageGallery from './ImageGallery';
 import 'bootstrap-tagsinput';
 
-class General extends React.Component {
-
+class CreateOrg extends React.Component {
     constructor(props, context) {
-        super(props, context);
+    super(props, context);
         this.state = {
             name: 'Horia\'s Kitchen',
             desc: 'Fancy french restaurant',
@@ -30,9 +28,9 @@ class General extends React.Component {
             }
         };
     }
-
+    
     componentDidMount() {
-        $("[data-role='tagsinput']").tagsinput()
+        $("[data-role='tagsinput']").tagsinput()    
     }
 
     handleNameChange(e) {
@@ -62,11 +60,9 @@ class General extends React.Component {
     render() {
         return (
             <ContentWrapper>
-                <h3>
-                    General
-                    <small>Restaurant general settings</small>
-                </h3>
-                <Row>
+                <h3>Create Your Restaurant</h3>
+
+		<Row>
                     <Col sm={ 12 }>
                         <div className="panel panel-default">
                             <div className="panel-heading">General</div>
@@ -124,14 +120,6 @@ class General extends React.Component {
                                     </div>
                                 </form>
                             </div>
-                            <div className="panel-footer">
-                                <Button bsClass="btn btn-labeled btn-primary mr">
-                                    <span className="btn-label"><i className="fa fa-check"></i></span> Save
-                                </Button>
-                                <Button bsClass="btn btn-labeled mr">
-                                    <span className="btn-label"><i className="fa fa-times"></i></span> Revert
-                                </Button>
-                            </div>
                         </div>
                     </Col>
                 </Row>
@@ -161,33 +149,6 @@ class General extends React.Component {
                                         onChange={ this.handleSunHoursChange.bind(this) } />
                                 </form>
                             </div>
-                            <div className="panel-footer">
-                                <Button bsClass="btn btn-labeled btn-primary mr">
-                                    <span className="btn-label"><i className="fa fa-check"></i></span> Save
-                                </Button>
-                                <Button bsClass="btn btn-labeled mr">
-                                    <span className="btn-label"><i className="fa fa-times"></i></span> Revert
-                                </Button>
-                            </div>
-                        </div>
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col sm={ 12 }>
-                        <div className="panel panel-default">
-                            <div className="panel-heading">Pictures</div>
-                            <div className="panel-body">
-                                <ImageGallery />
-                            </div>
-                            <div className="panel-footer">
-                                <Button bsClass="btn btn-labeled btn-primary mr">
-                                    <span className="btn-label"><i className="fa fa-check"></i></span> Save
-                                </Button>
-                                <Button bsClass="btn btn-labeled mr">
-                                    <span className="btn-label"><i className="fa fa-times"></i></span> Revert
-                                </Button>
-                            </div>
                         </div>
                     </Col>
                 </Row>
@@ -196,4 +157,4 @@ class General extends React.Component {
     }
 }
 
-export default General;
+export default CreateOrg;
