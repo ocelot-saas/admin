@@ -17,7 +17,6 @@ import Order from './components/Order';
 import Platforms from './components/Platforms';
 import Reports from './components/Reports';
 
-import Login from './components/Login';
 import AuthService from './AuthService';
 
 // Init translation system
@@ -47,16 +46,16 @@ class App extends React.Component {
 
     logout() {
         this.auth.logout();
-	this.setState({
-	    opState: 'SHOW_LOGIN_SCREEN',
-	    user: null
-	});
+        this.setState({
+            opState: 'SHOW_LOGIN_SCREEN',
+            user: null
+        });
     }
 
     componentDidMount() {
         if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
-	    // Call this here as well, since componentDidUpdate() is not called
-	    // on the first render.
+            // Call this here as well, since componentDidUpdate() is not called
+            // on the first render.
             this.auth.showLoginWidget();
         } else if (this.state.opState == 'LOADING_USER') {
             this.auth.getUserFromService()
@@ -86,24 +85,24 @@ class App extends React.Component {
 
     componentDidUpdate() {
         // This is called every time the state/props change, post-render. This is where
-	// we truly want to show the widget, once the DOM has been updated by React, so
-	// the transitions are nicer.
+        // we truly want to show the widget, once the DOM has been updated by React, so
+        // the transitions are nicer.
         if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
-	    this.auth.showLoginWidget();
-	}
+            this.auth.showLoginWidget();
+        }
     }
 
     render() {
         if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
             return (
                 <BasePage>
-                    <Login></Login>
+                    <div className="block-center mt-xl wd-xl"></div>
                 </BasePage>
             );
         } else if (this.state.opState == 'LOADING_USER') {
             return (
                 <BasePage>
-	           <div className="app-loading">
+                   <div className="app-loading">
                        <div className="line-scale">
                            <div></div>
                            <div></div>
@@ -111,7 +110,7 @@ class App extends React.Component {
                            <div></div>
                            <div></div>
                        </div>
-		   </div>
+                   </div>
                 </BasePage>
             );
         } else if (this.state.opState == 'LOADING_USER_FAILED') {
@@ -140,6 +139,10 @@ class App extends React.Component {
                         <Route path="/platforms" component={Platforms} />
                         <Route path="/reports" component={Reports} />
             
+                    </Route>
+
+                    <Route path="/" component={BasePage}>
+                        <Redirect from="/login" to="/" />
                     </Route>
         
                 </Router>
