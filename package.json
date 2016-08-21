@@ -28,11 +28,14 @@
         "history": "^2.0.0-rc2",
         "jwt-decode": "^2.0.1",
         "react": "^15.3.0",
-        "react-addons-css-transition-group": "^15.3.0",
-        "react-bootstrap": "^0.28.2",
         "react-dom": "^15.3.0",
-        "react-dropzone": "^3.5.1",
         "react-router": "^2.6.1",
+        "react-redux": "^4.4.5",
+        "react-router-redux": "^4.0.5",
+        "react-bootstrap": "^0.28.2",
+        "react-addons-css-transition-group": "^15.3.0",
+        "react-dropzone": "^3.5.1",
+        "redux": "^3.5.2",
         "screenfull": "3.0.0"
     },
     "devDependencies": {
