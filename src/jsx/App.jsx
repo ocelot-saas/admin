@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, IndexRedirect, Redirect, browserHistory } from 'react-router';
 
-import initTranslation from './common/localize';
-
 import Base from './components/Layout/Base';
 import BasePage from './components/Layout/BasePage';
 
@@ -19,9 +17,6 @@ import Reports from './components/Reports';
 import CreateOrg from './components/CreateOrg';
 
 import { authService } from './Services';
-
-// Init translation system
-initTranslation();
 
 class App extends React.Component {
 
