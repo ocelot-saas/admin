@@ -65,6 +65,7 @@ export class AuthService {
             (resolve, reject) => {
 		if (accessToken == null) {
 		    reject(401);
+		    return;
 		}
 		
                 $.get({
@@ -92,7 +93,7 @@ export class AuthService {
     }
 
     logout() {
-        localStorage.removeItem('acess_token');
+        localStorage.removeItem('access_token');
     }
 
     _setAccessToken(accessToken) {

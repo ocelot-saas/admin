@@ -13,9 +13,9 @@ class Base extends React.Component {
 
         return (
             <div className="wrapper">
-                <Header user={this.props.route.user} onLogoutClick={this.props.route.onLogoutClick} />
+                <Header user={this.props.user} onLogoutClick={this.props.onLogoutClick} />
 
-                <Sidebar user={this.props.route.user}/>
+                <Sidebar user={this.props.user}/>
 
                 <ReactCSSTransitionGroup
                     component="section"
@@ -24,7 +24,7 @@ class Base extends React.Component {
                     transitionLeaveTimeout={500}>
                     {React.cloneElement(this.props.children, {
                          key: Math.random(),
-                         user: this.props.route.user
+                         user: this.props.user
                      })}
                 </ReactCSSTransitionGroup>
 
