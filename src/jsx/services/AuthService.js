@@ -3,20 +3,43 @@ import Auth0Lock from 'auth0-lock'
 import { APP_COLORS} from './../common/constants';
 
 
-export default class AuthService {
-    
-    constructor(clientId, domain, identityServiceDomain) {
-        this.auth0 = new Auth0({
-            clientID: clientId,
-            domain: domain
-        });
-        
-        this.lock = new Auth0Lock(clientId, domain, {
+export class Auth0Widget {
+
+    constructor(clientId, domain) {
+	this.lock = new Auth0Lock(clientId, domain,  {
             closable: false,
             theme: {
                 logo: '/img/logo-single.png',
                 primaryColor: APP_COLORS['primary']
             }
+        });
+
+        this.lock.on('authorization_error', this._authorizationError.bind(this));
+        this.lock.on('unrecoverable_error', this._unrecoverableError.bind(this));
+    }
+
+    showLoginWidget() {
+	this.lock.show();
+    }
+
+    // TODO(horia141): better error handling
+    _authorizationError(error) {
+	console.log('Authentication Error', error);
+    }
+
+    // TODO(horia141): better error handling    
+    _unrecoverableError(error) {
+	console.log('Unrecoverable Error', error);
+    }
+}
+
+
+export class AuthService {
+    
+    constructor(clientId, domain, identityServiceDomain) {
+        this.auth0 = new Auth0({
+            clientID: clientId,
+            domain: domain
         });
 
         const authResult = this.auth0.parseHash(window.location.hash)
@@ -27,23 +50,7 @@ export default class AuthService {
             }
         }
 
-        this.lock.on('authorization_error', this._authorizationError.bind(this))
-        this.lock.on('unrecoverable_error', this._unrecoverableError.bind(this))
-
-        this.showLoginWidget = this.showLoginWidget.bind(this)
         this._identityServiceDomain = identityServiceDomain
-    }
-
-    _authorizationError(error) {
-        console.log('Authentication Error', error)
-    }
-
-    _unrecoverableError(error) {
-        console.log('Unrecoverable Error', error)
-    }    
-
-    showLoginWidget() {
-        this.lock.show()
     }
 
     loggedIn() {

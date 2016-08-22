@@ -16,7 +16,7 @@ import Platforms from './components/Platforms';
 import Reports from './components/Reports';
 import CreateOrg from './components/CreateOrg';
 
-import { authService } from './services';
+import { auth0Widget, authService } from './services';
 
 class App extends React.Component {
 
@@ -47,7 +47,7 @@ class App extends React.Component {
         if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
             // Call this here as well, since componentDidUpdate() is not called
             // on the first render.
-            authService.showLoginWidget();
+            auth0Widget.showLoginWidget();
         } else if (this.state.opState == 'LOADING_USER') {
             authService.getUserFromService()
                 .then((user) => {
