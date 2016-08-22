@@ -5,6 +5,7 @@ import { Router, Route, Link, IndexRedirect, Redirect, browserHistory } from 're
 import Base from './components/Layout/Base';
 import BasePage from './components/Layout/BasePage';
 
+import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import General from './components/General';
 import Menu from './components/Menu';
@@ -20,77 +21,92 @@ import { auth0Widget, authService } from './services';
 
 class App extends React.Component {
 
-    // States are:
-    //   SHOW_LOGIN_SCREEN -- AuthService says we're not logged in -show login widget
-    //   LOADING_USER -- Logged in, and will load the user data from base
-    //   LOADING_USER_FAILED -- Couldn't load the user data, show an error
-    //   READY -- Loaded user data, app can continue
-
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
 
         this.state = {
-            opState: authService.loggedIn() ? 'LOADING_USER' : 'SHOW_LOGIN_SCREEN',
-            user: null
+            globalLoading: {
+                opState: 'READY',
+                errorMessage: null
+            },
+            identity: {
+                accessToken: null,
+                user: null
+            }
         };
     }
 
     logout() {
         authService.logout();
         this.setState({
-            opState: 'SHOW_LOGIN_SCREEN',
-            user: null
+            globalLoading: {
+                opState: 'READY',
+                errorMessage: null,
+            },
+            identity: {
+                accessToken: null,
+                user: null
+            }
         });
     }
 
-    componentDidMount() {
-        if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
-            // Call this here as well, since componentDidUpdate() is not called
-            // on the first render.
-            auth0Widget.showLoginWidget();
-        } else if (this.state.opState == 'LOADING_USER') {
-            authService.getUserFromService()
-                .then((user) => {
-                    this.setState({
+    componentWillMount() {
+        this.setState({
+            globalLoading: {
+               opState: 'LOADING',
+               errorMessage: null
+            }
+        });
+
+        authService
+            .getUserFromService()
+            .then(({accessToken, user}) => {
+                this.setState({
+                    globalLoading: {
                         opState: 'READY',
+                        errorMessage: null
+                    },
+                    identity: {
+                        accessToken: accessToken,
                         user: user
-                    });
-                })
-                .catch((error) => {
-                    console.log('An error', error);
-                    this.setState({
-                        opState: 'LOADING_USER_FAILED',
-                        user: null
-                    });
+                    }
                 });
-        } else {
-            throw 'Invalid opState'
-        }
+            })
+            .catch((errorCode) => {
+                if (errorCode == 401) {
+                    this.setState({
+                        globalLoading: {
+                            opState: 'READY',
+                            errorMessage: null
+                        },
+                        identity: {
+                            accessToken: null,
+                            user: null
+                        }
+                    });
+                    
+                    this.context.router.push('/login');
+                } else {
+                    this.setState({
+                        globalLoading: {
+                            opState: 'FAILED',
+                            errorMessage: 'Could not perform user loading. Try again later'
+                        },
+                        identity: {
+                            accessToken: null,
+                            user: null
+                        }
+                    });
+                }
+            });
     }
 
     componentWillUnmount() {
-        if (this.state.opState == 'LOADING_USER') {
-            // TODO(horia141): Cancel request
-        }
-    }
-
-    componentDidUpdate() {
-        // This is called every time the state/props change, post-render. This is where
-        // we truly want to show the widget, once the DOM has been updated by React, so
-        // the transitions are nicer.
-        if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
-            authService.showLoginWidget();
-        }
+        // TOOD(horia141): cancel all pending requests.
     }
 
     render() {
-        if (this.state.opState == 'SHOW_LOGIN_SCREEN') {
-            return (
-                <BasePage>
-                    <div className="block-center mt-xl wd-xl"></div>
-                </BasePage>
-            );
-        } else if (this.state.opState == 'LOADING_USER') {
+        if (this.state.globalLoading.opState == 'LOADING') {
             return (
                 <BasePage>
                    <div className="app-loading">
@@ -104,19 +120,19 @@ class App extends React.Component {
                    </div>
                 </BasePage>
             );
-        } else if (this.state.opState == 'LOADING_USER_FAILED') {
+        } else if (this.state.globalLoading.opState == 'FAILED') {
             return (
                 <BasePage>
                     <div>Loading Failed</div>
                 </BasePage>
             );
-        } else if (this.state.opState == 'READY') {
+        } else if (this.state.globalLoading.opState == 'READY') {
             return (
                 <Router history={browserHistory}>
         
                     <Redirect from="/index.html" to="/" />
         
-                    <Route path="/" component={Base} user={this.state.user} onLogoutClick={this.logout.bind(this)}>
+                    <Route path="/" component={Base} user={this.state.identity.user} onLogoutClick={this.logout.bind(this)}>
             
                         <IndexRedirect to="/dashboard" />
             
@@ -133,8 +149,8 @@ class App extends React.Component {
                     </Route>
 
                     <Route path="/" component={BasePage}>
-                        <Redirect from="/login" to="/" />
-			<Route path="/create-org" component={CreateOrg} />
+                        <Route path="/login" component={Login} />
+                        <Route path="/create-org" component={CreateOrg} />
                     </Route>
         
                 </Router>
@@ -143,6 +159,10 @@ class App extends React.Component {
             throw 'Invalid opState';
         }
     }
+}
+
+App.contextTypes = {
+    router: React.PropTypes.object.isRequired
 }
 
 ReactDOM.render(

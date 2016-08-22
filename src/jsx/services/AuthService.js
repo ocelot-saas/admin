@@ -37,19 +37,20 @@ export class Auth0Widget {
 export class AuthService {
     
     constructor(clientId, domain, identityServiceDomain) {
-        this.auth0 = new Auth0({
-            clientID: clientId,
-            domain: domain
-        });
+        const auth0 = new Auth0({clientID: clientId, domain: domain});
 
-        const authResult = this.auth0.parseHash(window.location.hash)
+        const authResult = auth0.parseHash(window.location.hash);
 
-        if (authResult) {
-            if (authResult.accessToken && authResult.idToken) {
-                this._setAccessToken(authResult.accessToken)
-            }
-        }
+	var accessToken = null;
 
+        if (authResult && authResult.accessToken && authResult.idToken) {
+	    accessToken = authResult.accessToken;
+            this._setAccessToken(authResult.accessToken);
+        } else {
+	    accessToken = this.getAccessToken();
+	}
+	    
+	this._accessToken = accessToken; // Might be null!
         this._identityServiceDomain = identityServiceDomain
     }
 
@@ -59,15 +60,19 @@ export class AuthService {
     }
 
     getUserFromService() {
-        var accessToken = this.getAccessToken();
+        const accessToken = this._accessToken;
         return new Promise(
             (resolve, reject) => {
+		if (accessToken == null) {
+		    reject(401);
+		}
+		
                 $.get({
                     url: `http://${this._identityServiceDomain}/user`,
                     dataType: 'json',
                     headers: {'Authorization': `Bearer ${accessToken}`}
                 }).done((userResponse) => {
-                    resolve(userResponse.user);
+                    resolve({accessToken: accessToken, user: userResponse.user});
                 }).fail((xhr) => {
                     if (xhr.status == 404) {
                         $.post({
@@ -75,14 +80,12 @@ export class AuthService {
                             dataType: 'json',
                             headers: {'Authorization': `Bearer ${accessToken}`}
                         }).done((userResponse) => {
-                            resolve(userResponse.user);
+                            resolve({accessToken: accessToken, user: userResponse.user});
                         }).fail(() => {
                             reject(xhr.status);
-                            console.log('Error loading the User');
                         })
                     } else {
                         reject(xhr.status);
-                        console.log('Error loading the User')
                     }
                 });
             });

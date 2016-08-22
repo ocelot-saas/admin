@@ -124,7 +124,7 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.contextTypes = {
-    router: PropTypes.func.isRequired
+    router: PropTypes.object.isRequired
 }
 
 export default Sidebar;
