@@ -4,7 +4,7 @@ import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from '
 import { HoursRange, ExtractHours } from './HoursRange';
 import 'bootstrap-tagsinput';
 
-import { inventoryService } from './../Services';
+import { inventoryService } from './../services';
 
 class CreateOrg extends React.Component {
     

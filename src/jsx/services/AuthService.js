@@ -1,6 +1,6 @@
 import Auth0 from 'auth0-js'
 import Auth0Lock from 'auth0-lock'
-import { APP_COLORS} from './common/constants';
+import { APP_COLORS} from './../common/constants';
 
 
 export default class AuthService {

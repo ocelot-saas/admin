@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import SidebarRun from './Sidebar.run';
-import AuthService from '../../AuthService';
 
 class Sidebar extends React.Component {
 

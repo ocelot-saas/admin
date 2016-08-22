@@ -16,7 +16,7 @@ import Platforms from './components/Platforms';
 import Reports from './components/Reports';
 import CreateOrg from './components/CreateOrg';
 
-import { authService } from './Services';
+import { authService } from './services';
 
 class App extends React.Component {
 
