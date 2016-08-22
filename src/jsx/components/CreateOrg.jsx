@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentWrapper from './Layout/ContentWrapper';
+import ContentWrapper from './ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from 'react-bootstrap';
 import { HoursRange, ExtractHours } from './HoursRange';
 import 'bootstrap-tagsinput';

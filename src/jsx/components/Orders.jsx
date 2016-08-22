@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentWrapper from './Layout/ContentWrapper';
+import ContentWrapper from './ContentWrapper';
 import { Table } from 'react-bootstrap';
 
 class Orders extends React.Component {

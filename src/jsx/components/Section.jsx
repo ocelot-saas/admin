@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentWrapper from './Layout/ContentWrapper';
+import ContentWrapper from './ContentWrapper';
 import { Grid, Input, Row, Col, Panel, Button, Alert, Table } from 'react-bootstrap';
 import ImageGallery from './ImageGallery';
 

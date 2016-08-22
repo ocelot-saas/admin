@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, IndexRedirect, Redirect, browserHistory } from 'react-router';
 
-import Base from './components/Layout/Base';
-import BasePage from './components/Layout/BasePage';
+import Base from './components/Base';
+import BasePage from './components/BasePage';
 
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';

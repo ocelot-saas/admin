@@ -1,6 +1,6 @@
-import initStateToggler from '../../common/toggle-state';
-import initScreenfull from '../../common/fullscreen'
-import initTriggerResize from '../../common/trigger-resize';
+import initStateToggler from '../common/toggle-state';
+import initScreenfull from '../common/fullscreen'
+import initTriggerResize from '../common/trigger-resize';
 
 export default () => {
 
