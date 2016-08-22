@@ -34,7 +34,7 @@ export class Auth0Widget {
 }
 
 
-export class AuthService {
+export class IdentityService {
     
     constructor(clientId, domain, identityServiceDomain) {
         const auth0 = new Auth0({clientID: clientId, domain: domain});

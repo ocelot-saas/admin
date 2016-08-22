@@ -17,7 +17,7 @@ import Platforms from './components/Platforms';
 import Reports from './components/Reports';
 import CreateOrg from './components/CreateOrg';
 
-import { auth0Widget, authService } from './services';
+import { auth0Widget, identityService } from './services';
 
 class App extends React.Component {
 
@@ -37,7 +37,7 @@ class App extends React.Component {
     }
 
     logout() {
-        authService.logout();
+        identityService.logout();
 	this.context.router.push('/login');
 
 	this.setState({
@@ -53,7 +53,7 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-        authService
+        identityService
             .getUserFromService()
             .then(({accessToken, user}) => {
                 this.setState({

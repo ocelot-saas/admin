@@ -1,12 +1,12 @@
 export default class InventoryService {
 
-    constructor(inventoryServiceDomain, authService) {
+    constructor(inventoryServiceDomain, identityService) {
         this._inventoryServiceDomain = inventoryServiceDomain;
-        this._authService = authService;
+        this._identityService = identityService;
     }
 
     getOrgFromService() {
-        var accessToken = this._authService.getAccessToken();
+        var accessToken = this._identityService.getAccessToken();
         return new Promise(
             (resolve, reject) => {
                 $.get({
@@ -23,7 +23,7 @@ export default class InventoryService {
     }
 
     createOrgOnService(orgCreationRequest) {
-        var accessToken = this._authService.getAccessToken();
+        var accessToken = this._identityService.getAccessToken();
         return new Promise(
             (resolve, reject) => {
                 $.post({
