@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentWrapper from './ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from 'react-bootstrap';
-import HoursRange from './HoursRange';
+import { HoursRange } from './HoursRange';
 import ImageGallery from './ImageGallery';
 import 'bootstrap-tagsinput';
 
@@ -66,6 +66,7 @@ class General extends React.Component {
                     General
                     <small>Restaurant general settings</small>
                 </h3>
+
                 <Row>
                     <Col sm={ 12 }>
                         <div className="panel panel-default">
@@ -142,22 +143,19 @@ class General extends React.Component {
                             <div className="panel-heading">Opening Hours</div>
                             <div className="panel-body">
                                 <form className="form-horizontal">
-                                    { /* Monday to Friday opening times */ }
                                     <HoursRange
-                                        xid='mon-fri'
-                                        label={ 'Mon-Fri' }
+                                        xid="mon-fri"
+                                        xlabel="Mon-Fri"
                                         onChange={ this.handleMonFriHoursChange.bind(this) } />
 
-                                    { /* Saturday opening times */ }
                                     <HoursRange
                                         xid='sat'
-                                        label={ 'Saturday' }
+                                        xlabel={ 'Saturday' }
                                         onChange={ this.handleSatHoursChange.bind(this) } />
 
-                                    { /* Sunday opening times */ }
                                     <HoursRange
                                         xid='sun'
-                                        label={ 'Sunday' }
+                                        xlabel={ 'Sunday' }
                                         onChange={ this.handleSunHoursChange.bind(this) } />
                                 </form>
                             </div>
@@ -172,6 +170,8 @@ class General extends React.Component {
                         </div>
                     </Col>
                 </Row>
+
+                
 
                 <Row>
                     <Col sm={ 12 }>
@@ -191,9 +191,11 @@ class General extends React.Component {
                         </div>
                     </Col>
                 </Row>
+
             </ContentWrapper>
         );
     }
 }
+
 
 export default General;

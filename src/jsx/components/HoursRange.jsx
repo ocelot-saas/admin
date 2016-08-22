@@ -75,7 +75,7 @@ export class HoursRange extends React.Component {
     render() {
         return (
             <div className="form-group">
-                <label className="col-lg-2 col-xs-12 control-label">{ this.props.label }</label>
+                <label className="col-lg-2 col-xs-12 control-label">{ this.props.xlabel }</label>
                 <Col lg={ 2 } xs={ 4 }>
                     <div className="checkbox c-checkbox">
                         <label>
