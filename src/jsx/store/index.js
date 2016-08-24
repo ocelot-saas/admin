@@ -1,108 +1,67 @@
 import { createStore, combineReducers } from 'redux';
+import { createAction } from 'redux-actions';
 
 
 export const OPSTATE_INIT = 'INIT';
-export const OPSTATE_READY = 'READY';
 export const OPSTATE_LOADING = 'LOADING';
+export const OPSTATE_READY = 'READY';
 export const OPSTATE_FAILED = 'FAILED';
 
 
-const GLOBAL_LOADING_READY = 'GLOBAL_LOADING_READY';
-const GLOBAL_LOADING_LOADING = 'GLOBAL_LOADING_LOADING';
-const GLOBAL_LOADING_FAILED = 'GLOBAL_LOADING_FAILED';
-const IDENTITY_GET_USER = 'IDENTITY_GET_USER';
-const IDENTITY_LOGOUT = 'IDENTITY_LOGOUT';
-
-
-export function globalLoadingReady() {
-    return {type: GLOBAL_LOADING_READY};
-}
-
-
-export function globalLoadingLoading() {
-    return {type: GLOBAL_LOADING_LOADING};
-}
-
-
-export function globalLoadingFailed(errorMessage) {
-    return {
-        type: GLOBAL_LOADING_FAILED,
-        errorMessage: errorMessage
-    };
-}
-
-
-export function identityGetUser(accessToken, user) {
-    return {
-        type: IDENTITY_GET_USER,
-        accessToken: accessToken,
-        user: user
-    };
-}
-
-
-export function identityLogout() {
-    return {type: IDENTITY_LOGOUT};
-}
-
-
-const globalLoadingInitialState = {
-    opState: OPSTATE_INIT,
-    errorMessage: null
-};
-
-
-function globalLoadingReducer(state = globalLoadingInitialState, action) {
-    switch (action.type) {
-    case GLOBAL_LOADING_READY:
-        return {
-            opState: OPSTATE_READY,
-            errorMessage: null
-        };
-    case GLOBAL_LOADING_LOADING:
-        return {
-            opState: OPSTATE_LOADING,
-            errorMessage: null
-        };
-    case GLOBAL_LOADING_FAILED:
-        return {
-            opState : OPSTATE_FAILED,
-            errorMessage: action.errorMessage
-        };
-    }
-
-    return state;
-}
+export const identityLoading = createAction('IDENTITY_LOADING');
+export const identityReady = createAction('IDENTITY_READY', (accessToken, user) => { return { accessToken, user }; });
+export const identityFailed = createAction('IDENTITY_FAILED');
+export const identityClear = createAction('IDENTITY_CLEAR');
 
 
 const identityInitialState = {
+    opState: OPSTATE_INIT,
+    errorMessage: null,
     accessToken: null,
     user: null
 };
 
 
-function identityReducer(state = identityInitialState, action) {
+function identity(state = identityInitialState, action) {
     switch (action.type) {
-    case IDENTITY_GET_USER:
-        return {
-            accessToken: action.accessToken,
-            user: action.user
-        };
-    case IDENTITY_LOGOUT:
-        return {
-            accessToken: null,
-            user: null
-        };
+    case 'IDENTITY_LOADING':
+	return {
+	    opState: OPSTATE_LOADING,
+	    errorMessage: null,
+	    accessToken: null,
+	    user: null
+	};
+    case 'IDENTITY_READY':
+	return {
+	    opState: OPSTATE_READY,
+	    errorMessage: null,
+	    accessToken: action.payload.accessToken,
+	    user: action.payload.user
+	};
+    case 'IDENTITY_FAILED':
+	return {
+	    opState: OPSTATE_FAILED,
+	    errorMessage: action.payload.message,
+	    accessToken: null,
+	    user: null
+	};
+    case 'IDENTITY_CLEAR':
+	return {
+	    opState: OPSTATE_INIT,
+	    errorMessage: null,
+	    accessToken: null,
+	    user: null
+	};
+    default:
+	return state;
     }
-
-    return state;
 }
 
 
 const reducers = combineReducers({
-    globalLoading: globalLoadingReducer,
-    identity: identityReducer
+    identity: identity
 });
 
 
 export const store = createStore(reducers);
+

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { auth0Widget, identityService } from '../services';
-import { OPSTATE_INIT, OPSTATE_READY, OPSTATE_LOADING, OPSTATE_FAILED, globalLoadingReady, globalLoadingLoading, globalLoadingFailed, identityGetUser, identityLogout } from '../store';
+import { OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED, identityLoading, identityReady, identityFailed, identityClear } from '../store';
 import BasePage from './BasePage';
 
 
@@ -11,29 +11,25 @@ class App extends React.Component {
     logout() {
         identityService.logout();
 	this.context.router.push('/login');
-        this.props.globalLoadingReady();
-        this.props.identityLogout();
+	this.props.identityClear();
     }
 
     componentDidMount() {
         identityService
             .getUserFromService()
             .then(({accessToken, user}) => {
-                this.props.globalLoadingReady();
-                this.props.identityGetUser(accessToken, user);
+	        this.props.identityReady(accessToken, user);
             })
             .catch((errorCode) => {
                 if (errorCode == 401) {
                     this.context.router.push('/login');
-                    this.props.identityLogout();
-                    this.props.globalLoadingReady();
+		    this.props.identityClear();
                 } else {
-                    this.props.globalLoadingFailed('Could not perform user loading. Try again later');
-                    this.props.identityLogout();
+		    this.props.identityFailed(new Error('Could not perform user loading. Try again later'));
                 }
             });
 
-        this.props.globalLoadingLoading();
+	this.props.identityLoading();
     }
 
     componentWillUnmount() {
@@ -41,7 +37,7 @@ class App extends React.Component {
     }
 
     render() {
-        switch (this.props.globalLoading.opState) {
+        switch (this.props.identity.opState) {
             case OPSTATE_READY:
                 return React.cloneElement(this.props.children, {
 	            user: this.props.identity.user,
@@ -66,7 +62,7 @@ class App extends React.Component {
                 return (
                     <BasePage>
                         <div>Loading Failed</div>
-                        <div>{ this.props.globalLoading.errorMessage }</div>
+                        <div>{ this.props.identity.errorMessage }</div>
                     </BasePage>
                 );
             default:
@@ -83,7 +79,6 @@ App.contextTypes = {
 
 function mapStateToProps(store) {
     return {
-        globalLoading: store.globalLoading,
         identity: store.identity
     };
 }
@@ -91,11 +86,10 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        globalLoadingReady: () => dispatch(globalLoadingReady()),
-        globalLoadingLoading: () => dispatch(globalLoadingLoading()),
-        globalLoadingFailed: (errorMessage) => dispatch(globalLoadingFailed(errorMessage)),
-        identityGetUser: (accessToken, user) => dispatch(identityGetUser(accessToken, user)),
-        ideitityLogout: () => dispatch(identityLogout())
+    	identityLoading: () => dispatch(identityLoading()),
+	identityReady: (accessToken, user) => dispatch(identityReady(accessToken, user)),
+	identityFailed: (error) => dispatch(identityFailed(error)),
+	identityClear: () => dispatch(identityClear()),
     };
 }
 
