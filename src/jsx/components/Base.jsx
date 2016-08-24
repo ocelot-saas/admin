@@ -13,7 +13,7 @@ class Base extends React.Component {
 
         return (
             <div className="wrapper">
-                <Header onLogoutClick={this.props.onLogoutClick} />
+                <Header/>
 
                 <Sidebar/>
 

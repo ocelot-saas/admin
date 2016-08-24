@@ -1,12 +1,22 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import HeaderRun from './Header.run'
 import { NavDropdown, MenuItem } from 'react-bootstrap';
+import { identityService } from '../services';
+import { identityClear } from '../store';
+
 
 class Header extends React.Component {
     
     componentDidMount() {
         HeaderRun();
+    }
+
+    onLogoutClick() {
+        identityService.logout();
+	this.context.router.push('/login');
+	this.props.identityClear();    
     }
 
     render() {
@@ -69,7 +79,7 @@ class Header extends React.Component {
                                     <Link to="/dashboard" title="Dashboard">Dashboard</Link>
                                 </MenuItem>
                                 <MenuItem divider />
-                                <MenuItem className="animated flipInX" eventKey={3.3} onSelect={this.props.onLogoutClick}>
+                                <MenuItem className="animated flipInX" eventKey={3.3} onSelect={this.onLogoutClick.bind(this)}>
                                     <a>Logout</a>
                                 </MenuItem>
                             </NavDropdown>
@@ -96,4 +106,21 @@ class Header extends React.Component {
 }
 
 
-export default Header;
+Header.contextTypes = {
+    router: React.PropTypes.object.isRequired
+}
+
+
+function mapStateToProps(store) {
+    return {};
+}
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        identityClear: () => dispatch(identityClear())
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

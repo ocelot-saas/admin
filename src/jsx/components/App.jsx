@@ -8,12 +8,6 @@ import BasePage from './BasePage';
 
 class App extends React.Component {
 
-    logout() {
-        identityService.logout();
-	this.context.router.push('/login');
-	this.props.identityClear();
-    }
-
     componentDidMount() {
         identityService
             .getUserFromService()
@@ -39,9 +33,7 @@ class App extends React.Component {
     render() {
         switch (this.props.identity.opState) {
             case OPSTATE_READY:
-                return React.cloneElement(this.props.children, {
-		    onLogoutClick: this.logout.bind(this)
-	        });
+                return this.props.children;
             case OPSTATE_INIT:
             case OPSTATE_LOADING:
                 return (
