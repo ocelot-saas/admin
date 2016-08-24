@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux'; 
 import SidebarRun from './Sidebar.run';
 
 class Sidebar extends React.Component {
@@ -123,8 +124,16 @@ class Sidebar extends React.Component {
 
 }
 
+
 Sidebar.contextTypes = {
     router: PropTypes.object.isRequired
 }
 
-export default Sidebar;
+
+function mapStateToProps(store) {
+    return {
+        user: store.identity.user
+    };
+}
+
+export default connect(mapStateToProps)(Sidebar);

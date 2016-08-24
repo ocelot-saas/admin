@@ -40,7 +40,6 @@ class App extends React.Component {
         switch (this.props.identity.opState) {
             case OPSTATE_READY:
                 return React.cloneElement(this.props.children, {
-	            user: this.props.identity.user,
 		    onLogoutClick: this.logout.bind(this)
 	        });
             case OPSTATE_INIT:

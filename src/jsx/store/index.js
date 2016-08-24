@@ -25,35 +25,35 @@ const identityInitialState = {
 function identity(state = identityInitialState, action) {
     switch (action.type) {
     case 'IDENTITY_LOADING':
-	return {
-	    opState: OPSTATE_LOADING,
-	    errorMessage: null,
-	    accessToken: null,
-	    user: null
-	};
+        return {
+            opState: OPSTATE_LOADING,
+            errorMessage: null,
+            accessToken: null,
+            user: null
+        };
     case 'IDENTITY_READY':
-	return {
-	    opState: OPSTATE_READY,
-	    errorMessage: null,
-	    accessToken: action.payload.accessToken,
-	    user: action.payload.user
-	};
+        return {
+            opState: OPSTATE_READY,
+            errorMessage: null,
+            accessToken: action.payload.accessToken,
+            user: action.payload.user
+        };
     case 'IDENTITY_FAILED':
-	return {
-	    opState: OPSTATE_FAILED,
-	    errorMessage: action.payload.message,
-	    accessToken: null,
-	    user: null
-	};
+        return {
+            opState: OPSTATE_FAILED,
+            errorMessage: action.payload.message,
+            accessToken: null,
+            user: null
+        };
     case 'IDENTITY_CLEAR':
-	return {
-	    opState: OPSTATE_INIT,
-	    errorMessage: null,
-	    accessToken: null,
-	    user: null
-	};
+        return {
+            opState: OPSTATE_READY,
+            errorMessage: null,
+            accessToken: null,
+            user: null
+        };
     default:
-	return state;
+        return state;
     }
 }
 
