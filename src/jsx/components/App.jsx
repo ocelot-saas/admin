@@ -1,89 +1,39 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { auth0Widget, identityService } from '../services';
+import { OPSTATE_INIT, OPSTATE_READY, OPSTATE_LOADING, OPSTATE_FAILED, globalLoadingReady, globalLoadingLoading, globalLoadingFailed, identityGetUser, identityLogout } from '../store';
 import BasePage from './BasePage';
 
+
 class App extends React.Component {
-
-    constructor(props, context) {
-        super(props, context);
-
-        this.state = {
-            globalLoading: {
-                opState: 'READY',
-                errorMessage: null
-            },
-            identity: {
-                accessToken: null,
-                user: null
-            }
-        };
-    }
 
     logout() {
         identityService.logout();
 	this.context.router.push('/login');
-
-	this.setState({
-            globalLoading: {
-                opState: 'READY',
-                errorMessage: null,
-            },
-            identity: {
-                accessToken: null,
-                user: null
-            }
-        });
+        this.props.globalLoadingReady();
+        this.props.identityLogout();
     }
 
-    componentWillMount() {
+    componentDidMount() {
         identityService
             .getUserFromService()
             .then(({accessToken, user}) => {
-                this.setState({
-                    globalLoading: {
-                        opState: 'READY',
-                        errorMessage: null
-                    },
-                    identity: {
-                        accessToken: accessToken,
-                        user: user
-                    }
-                });
+                this.props.globalLoadingReady();
+                this.props.identityGetUser(accessToken, user);
             })
             .catch((errorCode) => {
                 if (errorCode == 401) {
                     this.context.router.push('/login');
-                    this.setState({
-                        globalLoading: {
-                            opState: 'READY',
-                            errorMessage: null
-                        },
-                        identity: {
-                            accessToken: null,
-                            user: null
-                        }
-                    });
+                    this.props.identityLogout();
+                    this.props.globalLoadingReady();
                 } else {
-                    this.setState({
-                        globalLoading: {
-                            opState: 'FAILED',
-                            errorMessage: 'Could not perform user loading. Try again later'
-                        },
-                        identity: {
-                            accessToken: null,
-                            user: null
-                        }
-                    });
+                    this.props.globalLoadingFailed('Could not perform user loading. Try again later');
+                    this.props.identityLogout();
                 }
             });
 
-        this.setState({
-            globalLoading: {
-               opState: 'LOADING',
-               errorMessage: null
-            }
-        });
+        this.props.globalLoadingLoading();
     }
 
     componentWillUnmount() {
@@ -91,33 +41,36 @@ class App extends React.Component {
     }
 
     render() {
-        if (this.state.globalLoading.opState == 'LOADING') {
-            return (
-                <BasePage>
-                   <div className="app-loading">
-                       <div className="line-scale">
-                           <div></div>
-                           <div></div>
-                           <div></div>
-                           <div></div>
-                           <div></div>
-                       </div>
-                   </div>
-                </BasePage>
-            );
-        } else if (this.state.globalLoading.opState == 'FAILED') {
-            return (
-                <BasePage>
-                    <div>Loading Failed</div>
-                </BasePage>
-            );
-        } else if (this.state.globalLoading.opState == 'READY') {
-            return React.cloneElement(this.props.children, {
-	        user: this.state.identity.user,
-		onLogoutClick: this.logout.bind(this)
-	    });
-        } else {
-            throw 'Invalid opState';
+        switch (this.props.globalLoading.opState) {
+            case OPSTATE_READY:
+                return React.cloneElement(this.props.children, {
+	            user: this.props.identity.user,
+		    onLogoutClick: this.logout.bind(this)
+	        });
+            case OPSTATE_INIT:
+            case OPSTATE_LOADING:
+                return (
+                    <BasePage>
+                        <div className="app-loading">
+                            <div className="line-scale">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </BasePage>
+                );
+            case OPSTATE_FAILED:
+                return (
+                    <BasePage>
+                        <div>Loading Failed</div>
+                        <div>{ this.props.globalLoading.errorMessage }</div>
+                    </BasePage>
+                );
+            default:
+                throw 'Invalid opState';
         }
     }    
 }
@@ -128,4 +81,23 @@ App.contextTypes = {
 }
 
 
-export default App;
+function mapStateToProps(store) {
+    return {
+        globalLoading: store.globalLoading,
+        identity: store.identity
+    };
+}
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        globalLoadingReady: () => dispatch(globalLoadingReady()),
+        globalLoadingLoading: () => dispatch(globalLoadingLoading()),
+        globalLoadingFailed: (errorMessage) => dispatch(globalLoadingFailed(errorMessage)),
+        identityGetUser: (accessToken, user) => dispatch(identityGetUser(accessToken, user)),
+        ideitityLogout: () => dispatch(identityLogout())
+    };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
