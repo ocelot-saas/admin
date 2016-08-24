@@ -58,10 +58,55 @@ function identity(state = identityInitialState, action) {
 }
 
 
+export const orgLoading = createAction('ORG_LOADING');
+export const orgReady = createAction('ORG_READY');
+export const orgFailed = createAction('ORG_FAILED');
+export const orgClear = createAction('ORG_CLEAR');
+
+
+const orgInitialState = {
+    opState: OPSTATE_INIT,
+    errorMessage: null,
+    org: null
+};
+
+
+function org(state = orgInitialState, action) {
+    switch (action.type) {
+    case 'ORG_LOADING':
+	return {
+	    opState: OPSTATE_LOADING,
+	    errorMessage: null,
+	    org: null
+	};
+    case 'ORG_READY':
+	return {
+	    opState: OPSTATE_READY,
+	    errorMessage: null,
+	    org: action.payload.org
+	};
+    case 'ORG_FAILED':
+	return {
+	    opState: OPSTATE_FAILED,
+	    errorMessage: action.payload.message,
+	    org: null
+	};
+    case 'ORG_CLEAR':
+	return {
+	    opState: OPSTATE_READY,
+	    errorMessage: null,
+	    org: null
+	};
+    default:
+	return state;
+    }
+}
+
+
 const reducers = combineReducers({
-    identity: identity
+    identity: identity,
+    org: org
 });
 
 
 export const store = createStore(reducers);
-

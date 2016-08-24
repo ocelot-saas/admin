@@ -25,9 +25,11 @@ ReactDOM.render(
         <Router history={browserHistory}>
 
             <Redirect from="/index.html" to="/" />
-            
+
+	    {/* Depend on having a user */}
             <Route path="/" component={App}>
-                
+
+	        {/* Depend on there being an Org */}
                 <Route path="/" component={Base}>
                     
                     <IndexRedirect to="/dashboard" />
@@ -43,13 +45,16 @@ ReactDOM.render(
                     <Route path="/reports" component={Reports} />
                     
                 </Route>
-                
+
+		{/* Don't depend on there being an Org */}
                 <Route path="/" component={BasePage}>
-                    <Route path="/login" component={Login} />
                     <Route path="/create-org" component={CreateOrg} />
                 </Route>
                 
             </Route>
+
+	    {/* Don't depend on there being a user */}
+            <Route path="/login" component={Login} />
             
         </Router>
     </Provider>,

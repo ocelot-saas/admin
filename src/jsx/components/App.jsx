@@ -32,32 +32,31 @@ class App extends React.Component {
 
     render() {
         switch (this.props.identity.opState) {
-            case OPSTATE_READY:
-                return this.props.children;
-            case OPSTATE_INIT:
-            case OPSTATE_LOADING:
-                return (
-                    <BasePage>
-                        <div className="app-loading">
-                            <div className="line-scale">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
+        case OPSTATE_READY:
+            return this.props.children;
+        case OPSTATE_INIT:
+        case OPSTATE_LOADING:
+            return (
+                <BasePage>
+                    <div className="app-loading">
+                        <div className="line-scale">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
                         </div>
-                    </BasePage>
-                );
-            case OPSTATE_FAILED:
-                return (
-                    <BasePage>
-                        <div>Loading Failed</div>
-                        <div>{ this.props.identity.errorMessage }</div>
-                    </BasePage>
-                );
-            default:
-                throw 'Invalid opState';
+                    </div>
+                </BasePage>
+            );
+        case OPSTATE_FAILED:
+            return (
+                <BasePage>
+                    <div>{ this.props.identity.errorMessage }</div>
+                </BasePage>
+            );
+        default:
+            throw new Error('Invalid opState');
         }
     }    
 }
