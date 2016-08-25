@@ -13,6 +13,10 @@ class Header extends React.Component {
         HeaderRun();
     }
 
+    onDashboardClick() {
+        this.context.router.push('/dashboard');
+    }
+
     onLogoutClick() {
         identityService.logout();
 	this.context.router.push('/login');
@@ -75,13 +79,9 @@ class Header extends React.Component {
                             { /* START Alert menu */ }
                             <NavDropdown noCaret eventKey={ 3 } title={ ddAlertTitle } id="basic-nav-dropdown" >
                                 <MenuItem className="animated flipInX" eventKey={3.2}>Profile</MenuItem>
-                                <MenuItem className="animated flipInX" eventKey={3.3}>
-                                    <Link to="/dashboard" title="Dashboard">Dashboard</Link>
-                                </MenuItem>
+                                <MenuItem className="animated flipInX" eventKey={3.3} onSelect={this.onDashboardClick.bind(this)}>Dashboard</MenuItem>
                                 <MenuItem divider />
-                                <MenuItem className="animated flipInX" eventKey={3.3} onSelect={this.onLogoutClick.bind(this)}>
-                                    <a>Logout</a>
-                                </MenuItem>
+                                <MenuItem className="animated flipInX" eventKey={3.3} onSelect={this.onLogoutClick.bind(this)}>Logout</MenuItem>
                             </NavDropdown>
                             { /* END Alert menu */ }
                         </ul>
