@@ -4,7 +4,8 @@ import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from '
 import { connect } from 'react-redux';
 import 'bootstrap-tagsinput';
 
-import { HoursRange, ExtractHours } from './HoursRange';
+import { HoursRange } from './HoursRange';
+import { ExtractHours } from '../common/hours';
 import { OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED, orgLoading, orgReady, orgFailed, orgClear } from '../store';
 import { inventoryService } from '../services';
 
