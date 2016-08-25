@@ -93,10 +93,10 @@ class CreateOrg extends React.Component {
             .createOrgOnService(orgCreationRequest)
             .then((org) => {
                 this.context.router.push('/dashboard');
-		this.props.orgReady(org);
+                this.props.orgReady(org);
             })
             .catch((error) => {
-	        this.props.orgFailed(new Error('Could not perform org creation. Try again later'));
+                this.props.orgFailed(new Error('Could not perform org creation. Try again later'));
             });
 
         this.props.orgLoading();
@@ -104,150 +104,150 @@ class CreateOrg extends React.Component {
 
     render() {
         switch (this.props.org.opState) {
-	case OPSTATE_INIT:
-	case OPSTATE_READY:
-            switch (this.state.screen) {
-	    case 'GENERAL':
+            case OPSTATE_INIT:
+            case OPSTATE_READY:
+                switch (this.state.screen) {
+                    case 'GENERAL':
+                        return (
+                            <ContentWrapper>
+                                <h3>Create Your Restaurant</h3>
+
+                                <Row>
+                                    <Col sm={ 12 }>
+                                        <div className="panel panel-default">
+                                            <div className="panel-heading">General</div>
+                                            <div className="panel-body">
+                                                <form className="form-horizontal">
+                                                    <div className="form-group">
+                                                        <label className="col-lg-2 control-label">Name</label>
+
+                                                        <Col lg={ 10 }>
+                                                            <Input
+                                                                standalone
+                                                                type="text"
+                                                                value={ this.state.name }
+                                                                onChange={ this.handleNameChange.bind(this) }
+                                                                required="required"
+                                                                placeholder="Name"
+                                                                className="form-control" />
+                                                        </Col>
+                                                    </div>
+
+                                                    <div className="form-group">
+                                                        <label className="col-lg-2 control-label">Description</label>
+                                                        <Col lg={ 10 }>
+                                                            <textarea
+                                                                value={ this.state.description }
+                                                                onChange={ this.handleDescriptionChange.bind(this) }
+                                                                required="required"
+                                                                placeholder="Description"
+                                                                rows="5"
+                                                                className="form-control" />
+                                                        </Col>
+                                                    </div>
+
+                                                    <div className="form-group">
+                                                        <label className="col-lg-2 control-label">
+                                                            Keywords
+                                                        </label>
+                                                        <Col lg={ 10 }>
+                                                            <input type="text" data-role="tagsinput" defaultValue="italian,family friendly,dog friendly" className="form-control" />
+                                                        </Col>
+                                                    </div>
+
+                                                    <div className="form-group">
+                                                        <label className="col-lg-2 control-label">Address</label>
+                                                        <Col lg={ 10 }>
+                                                            <Input
+                                                                standalone
+                                                                type="text"
+                                                                value={ this.state.address }
+                                                                onChange={ this.handleAddressChange.bind(this) }
+                                                                required="required"
+                                                                placeholder="Address"
+                                                                className="form-control" />
+                                                        </Col>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div className="panel-footer">
+                                                <Button bsClass="btn btn-labeled disabled mr">
+                                                    <span className="btn-label"><i className="fa fa-toggle-left"></i></span> Previous
+                                                </Button>
+                                                <Button bsClass="btn btn-labeled btn-primary mr" onClick={this.handleGeneralNext.bind(this)}>
+                                                    <span className="btn-label"><i className="fa fa-toggle-right"></i></span> Next
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </Col>
+                                </Row>
+
+                            </ContentWrapper>
+                        );
+                    case 'OPENING_HOURS':
+                        return (
+                            <ContentWrapper>
+                                <h3>Create Your Restaurant</h3>
+                                <Row>
+                                    <Col sm={ 12 }>
+                                        <div className="panel panel-default">
+                                            <div className="panel-heading">Opening Hours</div>
+                                            <div className="panel-body">
+                                                <form className="form-horizontal">
+                                                    { /* Monday to Friday opening times */ }
+                                                    <HoursRange
+                                                        xid='mon-fri'
+                                                        label={ 'Mon-Fri' }
+                                                        onChange={ this.handleMonFriHoursChange.bind(this) } />
+
+                                                    { /* Saturday opening times */ }
+                                                    <HoursRange
+                                                        xid='sat'
+                                                        label={ 'Saturday' }
+                                                        onChange={ this.handleSatHoursChange.bind(this) } />
+
+                                                    { /* Sunday opening times */ }
+                                                    <HoursRange
+                                                        xid='sun'
+                                                        label={ 'Sunday' }
+                                                        onChange={ this.handleSunHoursChange.bind(this) } />
+                                                </form>
+                                            </div>
+                                            <div className="panel-footer">
+                                                <Button bsClass="btn btn-labeled mr" onClick={this.handleOpeningHoursPrevious.bind(this)}>
+                                                    <span className="btn-label"><i className="fa fa-toggle-left"></i></span> Previous
+                                                </Button>
+                                                <Button bsClass="btn btn-labeled btn-primary mr" onClick={this.handleOpeningHoursNext.bind(this)}>
+                                                    <span className="btn-label"><i className="fa fa-check"></i></span> Create
+                                                </Button>
+                                            </div>
+                                        </div>                        
+                                    </Col>
+                                </Row>
+                            </ContentWrapper>
+                        );
+                    default:
+                        throw new Error('Invalid screen');
+                }
+            case OPSTATE_LOADING:
                 return (
-                    <ContentWrapper>
-                        <h3>Create Your Restaurant</h3>
-
-                        <Row>
-                            <Col sm={ 12 }>
-                                <div className="panel panel-default">
-                                    <div className="panel-heading">General</div>
-                                    <div className="panel-body">
-                                        <form className="form-horizontal">
-                                            <div className="form-group">
-                                                <label className="col-lg-2 control-label">Name</label>
-
-                                                <Col lg={ 10 }>
-                                                    <Input
-                                                        standalone
-                                                        type="text"
-                                                        value={ this.state.name }
-                                                        onChange={ this.handleNameChange.bind(this) }
-                                                        required="required"
-                                                        placeholder="Name"
-                                                        className="form-control" />
-                                                </Col>
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label className="col-lg-2 control-label">Description</label>
-                                                <Col lg={ 10 }>
-                                                    <textarea
-                                                        value={ this.state.description }
-                                                        onChange={ this.handleDescriptionChange.bind(this) }
-                                                        required="required"
-                                                        placeholder="Description"
-                                                        rows="5"
-                                                        className="form-control" />
-                                                </Col>
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label className="col-lg-2 control-label">
-                                                    Keywords
-                                                </label>
-                                                <Col lg={ 10 }>
-                                                    <input type="text" data-role="tagsinput" defaultValue="italian,family friendly,dog friendly" className="form-control" />
-                                                </Col>
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label className="col-lg-2 control-label">Address</label>
-                                                <Col lg={ 10 }>
-                                                    <Input
-                                                        standalone
-                                                        type="text"
-                                                        value={ this.state.address }
-                                                        onChange={ this.handleAddressChange.bind(this) }
-                                                        required="required"
-                                                        placeholder="Address"
-                                                        className="form-control" />
-                                                </Col>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div className="panel-footer">
-                                        <Button bsClass="btn btn-labeled disabled mr">
-                                            <span className="btn-label"><i className="fa fa-toggle-left"></i></span> Previous
-                                        </Button>
-                                        <Button bsClass="btn btn-labeled btn-primary mr" onClick={this.handleGeneralNext.bind(this)}>
-                                            <span className="btn-label"><i className="fa fa-toggle-right"></i></span> Next
-                                        </Button>
-                                    </div>
-                                </div>
-                            </Col>
-                        </Row>
-
-                    </ContentWrapper>
+                    <div className="app-loading">
+                        <div className="line-scale">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
                 );
-            case 'OPENING_HOURS':
+            case OPSTATE_FAILED:
                 return (
-                    <ContentWrapper>
-                        <h3>Create Your Restaurant</h3>
-                        <Row>
-                            <Col sm={ 12 }>
-                                <div className="panel panel-default">
-                                    <div className="panel-heading">Opening Hours</div>
-                                    <div className="panel-body">
-                                        <form className="form-horizontal">
-                                            { /* Monday to Friday opening times */ }
-                                            <HoursRange
-                                                xid='mon-fri'
-                                                label={ 'Mon-Fri' }
-                                                onChange={ this.handleMonFriHoursChange.bind(this) } />
-
-                                            { /* Saturday opening times */ }
-                                            <HoursRange
-                                                xid='sat'
-                                                label={ 'Saturday' }
-                                                onChange={ this.handleSatHoursChange.bind(this) } />
-
-                                            { /* Sunday opening times */ }
-                                            <HoursRange
-                                                xid='sun'
-                                                label={ 'Sunday' }
-                                                onChange={ this.handleSunHoursChange.bind(this) } />
-                                        </form>
-                                    </div>
-                                    <div className="panel-footer">
-                                        <Button bsClass="btn btn-labeled mr" onClick={this.handleOpeningHoursPrevious.bind(this)}>
-                                            <span className="btn-label"><i className="fa fa-toggle-left"></i></span> Previous
-                                        </Button>
-                                        <Button bsClass="btn btn-labeled btn-primary mr" onClick={this.handleOpeningHoursNext.bind(this)}>
-                                            <span className="btn-label"><i className="fa fa-check"></i></span> Create
-                                        </Button>
-                                    </div>
-                                </div>                        
-                            </Col>
-                        </Row>
-                    </ContentWrapper>
+                    <div>{ this.props.org.errorMessage }</div>
                 );
             default:
-	        throw new Error('Invalid screen');
-	    }
-	case OPSTATE_LOADING:
-            return (
-                <div className="app-loading">
-                    <div className="line-scale">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-            );
-	case OPSTATE_FAILED:
-            return (
-                <div>{ this.props.org.errorMessage }</div>
-            );
-	default:
-	   throw new Error('Invalid opState');
-	}
+                throw new Error('Invalid opState');
+        }
     }
 }
 
@@ -258,16 +258,18 @@ CreateOrg.contextTypes = {
 
 
 function mapStateToProps(store) {
-    return {};
+    return {
+        org: store.org
+    };
 }
 
 
 function mapDispatchToProps(dispatch) {
     return {
         orgLoading: () => dispatch(orgLoading()),
-	orgReady: (org) => dispatch(orgReady(org)),
-	orgFailed: (error) => dispatch(orgFailed(error)),
-	orgClear: () => dispatch(orgClear())
+        orgReady: (org) => dispatch(orgReady(org)),
+        orgFailed: (error) => dispatch(orgFailed(error)),
+        orgClear: () => dispatch(orgClear())
     }
 }
 
