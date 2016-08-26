@@ -40,4 +40,21 @@ export default class InventoryService {
             }
         );
     }
+
+    getRestaurantFromService() {
+	var accessToken = this._identityService.getAccessToken();
+	return new Promise(
+	    (resolve, reject) => {
+		$.get({
+		    url: `http://${this._inventoryServiceDomain}/org/restaurant`,
+		    dataType: 'json',
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((restaurantResponse) => {
+                    resolve(restaurantResponse.restaurant);
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );
+    }
 }

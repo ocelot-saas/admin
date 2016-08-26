@@ -59,7 +59,7 @@ function identity(state = identityInitialState, action) {
 
 
 export const orgLoading = createAction('ORG_LOADING');
-export const orgReady = createAction('ORG_READY');
+export const orgReady = createAction('ORG_READY', (org) => { return { org }; });
 export const orgFailed = createAction('ORG_FAILED');
 export const orgClear = createAction('ORG_CLEAR');
 
@@ -103,9 +103,48 @@ function org(state = orgInitialState, action) {
 }
 
 
+export const restaurantLoading = createAction('RESTAURANT_LOADING');
+export const restaurantReady = createAction('RESTAURANT_READY', (restaurant) => { return { restaurant }; });
+export const restaurantFailed = createAction('RESTAURANT_FAILED');
+
+
+const restaurantInitialState = {
+    opState: OPSTATE_INIT,
+    errorMessage: null,
+    restaurant: null
+};
+
+
+function restaurant(state = restaurantInitialState, action) {
+    switch (action.type) {
+    case 'RESTAURANT_LOADING':
+	return {
+	    opState: OPSTATE_LOADING,
+	    errorMessage: null,
+	    restaurant: null
+	};
+    case 'RESTAURANT_READY':
+        return {
+            opState: OPSTATE_READY,
+            errorMessage: null,
+            restaurant: action.payload.restaurant
+        };
+    case 'RESTAURANT_FAILED':
+	return {
+	    opState: OPSTATE_FAILED,
+	    errorMessage: action.payload.message,
+	    restaurant: null
+	};
+    default:
+	return state;
+    }
+}
+
+
 const reducers = combineReducers({
     identity: identity,
-    org: org
+    org: org,
+    restaurant: restaurant
 });
 
 

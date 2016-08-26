@@ -2,6 +2,7 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 
+import BasePage from './BasePage';
 import Header from './Header'
 import Sidebar from './Sidebar'
 import Footer from './Footer'
@@ -38,48 +39,47 @@ class Base extends React.Component {
 
 	switch (this.props.org.opState) {
 	case OPSTATE_READY:
-	    var core = this.props.children;
-	    break;
-	case OPSTATE_INIT:
-	case OPSTATE_LOADING:
-	    var core = (
-	    	<div className="app-loading">
-                    <div className="line-scale">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+            return (
+                <div className="wrapper">
+                    <Header/>
+
+                    <Sidebar/>
+
+                    <ReactCSSTransitionGroup
+                        component="section"
+                        transitionName="rag-fadeIn"
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}>
+                        {React.cloneElement(this.props.children, { key: Math.random() })}
+                    </ReactCSSTransitionGroup>
+
+                    <Footer />
                 </div>
             );
-	    break;
+	case OPSTATE_INIT:
+	case OPSTATE_LOADING:
+            return (
+                <BasePage>
+                    <div className="app-loading">
+                        <div className="line-scale">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </BasePage>
+            );
 	case OPSTATE_FAILED:
-	    var core = (
-	        <div>{ this.props.org.errorMessage }</div>
-	    );
-	    break;
+            return (
+                <BasePage>
+                    <div>{ this.props.org.errorMessage }</div>
+                </BasePage>
+            );
 	default:
 	    throw new Error('Invalid opState');
 	}
-
-        return (
-            <div className="wrapper">
-                <Header/>
-
-                <Sidebar/>
-
-                <ReactCSSTransitionGroup
-                    component="section"
-                    transitionName="rag-fadeIn"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={500}>
-                    {React.cloneElement(core, { key: Math.random() })}
-                </ReactCSSTransitionGroup>
-
-                <Footer />
-            </div>
-        );
     }
 }
 

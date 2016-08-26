@@ -1,6 +1,21 @@
 export function ToHours(apiHours) {
     if (apiHours.start.hour == 0 &&
         apiHours.start.minute == 0 &&
+	apiHours.end.hour == 23 &&
+	apiHours.end.minute == 59) {
+	return {
+	    nonStop: true,
+	    start: '00:00 AM',
+	    end: '11:59 PM'
+	}
+    } else {
+	return {
+	    nonStop: false,
+	    start: _ToHoursString(apiHours.start),
+	    end: _ToHoursString(apiHours.end)
+	}
+    }
+}
 
 
 export function ExtractHours(hours) {
@@ -16,6 +31,16 @@ export function ExtractHours(hours) {
         };
     }
 }
+
+
+function _ToHoursString(apiHour) {
+    if (apiHour.hour > 12) {
+	return `${apiHour.hour - 12}:${apiHour.minute} PM`;
+    } else {
+	return `${apiHour.hour}:${apiHour.minute} AM`;
+    }
+}
+
 
 function _ExtractHourFromString(hour) {
     var hourRe = new RegExp('(\\d\\d):(\\d\\d) (AM|PM)');
