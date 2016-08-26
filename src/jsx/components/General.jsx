@@ -49,19 +49,34 @@ class General extends React.Component {
 	}
     }
 
+    componentWillMount() {
+        if (this.props.restaurant.opState == OPSTATE_READY) {
+            this.setState({
+                name: this.props.restaurant.restaurant.name,
+                description: this.props.restaurant.restaurant.description,
+                address: this.props.restaurant.restaurant.address,
+                weekdayHours: ToHours(this.props.restaurant.restaurant.openingHours.weekday),
+                saturdayHours: ToHours(this.props.restaurant.restaurant.openingHours.saturday),
+                sundayHours: ToHours(this.props.restaurant.restaurant.openingHours.sunday)
+            });
+	}    
+    }
+
     componentDidMount() {
         $("[data-role='tagsinput']").tagsinput();
 
-	inventoryService
-	    .getRestaurantFromService()
-	    .then((restaurant) => {
-	        this.props.restaurantReady(restaurant);
-	    })
-	    .catch((errorCode) => {
-	        this.props.restaurantFailed(new Error('Could not perform restaurant fetching. Try again later'));
-	    });
+        if (this.props.restaurant.opState == OPSTATE_INIT) {
+            inventoryService
+                .getRestaurantFromService()
+                .then((restaurant) => {
+                    this.props.restaurantReady(restaurant);
+                })
+                .catch((errorCode) => {
+                    this.props.restaurantFailed(new Error('Could not perform restaurant fetching. Try again later'));
+                });
 
-        this.props.restaurantLoading();
+            this.props.restaurantLoading();
+	}
     }
 
     componentWillUnmount() {
