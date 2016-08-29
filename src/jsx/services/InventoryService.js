@@ -62,14 +62,15 @@ export default class InventoryService {
         var accessToken = this._identityService.getAccessToken();
         return new Promise(
             (resolve, reject) => {
-                $.put({
-                    url: `http://${this._inventoryServiceDomain}/org`,
+                $.ajax({
+                    type: 'PUT',
+                    url: `http://${this._inventoryServiceDomain}/org/restaurant`,
                     dataType: 'json',
                     data: JSON.stringify(updateRestaurantRequest),
                     contentType: 'application/json',
                     headers: {'Authorization': `Bearer ${accessToken}`}
-                }).done((orgResponse) => {
-                    resolve(orgResponse.org);
+                }).done((restaurantResponse) => {
+                    resolve(restaurantResponse.restaurant);
                 }).fail((xhr) => {
                     reject(xhr.status);
                 });
