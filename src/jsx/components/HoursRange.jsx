@@ -29,9 +29,7 @@ export class HoursRange extends React.Component {
     handleNonStopChange(e) {
         this.setState({
             nonStop: e.target.checked
-        });
-
-        this._updateOwner();
+        }, this._updateOwner);
     }
 
     handleStartChange(e) {
@@ -46,9 +44,7 @@ export class HoursRange extends React.Component {
 
         this.setState({
             start: start
-        });
-
-        this._updateOwner();
+        }, this._updateOwner);
     }
 
     handleEndChange(e) {
@@ -63,9 +59,7 @@ export class HoursRange extends React.Component {
 
         this.setState({
             end: end
-        });
-
-        this._updateOwner();
+        }, this._updateOwner);
     }
 
     render() {

@@ -212,19 +212,19 @@ class General extends React.Component {
                                            xid="mon-fri"
                                            xlabel="Mon-Fri"
                                            initialHours={this.state.weekdayHours}
-                                           onChange={ this.handleWeekdayHoursChange.bind(this) } />
+                                           onChange={this.handleWeekdayHoursChange.bind(this)} />
    
                                        <HoursRange
                                            xid='sat'
                                            xlabel={ 'Saturday' }
                                            initialHours={this.state.saturdayHours}
-                                           onChange={ this.handleSaturdayHoursChange.bind(this) } />
+                                           onChange={this.handleSaturdayHoursChange.bind(this)} />
    
                                        <HoursRange
                                            xid='sun'
                                            xlabel={ 'Sunday' }
                                            initialHours={this.state.sundayHours}
-                                           onChange={ this.handleSundayHoursChange.bind(this) } />
+                                           onChange={this.handleSundayHoursChange.bind(this)} />
                                    </form>
                                </div>
                                <div className="panel-footer">
