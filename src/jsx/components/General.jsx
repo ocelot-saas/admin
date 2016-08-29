@@ -107,6 +107,34 @@ class General extends React.Component {
         this.setState({sundayHours: e});
     }
 
+    handleSaveGeneral(e) {
+        const restaurantUpdateRequest = {
+            name: this.state.name,
+            description: this.state.description,
+            keywords: [],
+            address: this.state.address
+        };
+
+        inventoryService
+            .updateRestaurantFromService(restaurantUpdateRequest)
+            .then((restaurant) => {
+                this.props.restaurantReady(restaurant);
+            })
+            .catch((errorCode) => {
+                this.props.restaurantFailed(new Error('Could not perform restaurant updating. Try again later'));
+            });
+
+        this.props.restaurantLoading();
+    }
+
+    handleResetGeneral(e) {
+        this.setState({
+            name: this.props.restaurant.restaurant.name,
+            description: this.props.restaurant.restaurant.description,
+            address: this.props.restaurant.restaurant.address
+        })
+    }
+
     render() {
         switch (this.props.restaurant.opState) {
 	case OPSTATE_INIT:
@@ -191,10 +219,10 @@ class General extends React.Component {
                                    </form>
                                </div>
                                <div className="panel-footer">
-                                   <Button bsClass="btn btn-labeled btn-primary mr">
+                                   <Button bsClass="btn btn-labeled btn-primary mr" onClick={this.handleSaveGeneral.bind(this)}>
                                        <span className="btn-label"><i className="fa fa-check"></i></span> Save
                                    </Button>
-                                   <Button bsClass="btn btn-labeled mr">
+                                   <Button bsClass="btn btn-labeled mr" onClick={this.handleResetGeneral.bind(this)}>
                                        <span className="btn-label"><i className="fa fa-times"></i></span> Revert
                                    </Button>
                                </div>

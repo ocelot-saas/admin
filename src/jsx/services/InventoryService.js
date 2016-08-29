@@ -57,4 +57,23 @@ export default class InventoryService {
             }
         );
     }
+
+    updateRestaurantFromService(updateRestaurantRequest) {
+        var accessToken = this._identityService.getAccessToken();
+        return new Promise(
+            (resolve, reject) => {
+                $.put({
+                    url: `http://${this._inventoryServiceDomain}/org`,
+                    dataType: 'json',
+                    data: JSON.stringify(updateRestaurantRequest),
+                    contentType: 'application/json',
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((orgResponse) => {
+                    resolve(orgResponse.org);
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );
+    }
 }
