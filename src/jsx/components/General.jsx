@@ -211,16 +211,19 @@ class General extends React.Component {
                                        <HoursRange
                                            xid="mon-fri"
                                            xlabel="Mon-Fri"
+                                           initialHours={this.state.weekdayHours}
                                            onChange={ this.handleWeekdayHoursChange.bind(this) } />
    
                                        <HoursRange
                                            xid='sat'
                                            xlabel={ 'Saturday' }
+                                           initialHours={this.state.saturdayHours}
                                            onChange={ this.handleSaturdayHoursChange.bind(this) } />
    
                                        <HoursRange
                                            xid='sun'
                                            xlabel={ 'Sunday' }
+                                           initialHours={this.state.sundayHours}
                                            onChange={ this.handleSundayHoursChange.bind(this) } />
                                    </form>
                                </div>

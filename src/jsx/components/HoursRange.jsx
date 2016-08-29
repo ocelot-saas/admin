@@ -4,11 +4,7 @@ import { Col } from 'react-bootstrap';
 export class HoursRange extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            nonStop: false,
-            start: '07:00 AM',
-            end: '10:00 PM'
-        };
+        this.state = props.initialHours;
     }
 
     _updateOwner() {
