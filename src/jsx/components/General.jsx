@@ -123,7 +123,7 @@ class General extends React.Component {
                 </div>
 	    );
 	case OPSTATE_FAILED:
-            return (<div>{ this.props.org.errorMessage }</div>);
+            return (<div>{ this.props.restaurant.errorMessage }</div>);
 	case OPSTATE_READY:
             return (
                 <ContentWrapper>
