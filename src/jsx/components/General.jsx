@@ -15,6 +15,8 @@ class General extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
+            modifiedGeneral: false,
+            modifiedHours: false,
             name: '[ Name ]',
             description: '[ Description ]',
             address: '[ Address ]',
@@ -39,6 +41,8 @@ class General extends React.Component {
     componentWillReceiveProps(newProps) {
         if (newProps.restaurant.opState == OPSTATE_READY) {
             this.setState({
+                modifiedGeneral: false,
+                modifiedHours: false,
                 name: newProps.restaurant.restaurant.name,
                 description: newProps.restaurant.restaurant.description,
                 address: newProps.restaurant.restaurant.address,
@@ -46,12 +50,14 @@ class General extends React.Component {
                 saturdayHours: ToHours(newProps.restaurant.restaurant.openingHours.saturday),
                 sundayHours: ToHours(newProps.restaurant.restaurant.openingHours.sunday)
             });
-	}
+        }
     }
 
     componentWillMount() {
         if (this.props.restaurant.opState == OPSTATE_READY) {
             this.setState({
+                modifiedGeneral: false,
+                modifiedHours: false,
                 name: this.props.restaurant.restaurant.name,
                 description: this.props.restaurant.restaurant.description,
                 address: this.props.restaurant.restaurant.address,
@@ -59,7 +65,7 @@ class General extends React.Component {
                 saturdayHours: ToHours(this.props.restaurant.restaurant.openingHours.saturday),
                 sundayHours: ToHours(this.props.restaurant.restaurant.openingHours.sunday)
             });
-	}    
+        }    
     }
 
     componentDidMount() {
@@ -76,7 +82,7 @@ class General extends React.Component {
                 });
 
             this.props.restaurantLoading();
-	}
+        }
     }
 
     componentWillUnmount() {
@@ -84,27 +90,45 @@ class General extends React.Component {
     }
 
     handleNameChange(e) {
-        this.setState({name: e.target.value});
+        this.setState({
+            modifiedGeneral: true,
+            name: e.target.value
+        });
     }
 
     handleDescriptionChange(e) {
-        this.setState({description: e.target.value});
+        this.setState({
+            modifiedGeneral: true,
+            description: e.target.value
+        });
     }
 
     handleAddressChange(e) {
-        this.setState({address: e.target.value});
+        this.setState({
+            modifiedGeneral: true,
+            address: e.target.value
+        });
     }
 
     handleWeekdayHoursChange(e) {
-        this.setState({weekdayHours: e});
+        this.setState({
+            modifiedHours: true,
+            weekdayHours: e
+        });
     }
 
     handleSaturdayHoursChange(e) {
-        this.setState({saturdayHours: e});
+        this.setState({
+            modifiedHours: true,
+            saturdayHours: e
+        });
     }
 
     handleSundayHoursChange(e) {
-        this.setState({sundayHours: e});
+        this.setState({
+            modifiedHours: true,
+            sundayHours: e
+        });
     }
 
     handleSaveGeneral(e) {
@@ -129,6 +153,7 @@ class General extends React.Component {
 
     handleResetGeneral(e) {
         this.setState({
+            modifiedGeneral: false,
             name: this.props.restaurant.restaurant.name,
             description: this.props.restaurant.restaurant.description,
             address: this.props.restaurant.restaurant.address
@@ -137,10 +162,10 @@ class General extends React.Component {
 
     render() {
         switch (this.props.restaurant.opState) {
-	case OPSTATE_INIT:
-	case OPSTATE_LOADING:
+        case OPSTATE_INIT:
+        case OPSTATE_LOADING:
             return (
-	        <div className="app-loading">
+                <div className="app-loading">
                     <div className="line-scale">
                         <div></div>
                         <div></div>
@@ -149,10 +174,10 @@ class General extends React.Component {
                         <div></div>
                     </div>
                 </div>
-	    );
-	case OPSTATE_FAILED:
+            );
+        case OPSTATE_FAILED:
             return (<div>{ this.props.restaurant.errorMessage }</div>);
-	case OPSTATE_READY:
+        case OPSTATE_READY:
             return (
                 <ContentWrapper>
                    <h3>
@@ -219,7 +244,7 @@ class General extends React.Component {
                                    </form>
                                </div>
                                <div className="panel-footer">
-                                   <Button bsClass="btn btn-labeled btn-primary mr" onClick={this.handleSaveGeneral.bind(this)}>
+                                   <Button bsClass="btn btn-labeled btn-primary mr" disabled={!this.state.modifiedGeneral} onClick={this.handleSaveGeneral.bind(this)}>
                                        <span className="btn-label"><i className="fa fa-check"></i></span> Save
                                    </Button>
                                    <Button bsClass="btn btn-labeled mr" onClick={this.handleResetGeneral.bind(this)}>
@@ -287,10 +312,10 @@ class General extends React.Component {
                     </Row>
     
                 </ContentWrapper>
-	    );
-	default:
-	    throw new Error('Invalid opState');
-	}
+            );
+        default:
+            throw new Error('Invalid opState');
+        }
     }
 }
 
@@ -304,9 +329,9 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
     return {
-    	restaurantLoading: () => dispatch(restaurantLoading()),
-	restaurantReady: (restaurant) => dispatch(restaurantReady(restaurant)),
-	restaurantFailed: (error) => dispatch(restaurantFailed(error))
+        restaurantLoading: () => dispatch(restaurantLoading()),
+        restaurantReady: (restaurant) => dispatch(restaurantReady(restaurant)),
+        restaurantFailed: (error) => dispatch(restaurantFailed(error))
     };
 }
 
