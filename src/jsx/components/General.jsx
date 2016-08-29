@@ -6,7 +6,7 @@ import 'bootstrap-tagsinput';
 
 import { HoursRange } from './HoursRange';
 import ImageGallery from './ImageGallery';
-import { ToHours } from '../common/hours';
+import { ToHours, ExtractHours } from '../common/hours';
 import { OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED, restaurantLoading, restaurantReady, restaurantFailed } from '../store';
 import { inventoryService } from '../services';
 
@@ -160,6 +160,36 @@ class General extends React.Component {
         })
     }
 
+    handleSaveHours(e) {
+        const restaurantUpdateRequest = {
+            openingHours: {
+                weekday: ExtractHours(this.state.weekdayHours),
+                saturday: ExtractHours(this.state.saturdayHours),
+                sunday: ExtractHours(this.state.sundayHours)
+            }
+        };
+
+        inventoryService
+            .updateRestaurantFromService(restaurantUpdateRequest)
+            .then((restaurant) => {
+                this.props.restaurantReady(restaurant);
+            })
+            .catch((errorCode) => {
+                this.props.restaurantFailed(new Error('Could not perform restaurant updating. Try again later'));
+            });
+
+        this.props.restaurantLoading();
+    }
+
+    handleResetHours(e) {
+        this.setState({
+            modifiedHours: false,
+            weekdayHours: ToHours(this.props.restaurant.restaurant.openingHours.weekday),
+            saturdayHours: ToHours(this.props.restaurant.restaurant.openingHours.saturday),
+            sundayHours: ToHours(this.props.restaurant.restaurant.openingHours.sunday)
+        });
+    }
+
     render() {
         switch (this.props.restaurant.opState) {
         case OPSTATE_INIT:
@@ -244,7 +274,10 @@ class General extends React.Component {
                                    </form>
                                </div>
                                <div className="panel-footer">
-                                   <Button bsClass="btn btn-labeled btn-primary mr" disabled={!this.state.modifiedGeneral} onClick={this.handleSaveGeneral.bind(this)}>
+                                   <Button
+                                       bsClass="btn btn-labeled btn-primary mr"
+                                       disabled={!this.state.modifiedGeneral}
+                                       onClick={this.handleSaveGeneral.bind(this)}>
                                        <span className="btn-label"><i className="fa fa-check"></i></span> Save
                                    </Button>
                                    <Button bsClass="btn btn-labeled mr" onClick={this.handleResetGeneral.bind(this)}>
@@ -264,27 +297,32 @@ class General extends React.Component {
                                        <HoursRange
                                            xid="mon-fri"
                                            xlabel="Mon-Fri"
-                                           initialHours={this.state.weekdayHours}
+                                           hours={this.state.weekdayHours}
                                            onChange={this.handleWeekdayHoursChange.bind(this)} />
    
                                        <HoursRange
                                            xid='sat'
                                            xlabel={ 'Saturday' }
-                                           initialHours={this.state.saturdayHours}
+                                           hours={this.state.saturdayHours}
                                            onChange={this.handleSaturdayHoursChange.bind(this)} />
    
                                        <HoursRange
                                            xid='sun'
                                            xlabel={ 'Sunday' }
-                                           initialHours={this.state.sundayHours}
+                                           hours={this.state.sundayHours}
                                            onChange={this.handleSundayHoursChange.bind(this)} />
                                    </form>
                                </div>
                                <div className="panel-footer">
-                                   <Button bsClass="btn btn-labeled btn-primary mr">
+                                   <Button
+                                       bsClass="btn btn-labeled btn-primary mr"
+                                       disabled={!this.state.modifiedHours}
+                                       onClick={this.handleSaveHours.bind(this)}>
                                        <span className="btn-label"><i className="fa fa-check"></i></span> Save
                                    </Button>
-                                   <Button bsClass="btn btn-labeled mr">
+                                   <Button
+                                       bsClass="btn btn-labeled mr"
+                                       onClick={this.handleResetHours.bind(this)}>
                                        <span className="btn-label"><i className="fa fa-times"></i></span> Revert
                                    </Button>
                                </div>

@@ -2,22 +2,6 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 
 export class HoursRange extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = props.initialHours;
-    }
-
-    _updateOwner() {
-        if (!this.props.hasOwnProperty('onChange')) {
-            return;
-        }
-
-        this.props.onChange({
-            nonStop: this.state.nonStop,
-            start: this.state.start,
-            end: this.state.end
-        });
-    }
 
     componentDidMount() {
         $(`#dtp-start-${this.props.xid}`).datetimepicker({format: 'hh:mm A'});
@@ -27,9 +11,11 @@ export class HoursRange extends React.Component {
     }
 
     handleNonStopChange(e) {
-        this.setState({
-            nonStop: e.target.checked
-        }, this._updateOwner);
+        this.props.onChange({
+            nonStop: e.target.checked,
+            start: this.props.hours.start,
+            end: this.props.hours.end
+        });
     }
 
     handleStartChange(e) {
@@ -42,9 +28,11 @@ export class HoursRange extends React.Component {
             start = e.target.value;
         }
 
-        this.setState({
-            start: start
-        }, this._updateOwner);
+        this.props.onChange({
+            nonStop: this.props.hours.nonStop,
+            start: start,
+            end: this.props.hours.end
+        });
     }
 
     handleEndChange(e) {
@@ -57,9 +45,11 @@ export class HoursRange extends React.Component {
             end = e.target.value;
         }
 
-        this.setState({
+        this.props.onChange({
+            nonStop: this.props.hours.nonStop,
+            start: this.props.hours.start,
             end: end
-        }, this._updateOwner);
+        });
     }
 
     render() {
@@ -70,9 +60,8 @@ export class HoursRange extends React.Component {
                     <div className="checkbox c-checkbox">
                         <label>
                             <input
-                                standalone
                                 type="checkbox"
-                                checked={ this.state.nonStop }
+                                checked={ this.props.hours.nonStop }
                                 onChange={ this.handleNonStopChange.bind(this) } />
                             <em className="fa fa-check"></em>Non-stop
                         </label>
@@ -82,8 +71,8 @@ export class HoursRange extends React.Component {
                     <div id={ `dtp-start-${this.props.xid}` } className="input-group date">
                         <input
                             type="text"
-                            disabled={ this.state.nonStop }
-                            value={ this.state.start }
+                            disabled={ this.props.hours.nonStop }
+                            value={ this.props.hours.start }
                             onChange={ this.handleStartChange.bind(this) }
                             className="form-control" />
                         <span className="input-group-addon">
@@ -95,8 +84,8 @@ export class HoursRange extends React.Component {
                     <div id={ `dtp-end-${this.props.xid}` } className="input-group date">
                         <input
                             type="text"
-                            disabled={ this.state.nonStop }
-                            value={ this.state.end }
+                            disabled={ this.props.hours.nonStop }
+                            value={ this.props.hours.end }
                             onChange={ this.handleEndChange.bind(this) }
                             className="form-control" />
                         <span className="input-group-addon">

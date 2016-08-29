@@ -43,7 +43,7 @@ function _ToHoursString(apiHour) {
 
 
 function _ExtractHourFromString(hour) {
-    var hourRe = new RegExp('(\\d\\d):(\\d\\d) (AM|PM)');
+    var hourRe = new RegExp('(\\d|\\d\\d):(\\d|\\d\\d) (AM|PM)');
     var match = hourRe.exec(hour);
 
     if (!match) {
