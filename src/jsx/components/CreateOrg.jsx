@@ -199,21 +199,21 @@ class CreateOrg extends React.Component {
                                                     <HoursRange
                                                         xid='mon-fri'
                                                         label={ 'Mon-Fri' }
-                                                        initialHours={this.state.weekdayHours}
+                                                        hours={this.state.weekdayHours}
                                                         onChange={this.handleMonFriHoursChange.bind(this)} />
 
                                                     { /* Saturday opening times */ }
                                                     <HoursRange
                                                         xid='sat'
                                                         label={ 'Saturday' }
-                                                        initialHours={this.state.saturdayHours}
+                                                        hours={this.state.saturdayHours}
                                                         onChange={this.handleSatHoursChange.bind(this)} />
 
                                                     { /* Sunday opening times */ }
                                                     <HoursRange
                                                         xid='sun'
                                                         label={ 'Sunday' }
-                                                        initialHours={this.state.sundayHours}
+                                                        hours={this.state.sundayHours}
                                                         onChange={this.handleSunHoursChange.bind(this)} />
                                                 </form>
                                             </div>
