@@ -1,4 +1,4 @@
-export default class InventoryService {
+export class InventoryService {
 
     constructor(inventoryServiceDomain, identityService) {
         this._inventoryServiceDomain = inventoryServiceDomain;

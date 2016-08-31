@@ -25,6 +25,7 @@
         "auth0-lock": "^10.0.0-rc.1",
         "bootstrap-tagsinput": "^0.7.1",
         "classnames": "^2.2.3",
+	"filepicker-js": "^2.4.17",
         "history": "^2.0.0-rc2",
         "jwt-decode": "^2.0.1",
         "react": "^15.3.0",
@@ -35,6 +36,7 @@
         "react-bootstrap": "^0.28.2",
         "react-addons-css-transition-group": "^15.3.0",
         "react-dropzone": "^3.5.1",
+	"react-addons-update": "^15.3.0",
         "redux": "^3.5.2",
 	"redux-actions": "^0.11.0",
         "screenfull": "3.0.0"
