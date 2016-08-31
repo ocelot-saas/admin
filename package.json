@@ -1,6 +1,6 @@
 {
     "name": "admin",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "description": "The admin interface users use to manage their account with us, as an NPM package.",
     "author": "Horia Coman <horia141@gmail.com>",
     "scripts": {
@@ -85,6 +85,7 @@
         "webpack-dev-middleware": "^1.5.1",
         "webpack-hot-middleware": "^2.7.1",
         "webpack-stream": "^3.1.0",
-        "yargs": "^3.7.2"
+        "yargs": "^3.7.2",
+	"react-hot-loader": "^1.3.0"
     }
 }

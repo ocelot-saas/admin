@@ -12,7 +12,7 @@ export class FileStorageService {
 	    (resolve, reject) => {
 		filepicker.pick({
 		    mimetype: 'image/*',
-		    services: ['CONVERT', 'COMPUTER'],
+		    services: ['CONVERT', 'COMPUTER', 'FACEBOOK', 'DROPBOX', 'FLICKR', 'IMAGE_SEARCH', 'URL'],
 		    conversions: ['crop', 'rotate', 'filter'],
 		    cropRatio: 4/3
 		}, (blob) => {
