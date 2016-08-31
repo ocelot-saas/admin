@@ -25,12 +25,14 @@ class ImageGallery extends React.Component {
     handleImageUpload() {
         fileStorageService
 	    .selectImageWithWidgetToService()
-	    .then((imUrl) => {
+	    .then((im) => {
 	        this.setState({
 		    images: update(this.state.images, {$push: [{
-		        url: imUrl
+		        url: im.url
 		    }]})
                 });
+
+                console.log(im);
 	    })
 	    .catch((error) => {
 	        console.log(error);
