@@ -1,7 +1,6 @@
 import React from 'react';
 import update from 'react-addons-update';
 import { Row, Col, Button } from 'react-bootstrap';
-import Dropzone from 'react-dropzone';
 import { fileStorageService} from '../services';
 
 class ImageGallery extends React.Component {
@@ -52,18 +51,14 @@ class ImageGallery extends React.Component {
                 </Row>
                 <Row>
                     <Col lg={ 12 }>
-                        <Button bsClass="btn btn-labeled btn-success mr" onClick={this.handleImageUpload.bind(this)}>
-                            <span className="btn-label"><i className="icon-plus"></i></span> Add
-                        </Button>
-			    
-                        <Dropzone
-                            accept="image/*"
-                            className="image-gallery-dropzone" >
+		        <div
+			    className="image-gallery-dropzone"
+			    onClick={this.handleImageUpload.bind(this)}>
                             <Button bsClass="btn btn-labeled btn-success mr">
                                 <span className="btn-label"><i className="icon-plus"></i></span> Add
                             </Button>
-                            <div className="image-gallery-info">Click anywhere or drag an image to upload</div>
-                        </Dropzone>
+                            <div className="image-gallery-info">Click anywhere to upload</div>
+			</div>
                     </Col>
                 </Row>
             </div>

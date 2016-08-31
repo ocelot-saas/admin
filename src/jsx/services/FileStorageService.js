@@ -11,7 +11,10 @@ export class FileStorageService {
 	return new Promise(
 	    (resolve, reject) => {
 		filepicker.pick({
-		    mimetype: 'image/*'
+		    mimetype: 'image/*',
+		    services: ['CONVERT', 'COMPUTER'],
+		    conversions: ['crop', 'rotate', 'filter'],
+		    cropRatio: 4/3
 		}, (blob) => {
 		    resolve(blob.url);
 		}, (error) => {
