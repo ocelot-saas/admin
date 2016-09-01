@@ -87,7 +87,8 @@ class CreateOrg extends React.Component {
                 weekday: ExtractHours(this.state.weekdayHours),
                 saturday: ExtractHours(this.state.saturdayHours),
                 sunday: ExtractHours(this.state.sundayHours)
-            }
+            },
+	    imageSet: []
         };
 
         inventoryService
