@@ -2,6 +2,7 @@ import React from 'react';
 import ContentWrapper from './ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import update from 'react-addons-update';
 import 'bootstrap-tagsinput';
 
 import { HoursRange } from './HoursRange';
@@ -16,10 +17,10 @@ class General extends React.Component {
         super(props, context);
         this.state = {
             modifiedGeneral: false,
-            modifiedHours: false,
             name: '[ Name ]',
             description: '[ Description ]',
             address: '[ Address ]',
+            modifiedHours: false,
             weekdayHours: {
                 nonStop: false,
                 start: '07:00 AM',
@@ -34,7 +35,9 @@ class General extends React.Component {
                 nonStop: false,
                 start: '07:00 AM',
                 end: '10:00 PM'
-            }
+            },
+	    modifiedImageSet: false,
+	    imageSet: []
         };
     }
 
@@ -42,13 +45,15 @@ class General extends React.Component {
         if (newProps.restaurant.opState == OPSTATE_READY) {
             this.setState({
                 modifiedGeneral: false,
-                modifiedHours: false,
                 name: newProps.restaurant.restaurant.name,
                 description: newProps.restaurant.restaurant.description,
                 address: newProps.restaurant.restaurant.address,
+                modifiedHours: false,
                 weekdayHours: ToHours(newProps.restaurant.restaurant.openingHours.weekday),
                 saturdayHours: ToHours(newProps.restaurant.restaurant.openingHours.saturday),
-                sundayHours: ToHours(newProps.restaurant.restaurant.openingHours.sunday)
+                sundayHours: ToHours(newProps.restaurant.restaurant.openingHours.sunday),
+		modifiedImageSet: false,
+		imageSet: newProps.restaurant.restaurant.imageSet
             });
         }
     }
@@ -57,13 +62,15 @@ class General extends React.Component {
         if (this.props.restaurant.opState == OPSTATE_READY) {
             this.setState({
                 modifiedGeneral: false,
-                modifiedHours: false,
                 name: this.props.restaurant.restaurant.name,
                 description: this.props.restaurant.restaurant.description,
                 address: this.props.restaurant.restaurant.address,
+                modifiedHours: false,
                 weekdayHours: ToHours(this.props.restaurant.restaurant.openingHours.weekday),
                 saturdayHours: ToHours(this.props.restaurant.restaurant.openingHours.saturday),
-                sundayHours: ToHours(this.props.restaurant.restaurant.openingHours.sunday)
+                sundayHours: ToHours(this.props.restaurant.restaurant.openingHours.sunday),
+		modifiedImageSet: false,
+		imageSet: this.props.restaurant.restaurant.imageSet
             });
         }    
     }
@@ -131,6 +138,18 @@ class General extends React.Component {
         });
     }
 
+    handleImageAdded(e) {
+        this.setState({
+	    modifiedImageSet: true,
+	    imageSet: update(this.state.imageSet, {$push: [{
+	        orderNo: this.state.imageSet.length,
+		uri: e.uri,
+		width: e.width,
+		height: e.height
+	    }]})
+	})
+    }
+
     handleSaveGeneral(e) {
         const restaurantUpdateRequest = {
             name: this.state.name,
@@ -187,6 +206,30 @@ class General extends React.Component {
             weekdayHours: ToHours(this.props.restaurant.restaurant.openingHours.weekday),
             saturdayHours: ToHours(this.props.restaurant.restaurant.openingHours.saturday),
             sundayHours: ToHours(this.props.restaurant.restaurant.openingHours.sunday)
+        });
+    }
+
+    handleSaveImages(e) {
+        const restaurantUpdateRequest = {
+	    imageSet: this.state.imageSet
+	};
+
+	inventoryService
+	    .updateRestaurantFromService(restaurantUpdateRequest)
+	    .then((restaurant) => {
+                this.props.restaurantReady(restaurant);
+            })
+            .catch((errorCode) => {
+                this.props.restaurantFailed(new Error('Could not perform restaurant updating. Try again later'));
+            });
+
+        this.props.restaurantLoading();
+    }
+
+    handleResetImages(e) {
+        this.setState({
+            modifiedImageSet: false,
+	    imageSet: this.props.restaurant.restaurant.imageSet
         });
     }
 
@@ -335,13 +378,18 @@ class General extends React.Component {
                             <div className="panel panel-default">
                                 <div className="panel-heading">Pictures</div>
                                 <div className="panel-body">
-                                    <ImageGallery />
+                                    <ImageGallery imageSet={this.state.imageSet} onImageAdded={this.handleImageAdded.bind(this)} />
                                 </div>
                                 <div className="panel-footer">
-                                    <Button bsClass="btn btn-labeled btn-primary mr">
+                                    <Button
+					bsClass="btn btn-labeled btn-primary mr"
+					disabled={!this.state.modifiedImageSet}
+					onClick={this.handleSaveImages.bind(this)}>
                                         <span className="btn-label"><i className="fa fa-check"></i></span> Save
                                     </Button>
-                                    <Button bsClass="btn btn-labeled mr">
+                                    <Button
+				        bsClass="btn btn-labeled mr"
+					onClick={this.handleResetImages.bind(this)}>
                                         <span className="btn-label"><i className="fa fa-times"></i></span> Revert
                                     </Button>
                                 </div>

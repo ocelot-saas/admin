@@ -1,38 +1,14 @@
 import React from 'react';
-import update from 'react-addons-update';
 import { Row, Col, Button } from 'react-bootstrap';
 import { fileStorageService} from '../services';
 
 class ImageGallery extends React.Component {
     
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            images: [{
-                url: '/img/mood01.jpg'
-            }, {
-                url: '/img/mood02.jpg'
-            }, {
-                url: '/img/mood03.jpg'
-            }, {
-                url: '/img/mood04.jpg'
-            }, {
-                url: '/img/mood05.jpg'
-            }]
-        };
-    }
-
     handleImageUpload() {
         fileStorageService
 	    .selectImageWithWidgetToService()
 	    .then((im) => {
-	        this.setState({
-		    images: update(this.state.images, {$push: [{
-		        url: im.url
-		    }]})
-                });
-
-                console.log(im);
+	        this.props.onImageAdded(im);
 	    })
 	    .catch((error) => {
 	        console.log(error);
@@ -40,9 +16,9 @@ class ImageGallery extends React.Component {
     }
 
     render() {
-        var rows = this.state.images.map((im) =>
-            <Col key={ im.url } lg={ 4 }>
-                <img src={ im.url } className="img-thumbnail img-responsive" />
+        var rows = this.props.imageSet.map((im) =>
+            <Col key={ im.uri } lg={ 4 }>
+                <img src={ im.uri } className="img-thumbnail img-responsive" />
             </Col>
         );
 

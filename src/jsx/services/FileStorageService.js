@@ -14,20 +14,22 @@ export class FileStorageService {
                     mimetype: 'image/*',
                     services: ['CONVERT', 'COMPUTER', 'FACEBOOK', 'DROPBOX', 'FLICKR'],
                     conversions: ['crop', 'rotate', 'filter'],
-                    imageMin: [800, 450],
-                    imageMax: [1600, 900],
                     imageDim: [1600, 900],
                     cropRatio: 16/9,
                     cropForce: true,
                 }, (blob) => {
-                    filepicker.stat(blob, {
-                        width: true,
-                        height: true,
-                    }, (metadata) => {
+		    filepicker.convert(blob, {
+			width: 1600,
+			height: 900,
+			fit: 'scale',
+			format: 'jpg',
+			compress: true,
+			quality: 90,
+		    }, (newBlob) => {
                         resolve({
-                            url: blob.url,
-                            width: metadata.width,
-                            height: metadata.height
+                            uri: newBlob.url,
+                            width: 1600,
+                            height: 900
                         });
                     }, (error) => {
                         reject(error);
