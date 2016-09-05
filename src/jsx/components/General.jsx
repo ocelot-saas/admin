@@ -291,6 +291,10 @@ class General extends React.Component {
                    <SweetAlert
                        isOpen={this.state.showAYSRemoveImagesDialog}
                        type="warning"
+                       title="Are you sure?"
+                       text="You've removed pictures. Are you sure you want to go ahead?"
+                       confirmButtonText="Yes"
+                       cancelButtonText="No"
                        callback={this.handleSaveImagesFromDialog.bind(this)} />
 
                    <Row>
