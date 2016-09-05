@@ -3,6 +3,7 @@ import ContentWrapper from './ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import update from 'react-addons-update';
+import SweetAlert from 'react-swal';
 import 'bootstrap-tagsinput';
 
 import { HoursRange } from './HoursRange';
@@ -38,6 +39,7 @@ class General extends React.Component {
             },
 	    modifiedImageSet: false,
 	    removedFromImageSet: false,
+            showAYSRemoveImagesDialog: false,
 	    imageSet: []
         };
     }
@@ -55,6 +57,7 @@ class General extends React.Component {
                 sundayHours: ToHours(newProps.restaurant.restaurant.openingHours.sunday),
 		modifiedImageSet: false,
 		removedFromImageSet: false,
+                showAYSRemoveImagesDialog: false,
 		imageSet: newProps.restaurant.restaurant.imageSet
             });
         }
@@ -73,6 +76,7 @@ class General extends React.Component {
                 sundayHours: ToHours(this.props.restaurant.restaurant.openingHours.sunday),
 		modifiedImageSet: false,
 		removedFromImageSet: false,
+                showAYSRemoveImagesDialog: false,
 		imageSet: this.props.restaurant.restaurant.imageSet
             });
         }    
@@ -226,6 +230,24 @@ class General extends React.Component {
     }
 
     handleSaveImages(e) {
+        if (this.state.removedFromImageSet) {
+            this.setState({showAYSRemoveImagesDialog: true});
+        } else {
+            this._handleSaveImages();
+        }
+    }
+
+    handleSaveImagesFromDialog(confirmed) {
+        this.setState({
+            showAYSRemoveImagesDialog: false
+        });
+
+        if (confirmed) {
+            this._handleSaveImages();
+        }
+    }
+
+    _handleSaveImages() {
         const restaurantUpdateRequest = {
 	    imageSet: this.state.imageSet
 	};
@@ -274,6 +296,11 @@ class General extends React.Component {
                        General
                        <small>Restaurant general settings</small>
                    </h3>
+
+                   <SweetAlert
+                       isOpen={this.state.showAYSRemoveImagesDialog}
+                       type="warning"
+                       callback={this.handleSaveImagesFromDialog.bind(this)} />
 
                    <Row>
                        <Col sm={ 12 }>
