@@ -14,3 +14,14 @@
 .image-gallery-info {
     padding-top: 5px;
 }
+
+.image-gallery-im-container {
+    position: relative
+}
+
+.image-gallery-im-remove {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    border: 0px;
+}

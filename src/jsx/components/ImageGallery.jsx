@@ -15,10 +15,21 @@ class ImageGallery extends React.Component {
             });
     }
 
+    handleImageRemove(im) {
+        this.props.onImageRemoved(im);
+    }
+
     render() {
         var rows = this.props.imageSet.map((im) =>
             <Col key={ im.uri } lg={ 4 }>
-                <img src={ im.uri } className="img-thumbnail img-responsive" />
+	        <div className="image-gallery-im-container">
+                    <img src={ im.uri } className="img-thumbnail img-responsive" />
+		    <Button
+		        className="image-gallery-im-remove btn btn-danger btn-sm"
+			onClick={this.handleImageRemove.bind(this, im)}>
+			<i className="fa fa-fw fa-times"></i>
+		    </Button>
+		</div>
             </Col>
         );
 

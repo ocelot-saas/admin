@@ -37,6 +37,7 @@ class General extends React.Component {
                 end: '10:00 PM'
             },
 	    modifiedImageSet: false,
+	    removedFromImageSet: false,
 	    imageSet: []
         };
     }
@@ -53,6 +54,7 @@ class General extends React.Component {
                 saturdayHours: ToHours(newProps.restaurant.restaurant.openingHours.saturday),
                 sundayHours: ToHours(newProps.restaurant.restaurant.openingHours.sunday),
 		modifiedImageSet: false,
+		removedFromImageSet: false,
 		imageSet: newProps.restaurant.restaurant.imageSet
             });
         }
@@ -70,6 +72,7 @@ class General extends React.Component {
                 saturdayHours: ToHours(this.props.restaurant.restaurant.openingHours.saturday),
                 sundayHours: ToHours(this.props.restaurant.restaurant.openingHours.sunday),
 		modifiedImageSet: false,
+		removedFromImageSet: false,
 		imageSet: this.props.restaurant.restaurant.imageSet
             });
         }    
@@ -148,6 +151,19 @@ class General extends React.Component {
 		height: e.height
 	    }]})
 	})
+    }
+
+    handleImageRemoved(e) {
+        const newImageSet = update(this.state.imageSet, {$splice: [[e.orderNo, 1]]});
+
+        for (var i = 0; i < newImageSet.length; i++)
+	    newImageSet[i].orderNo = i;
+	    
+        this.setState({
+	    modifiedImageSet: true,
+	    removedFromImageSet: true,
+	    imageSet: newImageSet
+	});
     }
 
     handleSaveGeneral(e) {
@@ -229,6 +245,7 @@ class General extends React.Component {
     handleResetImages(e) {
         this.setState({
             modifiedImageSet: false,
+	    removedFromImageSet: false,
 	    imageSet: this.props.restaurant.restaurant.imageSet
         });
     }
@@ -378,7 +395,10 @@ class General extends React.Component {
                             <div className="panel panel-default">
                                 <div className="panel-heading">Pictures</div>
                                 <div className="panel-body">
-                                    <ImageGallery imageSet={this.state.imageSet} onImageAdded={this.handleImageAdded.bind(this)} />
+                                    <ImageGallery
+				        imageSet={this.state.imageSet}
+					onImageAdded={this.handleImageAdded.bind(this)}
+					onImageRemoved={this.handleImageRemoved.bind(this)} />
                                 </div>
                                 <div className="panel-footer">
                                     <Button
