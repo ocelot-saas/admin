@@ -44,41 +44,32 @@ class General extends React.Component {
         };
     }
 
+    _fullStateFromProps(props) {
+        return {
+            modifiedGeneral: false,
+            name: props.restaurant.restaurant.name,
+            description: props.restaurant.restaurant.description,
+            address: props.restaurant.restaurant.address,
+            modifiedHours: false,
+            weekdayHours: ToHours(props.restaurant.restaurant.openingHours.weekday),
+            saturdayHours: ToHours(props.restaurant.restaurant.openingHours.saturday),
+            sundayHours: ToHours(props.restaurant.restaurant.openingHours.sunday),
+	    modifiedImageSet: false,
+	    removedFromImageSet: false,
+            showAYSRemoveImagesDialog: false,
+	    imageSet: props.restaurant.restaurant.imageSet
+        }
+    }
+
     componentWillReceiveProps(newProps) {
         if (newProps.restaurant.opState == OPSTATE_READY) {
-            this.setState({
-                modifiedGeneral: false,
-                name: newProps.restaurant.restaurant.name,
-                description: newProps.restaurant.restaurant.description,
-                address: newProps.restaurant.restaurant.address,
-                modifiedHours: false,
-                weekdayHours: ToHours(newProps.restaurant.restaurant.openingHours.weekday),
-                saturdayHours: ToHours(newProps.restaurant.restaurant.openingHours.saturday),
-                sundayHours: ToHours(newProps.restaurant.restaurant.openingHours.sunday),
-		modifiedImageSet: false,
-		removedFromImageSet: false,
-                showAYSRemoveImagesDialog: false,
-		imageSet: newProps.restaurant.restaurant.imageSet
-            });
+            this.setState(this._fullStateFromProps(newProps));
         }
     }
 
     componentWillMount() {
         if (this.props.restaurant.opState == OPSTATE_READY) {
-            this.setState({
-                modifiedGeneral: false,
-                name: this.props.restaurant.restaurant.name,
-                description: this.props.restaurant.restaurant.description,
-                address: this.props.restaurant.restaurant.address,
-                modifiedHours: false,
-                weekdayHours: ToHours(this.props.restaurant.restaurant.openingHours.weekday),
-                saturdayHours: ToHours(this.props.restaurant.restaurant.openingHours.saturday),
-                sundayHours: ToHours(this.props.restaurant.restaurant.openingHours.sunday),
-		modifiedImageSet: false,
-		removedFromImageSet: false,
-                showAYSRemoveImagesDialog: false,
-		imageSet: this.props.restaurant.restaurant.imageSet
-            });
+            this.setState(this._fullStateFromProps(this.props));
         }    
     }
 
@@ -241,7 +232,7 @@ class General extends React.Component {
         this.setState({
             showAYSRemoveImagesDialog: false
         });
-
+        
         if (confirmed) {
             this._handleSaveImages();
         }
