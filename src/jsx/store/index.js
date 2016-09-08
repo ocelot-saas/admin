@@ -141,10 +141,127 @@ function restaurant(state = restaurantInitialState, action) {
 }
 
 
+export const platformsWebsiteLoading = createAction('PLATFORMS_WEBSITE_LOADING');
+export const platformsWebsiteReady = createAction('PLATFORMS_WEBSITE_READY', (platformsWebsite) => { return { platformsWebsite }; });
+export const platformsWebsiteFailed = createAction('PLATFORMS_WEBSITE_FAILED');
+
+
+const platformsWebsiteInitialState = {
+    opState: OPSTATE_INIT,
+    errorMessage: null,
+    platformsWebsite: null
+};
+
+
+function platformsWebsite(state = platformsWebsiteInitialState, action) {
+    switch (action.type) {
+    case 'PLATFORMS_WEBSITE_LOADING':
+	return {
+	    opState: OPSTATE_LOADING,
+	    errorMessage: null,
+	    platformsWebsite: null
+	};
+    case 'RESTAURANT_READY':
+        return {
+            opState: OPSTATE_READY,
+            errorMessage: null,
+            platformsWebsite: action.payload.platformsWebsite
+        };
+    case 'RESTAURANT_FAILED':
+	return {
+	    opState: OPSTATE_FAILED,
+	    errorMessage: action.payload.message,
+	    platformsWebsite: null
+	};
+    default:
+	return state;
+    }
+}
+
+
+export const platformsCallcenterLoading = createAction('PLATFORMS_CALLCENTER_LOADING');
+export const platformsCallcenterReady = createAction('PLATFORMS_CALLCENTER_READY', (platformsCallcenter) => { return { platformsCallcenter }; });
+export const platformsCallcenterFailed = createAction('PLATFORMS_CALLCENTER_FAILED');
+
+
+const platformsCallcenterInitialState = {
+    opState: OPSTATE_INIT,
+    errorMessage: null,
+    platformsCallcenter: null
+};
+
+
+function platformsCallcenter(state = platformsCallcenterInitialState, action) {
+    switch (action.type) {
+    case 'PLATFORMS_CALLCENTER_LOADING':
+	return {
+	    opState: OPSTATE_LOADING,
+	    errorMessage: null,
+	    platformsCallcenter: null
+	};
+    case 'RESTAURANT_READY':
+        return {
+            opState: OPSTATE_READY,
+            errorMessage: null,
+            platformsCallcenter: action.payload.platformsCallcenter
+        };
+    case 'RESTAURANT_FAILED':
+	return {
+	    opState: OPSTATE_FAILED,
+	    errorMessage: action.payload.message,
+	    platformsCallcenter: null
+	};
+    default:
+	return state;
+    }
+}
+
+
+export const platformsEmailcenterLoading = createAction('PLATFORMS_EMAILCENTER_LOADING');
+export const platformsEmailcenterReady = createAction('PLATFORMS_EMAILCENTER_READY', (platformsEmailcenter) => { return { platformsEmailcenter }; });
+export const platformsEmailcenterFailed = createAction('PLATFORMS_EMAILCENTER_FAILED');
+
+
+const platformsEmailcenterInitialState = {
+    opState: OPSTATE_INIT,
+    errorMessage: null,
+    platformsEmailcenter: null
+};
+
+
+function platformsEmailcenter(state = platformsEmailcenterInitialState, action) {
+    switch (action.type) {
+    case 'PLATFORMS_EMAILCENTER_LOADING':
+	return {
+	    opState: OPSTATE_LOADING,
+	    errorMessage: null,
+	    platformsEmailcenter: null
+	};
+    case 'RESTAURANT_READY':
+        return {
+            opState: OPSTATE_READY,
+            errorMessage: null,
+            platformsEmailcenter: action.payload.platformsEmailcenter
+        };
+    case 'RESTAURANT_FAILED':
+	return {
+	    opState: OPSTATE_FAILED,
+	    errorMessage: action.payload.message,
+	    platformsEmailcenter: null
+	};
+    default:
+	return state;
+    }
+}
+
+
 const reducers = combineReducers({
     identity: identity,
     org: org,
-    restaurant: restaurant
+    restaurant: restaurant,
+    platformsWebsite: platformsWebsite,
+    platformsCallcenter: platformsCallcenter,
+    platformsEmailcenter: platformsEmailcenter
 });
 
 
