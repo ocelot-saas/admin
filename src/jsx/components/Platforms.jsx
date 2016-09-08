@@ -165,7 +165,7 @@ class Platforms extends React.Component {
                                                 <Input
                                                     standalone
                                                     type="text"
-                                                    value={ this.state.websiteSubdmain }
+                                                    value={ this.state.websiteSubdomain }
                                                     onChange={ this.handleWebsiteSubdomainChange.bind(this) }
                                                     required="required"
                                                     placeholder="Subdomain"
@@ -233,7 +233,7 @@ class Platforms extends React.Component {
                                                     standalone
                                                     type="text"
                                                     value={ this.state.emailcenterEmailName }
-                                                    onChange={ this.handleEmailCenterEmailNameChange.bind(this) }
+                                                    onChange={ this.handleEmailcenterEmailNameChange.bind(this) }
                                                     required="required"
                                                     placeholder="Email"
                                                     className="form-control"
