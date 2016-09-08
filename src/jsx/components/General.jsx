@@ -362,7 +362,9 @@ class General extends React.Component {
                                        onClick={this.handleSaveGeneral.bind(this)}>
                                        <span className="btn-label"><i className="fa fa-check"></i></span> Save
                                    </Button>
-                                   <Button bsClass="btn btn-labeled mr" onClick={this.handleResetGeneral.bind(this)}>
+                                   <Button
+                                       bsClass="btn btn-labeled mr"
+                                       onClick={this.handleResetGeneral.bind(this)}>
                                        <span className="btn-label"><i className="fa fa-times"></i></span> Revert
                                    </Button>
                                </div>
