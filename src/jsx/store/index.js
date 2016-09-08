@@ -161,13 +161,13 @@ function platformsWebsite(state = platformsWebsiteInitialState, action) {
 	    errorMessage: null,
 	    platformsWebsite: null
 	};
-    case 'RESTAURANT_READY':
+    case 'PLATFORMS_WEBSITE_READY':
         return {
             opState: OPSTATE_READY,
             errorMessage: null,
             platformsWebsite: action.payload.platformsWebsite
         };
-    case 'RESTAURANT_FAILED':
+    case 'PLATFORMS_WEBSITE_FAILED':
 	return {
 	    opState: OPSTATE_FAILED,
 	    errorMessage: action.payload.message,
@@ -199,13 +199,13 @@ function platformsCallcenter(state = platformsCallcenterInitialState, action) {
 	    errorMessage: null,
 	    platformsCallcenter: null
 	};
-    case 'RESTAURANT_READY':
+    case 'PLATFORMS_CALLCENTER_READY':
         return {
             opState: OPSTATE_READY,
             errorMessage: null,
             platformsCallcenter: action.payload.platformsCallcenter
         };
-    case 'RESTAURANT_FAILED':
+    case 'PLATFORMS_CALLCENTER_FAILED':
 	return {
 	    opState: OPSTATE_FAILED,
 	    errorMessage: action.payload.message,
@@ -237,13 +237,13 @@ function platformsEmailcenter(state = platformsEmailcenterInitialState, action) 
 	    errorMessage: null,
 	    platformsEmailcenter: null
 	};
-    case 'RESTAURANT_READY':
+    case 'PLATFORMS_EMAILCENTER_READY':
         return {
             opState: OPSTATE_READY,
             errorMessage: null,
             platformsEmailcenter: action.payload.platformsEmailcenter
         };
-    case 'RESTAURANT_FAILED':
+    case 'PLATFORMS_EMAILCENTER_FAILED':
 	return {
 	    opState: OPSTATE_FAILED,
 	    errorMessage: action.payload.message,

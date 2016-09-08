@@ -58,7 +58,7 @@ class General extends React.Component {
 	    removedFromImageSet: false,
             showAYSRemoveImagesDialog: false,
 	    imageSet: props.restaurant.restaurant.imageSet
-        }
+        };
     }
 
     componentWillReceiveProps(newProps) {
