@@ -78,6 +78,186 @@ export class InventoryService {
         );
     }
 
+    createMenuSection(createMenuSectionRequest) {
+        var accessToken = this._identityService.getAccessToken();
+        return new Promise(
+            (resolve, reject) => {
+                $.post({
+                    url: `http://${this._inventoryServiceDomain}/org/menu/sections`,
+                    dataType: 'json',
+                    data: JSON.stringify(createMenuSectionRequest),
+                    contentType: 'application/json',
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((menuSectionsResponse) => {
+                    resolve(menuSectionsResponse.menuSections[0]);
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );
+    }
+
+    getAllMenuSections() {
+	var accessToken = this._identityService.getAccessToken();
+	return new Promise(
+	    (resolve, reject) => {
+		$.get({
+		    url: `http://${this._inventoryServiceDomain}/org/menu/sections`,
+		    dataType: 'json',
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((menuSectionsResponse) => {
+                    resolve(menuSectionsResponse.menuSections);
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );
+    }
+
+    getMenuSection(sectionId) {
+	var accessToken = this._identityService.getAccessToken();
+	return new Promise(
+	    (resolve, reject) => {
+		$.get({
+		    url: `http://${this._inventoryServiceDomain}/org/menu/sections/${sectionId}`,
+		    dataType: 'json',
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((menuSectionResponse) => {
+                    resolve(menuSectionResponse.menuSection);
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );
+    }
+
+    updateMenuSection(sectionId, updateMenuSectionRequest) {
+        var accessToken = this._identityService.getAccessToken();
+        return new Promise(
+            (resolve, reject) => {
+                $.ajax({
+                    type: 'PUT',
+                    url: `http://${this._inventoryServiceDomain}/org/sections/${sectionId}`,
+                    dataType: 'json',
+                    data: JSON.stringify(updateMenuSectionRequest),
+                    contentType: 'application/json',
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((menuSectionResponse) => {
+                    resolve(menuSectionResponse.menuSectionResponse);
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );
+    }
+
+    deleteMenuSection(sectionId) {
+        var accessToken = this._identityService.getAccessToken();
+        return new Promise(
+            (resolve, reject) => {
+                $.ajax({
+                    type: 'DELETE',
+                    url: `http://${this._inventoryServiceDomain}/org/sections/${sectionId}`,
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((unused) => {
+                    resolve({});
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );
+    }
+
+    createMenuItem(createMenuItemRequest) {
+        var accessToken = this._identityService.getAccessToken();
+        return new Promise(
+            (resolve, reject) => {
+                $.post({
+                    url: `http://${this._inventoryServiceDomain}/org/menu/items`,
+                    dataType: 'json',
+                    data: JSON.stringify(createMenuItemRequest),
+                    contentType: 'application/json',
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((menuItemsResponse) => {
+                    resolve(menuItemsResponse.menuItems[0]);
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );
+    }
+
+    getAllMenuItems() {
+	var accessToken = this._identityService.getAccessToken();
+	return new Promise(
+	    (resolve, reject) => {
+		$.get({
+		    url: `http://${this._inventoryServiceDomain}/org/menu/items`,
+		    dataType: 'json',
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((menuItemsResponse) => {
+                    resolve(menuItemsResponse.menuItems);
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );	
+    }
+
+    getMenuItem(itemId) {
+	var accessToken = this._identityService.getAccessToken();
+	return new Promise(
+	    (resolve, reject) => {
+		$.get({
+		    url: `http://${this._inventoryServiceDomain}/org/menu/items/${itemId}`,
+		    dataType: 'json',
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((menuItemResponse) => {
+                    resolve(menuItemResponse.menuItem);
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );
+    }
+
+    updateMenuItem(itemId, updateMenuItemRequest) {
+        var accessToken = this._identityService.getAccessToken();
+        return new Promise(
+            (resolve, reject) => {
+                $.ajax({
+                    type: 'PUT',
+                    url: `http://${this._inventoryServiceDomain}/org/items/${itemId}`,
+                    dataType: 'json',
+                    data: JSON.stringify(updateMenuItemRequest),
+                    contentType: 'application/json',
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((menuItemResponse) => {
+                    resolve(menuItemResponse.menuItemResponse);
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );
+    }
+
+    deleteMenuItem(itemId) {
+        var accessToken = this._identityService.getAccessToken();
+        return new Promise(
+            (resolve, reject) => {
+                $.ajax({
+                    type: 'DELETE',
+                    url: `http://${this._inventoryServiceDomain}/org/items/${itemId}`,
+                    headers: {'Authorization': `Bearer ${accessToken}`}
+                }).done((unused) => {
+                    resolve({});
+                }).fail((xhr) => {
+                    reject(xhr.status);
+                });
+            }
+        );
+    }
+
     getPlatformsWebsiteFromService() {
 	var accessToken = this._identityService.getAccessToken();
 	return new Promise(
