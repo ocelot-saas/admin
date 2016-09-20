@@ -141,6 +141,186 @@ function restaurant(state = restaurantInitialState, action) {
 }
 
 
+export const menuSectionsLoading = createAction('MENU_SECTIONS_LOADING');
+export const menuSectionsReady = createAction('MENU_SECTIONS_READY', (menuSections) => { return { menuSections }; });
+export const menuSectionsFailed = createAction('MENU_SECTIONS_LOADING');
+export const menuSectionsClear = createAction('MENU_SECTIONS_CLEAR');
+
+
+const menuSectionsInitialState = {
+    opState: OPSTATE_INIT,
+    errorMessage: null,
+    menuSections: null
+};
+
+
+function menuSections(state = menuSectionsInitialState, action) {
+    switch (action.type) {
+    case 'MENU_SECTIONS_LOADING':
+	return {
+	    opState: OPSTATE_LOADING,
+	    errorMessage: null,
+	    menuSections: null
+	};
+    case 'MENU_SECTIONS_READY':
+	return {
+	    opState: OPSTATE_READY,
+	    errorMessage: null,
+	    menuSections: action.payload.menuSections
+	};
+    case 'MENU_SECTIONS_FAILED':
+	return {
+	    opState: OPSTATE_FAILED,
+	    errorMessage: action.payload.message,
+	    menuSections: null
+	};
+    case 'MENU_SECTIONS_CLEAR':
+	return {
+	    opState: OPSTATE_INIT,
+	    errorMessage: null,
+	    menuSections: null
+	};
+    default:
+	return state;
+    }
+}
+
+
+export const currentMenuSectionLoading = createAction('CURRENT_MENU_SECTION_LOADING');
+export const currentMenuSectionReady = createAction('CURRENT_MENU_SECTION_READY', (currentMenuSection) => { return { currentMenuSection }; });
+export const currentMenuSectionFailed = createAction('CURRENT_MENU_SECTION_LOADING');
+export const currentMenuSectionClear = createAction('CURRENT_MENU_SECTION_CLEAR');
+
+
+const currentMenuSectionInitialState = {
+    opState: OPSTATE_INIT,
+    errorMessage: null,
+    currentMenuSection: null
+};
+
+
+function currentMenuSection(state = currentMenuSectionInitialState, action) {
+    switch (action.type) {
+    case 'CURRENT_MENU_SECTION_LOADING':
+	return {
+	    opState: OPSTATE_LOADING,
+	    errorMessage: null,
+	    currentMenuSection: null
+	};
+    case 'CURRENT_MENU_SECTION_READY':
+	return {
+	    opState: OPSTATE_READY,
+	    errorMessage: null,
+	    currentMenuSection: action.payload.currentMenuSection
+	};
+    case 'CURRENT_MENU_SECTION_FAILED':
+	return {
+	    opState: OPSTATE_FAILED,
+	    errorMessage: action.payload.message,
+	    currentMenuSection: null
+	};
+    case 'CURRENT_MENU_SECTION_CLEAR':
+	return {
+	    opState: OPSTATE_INIT,
+	    errorMessage: null,
+	    currentMenuSection: null
+	};
+    default:
+	return state;
+    }
+}
+
+
+export const menuItemsLoading = createAction('MENU_ITEMS_LOADING');
+export const menuItemsReady = createAction('MENU_ITEMS_READY', (menuItems) => { return { menuItems }; });
+export const menuItemsFailed = createAction('MENU_ITEMS_LOADING');
+export const menuItemsClear = createAction('MENU_ITEMS_CLEAR');
+
+
+const menuItemsInitialState = {
+    opState: OPSTATE_INIT,
+    errorMessage: null,
+    menuItems: null
+};
+
+
+function menuItems(state = menuItemsInitialState, action) {
+    switch (action.type) {
+    case 'MENU_ITEMS_LOADING':
+	return {
+	    opState: OPSTATE_LOADING,
+	    errorMessage: null,
+	    menuItems: null
+	};
+    case 'MENU_ITEMS_READY':
+	return {
+	    opState: OPSTATE_READY,
+	    errorMessage: null,
+	    menuItems: action.payload.menuItems
+	};
+    case 'MENU_ITEMS_FAILED':
+	return {
+	    opState: OPSTATE_FAILED,
+	    errorMessage: action.payload.message,
+	    menuItems: null
+	};
+    case 'MENU_ITEMS_CLEAR':
+	return {
+	    opState: OPSTATE_INIT,
+	    errorMessage: null,
+	    menuItems: null
+	};
+    default:
+	return state;
+    }
+}
+
+
+export const currentMenuItemLoading = createAction('CURRENT_MENU_ITEM_LOADING');
+export const currentMenuItemReady = createAction('CURRENT_MENU_ITEM_READY', (currentMenuItem) => { return { currentMenuItem }; });
+export const currentMenuItemFailed = createAction('CURRENT_MENU_ITEM_LOADING');
+export const currentMenuItemClear = createAction('CURRENT_MENU_ITEM_CLEAR');
+
+
+const currentMenuItemInitialState = {
+    opState: OPSTATE_INIT,
+    errorMessage: null,
+    currentMenuItem: null
+};
+
+
+function currentMenuItem(state = currentMenuItemInitialState, action) {
+    switch (action.type) {
+    case 'CURRENT_MENU_ITEM_LOADING':
+	return {
+	    opState: OPSTATE_LOADING,
+	    errorMessage: null,
+	    currentMenuItem: null
+	};
+    case 'CURRENT_MENU_ITEM_READY':
+	return {
+	    opState: OPSTATE_READY,
+	    errorMessage: null,
+	    currentMenuItem: action.payload.currentMenuItem
+	};
+    case 'CURRENT_MENU_ITEM_FAILED':
+	return {
+	    opState: OPSTATE_FAILED,
+	    errorMessage: action.payload.message,
+	    currentMenuItem: null
+	};
+    case 'CURRENT_MENU_ITEM_CLEAR':
+	return {
+	    opState: OPSTATE_INIT,
+	    errorMessage: null,
+	    currentMenuItem: null
+	};
+    default:
+	return state;
+    }
+}
+
+
 export const platformsWebsiteLoading = createAction('PLATFORMS_WEBSITE_LOADING');
 export const platformsWebsiteReady = createAction('PLATFORMS_WEBSITE_READY', (platformsWebsite) => { return { platformsWebsite }; });
 export const platformsWebsiteFailed = createAction('PLATFORMS_WEBSITE_FAILED');
@@ -259,6 +439,10 @@ const reducers = combineReducers({
     identity: identity,
     org: org,
     restaurant: restaurant,
+    menuSections: menuSections,
+    currentMenuSection: currentMenuSection,
+    menuItems: menuItems,
+    currentMenuItem: currentMenuItem,
     platformsWebsite: platformsWebsite,
     platformsCallcenter: platformsCallcenter,
     platformsEmailcenter: platformsEmailcenter
