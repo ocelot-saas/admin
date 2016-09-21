@@ -67,9 +67,9 @@ class Platforms extends React.Component {
                     this.props.platformsEmailcenterReady(platformsEmailcenter);
                 })
                 .catch((errorCode) => {
-                    this.props.platformsWebsiteFailed(new Error('Coult not perform platforms website fetching. Try again later'));
-                    this.props.platformsCallcenterFailed(new Error('Coult not perform platforms callcenter fetching. Try again later'));
-                    this.props.platformsEmailcenterFailed(new Error('Coult not perform platforms emailcenter fetching. Try again later'));
+                    this.props.platformsWebsiteFailed(new Error('Could not perform platforms website fetching. Try again later'));
+                    this.props.platformsCallcenterFailed(new Error('Could not perform platforms callcenter fetching. Try again later'));
+                    this.props.platformsEmailcenterFailed(new Error('Could not perform platforms emailcenter fetching. Try again later'));
                 });
 
             this.props.platformsWebsiteLoading();
@@ -372,5 +372,6 @@ function mapDispatchToProps(dispatch) {
         platformsEmailcenterFailed: (error) => dispatch(platformsEmailcenterFailed(error))
     };
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Platforms);
