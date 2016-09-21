@@ -227,13 +227,13 @@ export class InventoryService {
             (resolve, reject) => {
                 $.ajax({
                     type: 'PUT',
-                    url: `http://${this._inventoryServiceDomain}/org/items/${itemId}`,
+                    url: `http://${this._inventoryServiceDomain}/org/menu/items/${itemId}`,
                     dataType: 'json',
                     data: JSON.stringify(updateMenuItemRequest),
                     contentType: 'application/json',
                     headers: {'Authorization': `Bearer ${accessToken}`}
                 }).done((menuItemResponse) => {
-                    resolve(menuItemResponse.menuItemResponse);
+                    resolve(menuItemResponse.menuItem);
                 }).fail((xhr) => {
                     reject(xhr.status);
                 });
@@ -247,7 +247,7 @@ export class InventoryService {
             (resolve, reject) => {
                 $.ajax({
                     type: 'DELETE',
-                    url: `http://${this._inventoryServiceDomain}/org/items/${itemId}`,
+                    url: `http://${this._inventoryServiceDomain}/org/menu/items/${itemId}`,
                     headers: {'Authorization': `Bearer ${accessToken}`}
                 }).done((unused) => {
                     resolve({});
