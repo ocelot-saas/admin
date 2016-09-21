@@ -37,10 +37,10 @@ class General extends React.Component {
                 start: '07:00 AM',
                 end: '10:00 PM'
             },
-	    modifiedImageSet: false,
-	    removedFromImageSet: false,
+            modifiedImageSet: false,
+            removedFromImageSet: false,
             showAYSRemoveImagesDialog: false,
-	    imageSet: []
+            imageSet: []
         };
     }
 
@@ -54,10 +54,10 @@ class General extends React.Component {
             weekdayHours: ToHours(props.restaurant.restaurant.openingHours.weekday),
             saturdayHours: ToHours(props.restaurant.restaurant.openingHours.saturday),
             sundayHours: ToHours(props.restaurant.restaurant.openingHours.sunday),
-	    modifiedImageSet: false,
-	    removedFromImageSet: false,
+            modifiedImageSet: false,
+            removedFromImageSet: false,
             showAYSRemoveImagesDialog: false,
-	    imageSet: props.restaurant.restaurant.imageSet
+            imageSet: props.restaurant.restaurant.imageSet
         };
     }
 
@@ -138,27 +138,27 @@ class General extends React.Component {
 
     handleImageAdded(e) {
         this.setState({
-	    modifiedImageSet: true,
-	    imageSet: update(this.state.imageSet, {$push: [{
-	        orderNo: this.state.imageSet.length,
-		uri: e.uri,
-		width: e.width,
-		height: e.height
-	    }]})
-	})
+            modifiedImageSet: true,
+            imageSet: update(this.state.imageSet, {$push: [{
+                orderNo: this.state.imageSet.length,
+                uri: e.uri,
+                width: e.width,
+                height: e.height
+            }]})
+        })
     }
 
     handleImageRemoved(e) {
         const newImageSet = update(this.state.imageSet, {$splice: [[e.orderNo, 1]]});
 
         for (var i = 0; i < newImageSet.length; i++)
-	    newImageSet[i].orderNo = i;
-	    
+            newImageSet[i].orderNo = i;
+            
         this.setState({
-	    modifiedImageSet: true,
-	    removedFromImageSet: true,
-	    imageSet: newImageSet
-	});
+            modifiedImageSet: true,
+            removedFromImageSet: true,
+            imageSet: newImageSet
+        });
     }
 
     handleSaveGeneral(e) {
@@ -240,12 +240,12 @@ class General extends React.Component {
 
     _handleSaveImages() {
         const restaurantUpdateRequest = {
-	    imageSet: this.state.imageSet
-	};
+            imageSet: this.state.imageSet
+        };
 
-	inventoryService
-	    .updateRestaurantFromService(restaurantUpdateRequest)
-	    .then((restaurant) => {
+        inventoryService
+            .updateRestaurantFromService(restaurantUpdateRequest)
+            .then((restaurant) => {
                 this.props.restaurantReady(restaurant);
             })
             .catch((errorCode) => {
@@ -258,8 +258,8 @@ class General extends React.Component {
     handleResetImages(e) {
         this.setState({
             modifiedImageSet: false,
-	    removedFromImageSet: false,
-	    imageSet: this.props.restaurant.restaurant.imageSet
+            removedFromImageSet: false,
+            imageSet: this.props.restaurant.restaurant.imageSet
         });
     }
 
@@ -420,20 +420,20 @@ class General extends React.Component {
                                 <div className="panel-heading">Pictures</div>
                                 <div className="panel-body">
                                     <ImageGallery
-				        imageSet={this.state.imageSet}
-					onImageAdded={this.handleImageAdded.bind(this)}
-					onImageRemoved={this.handleImageRemoved.bind(this)} />
+                                        imageSet={this.state.imageSet}
+                                        onImageAdded={this.handleImageAdded.bind(this)}
+                                        onImageRemoved={this.handleImageRemoved.bind(this)} />
                                 </div>
                                 <div className="panel-footer">
                                     <Button
-					bsClass="btn btn-labeled btn-primary mr"
-					disabled={!this.state.modifiedImageSet}
-					onClick={this.handleSaveImages.bind(this)}>
+                                        bsClass="btn btn-labeled btn-primary mr"
+                                        disabled={!this.state.modifiedImageSet}
+                                        onClick={this.handleSaveImages.bind(this)}>
                                         <span className="btn-label"><i className="fa fa-check"></i></span> Save
                                     </Button>
                                     <Button
-				        bsClass="btn btn-labeled mr"
-					onClick={this.handleResetImages.bind(this)}>
+                                        bsClass="btn btn-labeled mr"
+                                        onClick={this.handleResetImages.bind(this)}>
                                         <span className="btn-label"><i className="fa fa-times"></i></span> Revert
                                     </Button>
                                 </div>
