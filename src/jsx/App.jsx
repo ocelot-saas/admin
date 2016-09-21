@@ -38,7 +38,7 @@ ReactDOM.render(
                     <Route path="/general" component={General} />
                     <Route path="/menu" component={Menu} />
                     <Route path="/menu/sections/:sectionId" component={Section} />
-                    <Route path="/menu/fooditem/:foodItemId" component={FoodItem} />
+                    <Route path="/menu/item/:itemId" component={FoodItem} />
                     <Route path="/orders/:orderId" component={Order} />
                     <Route path="/orders" component={Orders} />
                     <Route path="/platforms" component={Platforms} />

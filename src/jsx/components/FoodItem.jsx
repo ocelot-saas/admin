@@ -42,12 +42,12 @@ class FoodItem extends React.Component {
                                         <Col lg={ 10 }>
                                             <Input
                                                 standalone
-type="text"
-value={ this.state.name }
-onChange={ this.handleNameChange.bind(this) }
-required="required"
-placeholder="Name"
-className="form-control" />
+                                                type="text"
+                                                value={ this.state.name }
+                                                onChange={ this.handleNameChange.bind(this) }
+                                                required="required"
+                                                placeholder="Name"
+                                                className="form-control" />
                                         </Col>
                                     </div>
 
@@ -55,12 +55,12 @@ className="form-control" />
                                         <label className="col-lg-2 control-label">Description</label>
                                         <Col lg={ 10 }>
                                             <textarea
-value={ this.state.desc }
-onChange={ this.handleDescChange.bind(this) }
-required="required"
-placeholder="Description"
-rows="5"
-className="form-control" />
+                                                value={ this.state.desc }
+                                                onChange={ this.handleDescChange.bind(this) }
+                                                required="required"
+                                                placeholder="Description"
+                                                rows="5"
+                                                className="form-control" />
                                         </Col>
                                     </div>
 

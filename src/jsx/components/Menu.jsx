@@ -9,6 +9,126 @@ import {
     menuItemsLoading, menuItemsReady, menuItemsFailed, menuItemsClear} from '../store';
 import { inventoryService } from '../services';
 
+
+function MenuSectionSummary(props) {
+    return (
+        <div className="media p mt0 list-group-item" onClick={ props.onClick }>
+            <span className="close">&times;</span>
+            <span className="pull-left">
+                <img src="/img/mood01.jpg" className="media-object img-circle thumb32" />
+            </span>
+            <Row>
+                <Col md={ 3 }>
+                    <span className="media-body">
+                        <span className="media-heading">
+                            <strong>{ props.menuSection.name }</strong>
+                            <br/>
+                            <small className="text-muted">{ props.menuSection.description }</small>
+                        </span>
+                    </span>
+                </Col>
+                <Col md={ 6 }>
+                    <span className="media-body">
+                        <span className="media-heading">
+                            <strong>Tomato Soup, Mushroom Soup</strong>
+                            <br/>
+                            <small className="text-muted">And 5 other soups</small>
+                        </span>
+                    </span>
+                </Col>
+            </Row>
+        </div>
+    );
+}
+
+
+function MenuItemSummary(props) {
+    var ingredients;
+    var otherIngredients;
+    if ( props.menuItem.ingredients.length == 0) {
+        ingredients = '';
+    } else if (props.menuItem.ingredients.length == 1) {
+        ingredients = props.menuItem.ingredients[0];
+    } else {
+        ingredients = `${props.menuItem.ingredients[0]}, ${props.menuItem.ingredients[1]}`;
+    }
+
+    switch (props.menuItem.ingredients.length) {
+        case 0:
+        case 1:
+        case 2:
+            otherIngredients = '';
+            break;
+        case 3:
+            otherIngredients = 'And 1 other ingredient';
+            break;
+        default:
+            otherIngredients = `And ${props.menuItem.ingredients.length - 2} other ingredients`;
+    }
+
+    var keywords;
+    switch (props.menuItem.keywords.length) {
+        case 0:
+            keywords = <ul className="list-inline m0"></ul>;
+            break;
+        case 1:
+            keywords = (
+                <ul className="list-inline m0">
+                    <li><div className="badge bg-green">{ props.menuItem.keywords[0] }</div></li>
+                </ul>
+            );
+            break;
+        case 2:
+            keywords = (
+                <ul className="list-inline m0">
+                    <li><div className="badge bg-green">{ props.menuItem.keywords[0] }</div></li>
+                    <li><div className="badge bg-green">{ props.menuItem.keywords[1] }</div></li>                    
+                </ul>
+            );
+            break;
+        default:
+            keywords = (
+                <ul className="list-inline m0">
+                    <li><div className="badge bg-green">{ props.menuItem.keywords[0] }</div></li>
+                    <li><div className="badge bg-green">{ props.menuItem.keywords[1] }</div></li>
+                    <li><div className="badge bg-purple">more</div></li>
+                </ul>
+            );
+    }
+    
+    return (
+        <div className="media p mt0 list-group-item" onClick={ props.onClick }>
+            <span className="close">&times;</span>
+            <span className="pull-left">
+                <img src="/img/mood04.jpg" className="media-object img-circle thumb32" />
+            </span>
+            <Row>
+                <Col md={ 3 }>
+                    <span className="media-body">
+                        <span className="media-heading">
+                            <strong>{ props.menuItem.name }</strong>
+                            <br/>
+                            <small className="text-muted">{ props.menuItem.description }</small>
+                        </span>
+                    </span>
+                </Col>
+                <Col md={ 3 }>
+                    <span className="media-body">
+                        <span className="media-heading">
+                            <strong>{ ingredients }</strong>
+                            <br/>
+                            <small className="text-muted">{ otherIngredients }</small>
+                        </span>
+                    </span>
+                </Col>
+                <Col md={ 4 }>
+                    { keywords }
+                </Col>
+            </Row>
+        </div>
+    );
+}
+
 class Menu extends React.Component {
 
     constructor(props, context) {
@@ -19,8 +139,8 @@ class Menu extends React.Component {
         this.context.router.push(`/menu/sections/${sectionId}`);
     }
 
-    handleClickToFoodItem(foodItemId, e) {
-        this.context.router.push(`/menu/fooditem/${foodItemId}`);
+    handleClickToItem(itemId, e) {
+        this.context.router.push(`/menu/item/${itemId}`);
     }
 
     componentDidMount() {
@@ -79,6 +199,11 @@ class Menu extends React.Component {
                 return (<div>{ this.props.menuItems.errorMessage }</div>);
             }
         case OPSTATE_READY:
+            const menuSectionSummaries = this.props.menuSections.menuSections.map((ms) =>
+                <MenuSectionSummary menuSection={ ms } onClick={ this.handleClickToSection.bind(this, ms.id) } />);
+            const menuItemSummaries = this.props.menuItems.menuItems.map((mi) =>
+                <MenuItemSummary menuItem={ mi } onClick={ this.handleClickToItem.bind(this, mi.id) } />);
+                
             return (
                 <ContentWrapper>
                     <div className="content-heading">
@@ -98,87 +223,7 @@ class Menu extends React.Component {
 
                                 <div className="panel-body">
                                     <div className="list-group">
-
-                                        <div className="media p mt0 list-group-item" onClick={ this.handleClickToSection.bind(this, '1') }>
-                                            <span className="close">&times;</span>
-                                            <span className="pull-left">
-                                                <img src="/img/mood01.jpg" className="media-object img-circle thumb32" />
-                                            </span>
-                                            <Row>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Soups</strong>
-                                                            <br/>
-                                                            <small className="text-muted">Our nice selection of soups</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 6 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Tomato Soup, Mushroom Soup</strong>
-                                                            <br/>
-                                                            <small className="text-muted">And 5 other soups</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                            </Row>
-                                        </div>
-
-                                            <div className="media p mt0 list-group-item" onClick={ this.handleClickToSection.bind(this, '2') }>
-                                            <span className="close">&times;</span>
-                                            <span className="pull-left">
-                                                <img src="/img/mood02.jpg" className="media-object img-circle thumb32" />
-                                            </span>
-                                            <Row>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Pastas</strong>
-                                                            <br/>
-                                                            <small className="text-muted">A bunch of pastas</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 6 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Carbonara, Bolognese</strong>
-                                                            <br/>
-                                                            <small className="text-muted">And 6 other pastas</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                            </Row>
-                                        </div>
-    
-                                        <div className="media p mt0 list-group-item" onClick={ this.handleClickToSection.bind(this, '3') }>
-                                            <span className="close">&times;</span>
-                                            <span className="pull-left">
-                                                <img src="/img/mood03.jpg" className="media-object img-circle thumb32" />
-                                            </span>
-                                            <Row>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Drinks</strong>
-                                                            <br/>
-                                                            <small className="text-muted">To ease things down</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 6 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Beck's, White Wine</strong>
-                                                            <br/>
-                                                            <small className="text-muted">And 10 other drinks</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                            </Row>
-                                        </div>
+                                        { menuSectionSummaries }
                                     </div>
                                 </div>
 
@@ -206,141 +251,7 @@ class Menu extends React.Component {
     
                                 <div className="panel-body">
                                     <div className="list-group">
-    
-                                        <div className="media p mt0 list-group-item" onClick={ this.handleClickToFoodItem.bind(this, '1') }>
-                                            <span className="close">&times;</span>
-                                            <span className="pull-left">
-                                                <img src="/img/mood04.jpg" className="media-object img-circle thumb32" />
-                                            </span>
-                                            <Row>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Tomato Soup</strong>
-                                                            <br/>
-                                                            <small className="text-muted">A soup made from fresh tomatoes</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Tomato, Salt</strong>
-                                                        <br/>
-                                                            <small className="text-muted">And 2 other ingredients</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 4 }>
-                                                    <ul className="list-inline m0">
-                                                        <li><div className="badge bg-green">vegetarian</div></li>
-                                                        <li><div className="badge bg-green">italian</div></li>
-                                                        <li><div className="badge bg-purple">more</div></li>
-                                                    </ul>
-                                                </Col>
-                                            </Row>
-                                        </div>
-
-                                        <div className="media p mt0 list-group-item" onClick={ this.handleClickToFoodItem.bind(this, '2') }>
-                                            <span className="close">&times;</span>
-                                            <span className="pull-left">
-                                                <img src="/img/mood05.jpg" className="media-object img-circle thumb32" />
-                                            </span>
-                                            <Row>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Pasta Carbonara</strong>
-                                                            <br/>
-                                                            <small className="text-muted">Since carbonara pastas</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Pasta, Cream</strong>
-                                                            <br/>
-                                                            <small className="text-muted">And 5 other ingredients</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 4 }>
-                                                    <ul className="list-inline m0">
-                                                        <li><div className="badge bg-green">pasta</div></li>
-                                                        <li><div className="badge bg-green">italian</div></li>
-                                                        <li><div className="badge bg-purple">more</div></li>
-                                                    </ul>
-                                                </Col>
-                                            </Row>
-                                        </div>
-
-                                        <div className="media p mt0 list-group-item" onClick={ this.handleClickToFoodItem.bind(this, '3') }>
-                                            <span className="close">&times;</span>
-                                            <span className="pull-left">
-                                                <img src="/img/mood01.jpg" className="media-object img-circle thumb32" />
-                                            </span>
-                                            <Row>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Pasta Bolognese</strong>
-                                                            <br/>
-                                                            <small className="text-muted">Meaty pastas</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Pasta, Tomato Sauce</strong>
-                                                            <br/>
-                                                            <small className="text-muted">And 5 other ingredients</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 4 }>
-                                                    <ul className="list-inline m0">
-                                                        <li><div className="badge bg-green">italian</div></li>
-                                                        <li><div className="badge bg-green">pasta</div></li>
-                                                        <li><div className="badge bg-purple">more</div></li>
-                                                    </ul>
-                                                </Col>
-                                            </Row>
-                                        </div>
-    
-                                        <div className="media p mt0 list-group-item" onClick={ this.handleClickToFoodItem.bind(this, '4') }>
-                                            <span className="close">&times;</span>
-                                            <span className="pull-left">
-                                                <img src="/img/mood02.jpg" className="media-object img-circle thumb32" />
-                                            </span>
-                                            <Row>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Beck's</strong>
-                                                            <br/>
-                                                            <small className="text-muted">Dutch beer</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Regular Beer Ingredients</strong>
-                                                            <br/>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 4 }>
-                                                    <ul className="list-inline m0">
-                                                        <li><div className="badge bg-green">alcoholic</div></li>
-                                                        <li><div className="badge bg-green">beer</div></li>
-                                                        <li><div className="badge bg-purple">more</div></li>
-                                                    </ul>
-                                                </Col>
-                                            </Row>
-                                        </div>
+                                        { menuItemSummaries }
                                     </div>
                                 </div>
 
