@@ -4,9 +4,9 @@ import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl, Table }
 import { connect } from 'react-redux';
 
 import {
-    OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED,
-    menuSectionsLoading, menuSectionsReady, menuSectionsFailed,
-    menuItemsLoading, menuItemsReady, menuItemsFailed} from '../store';
+    OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED, compositeState,
+    menuSectionsLoading, menuSectionsReady, menuSectionsFailed, menuSectionsClear,
+    menuItemsLoading, menuItemsReady, menuItemsFailed, menuItemsClear} from '../store';
 import { inventoryService } from '../services';
 
 class Menu extends React.Component {
@@ -58,25 +58,7 @@ class Menu extends React.Component {
             this.props.menuItems.opState
         ];
 
-        var compositeState;
-        if (opStates.every((s) => { return s == OPSTATE_READY; })) {
-            // All states are "ready".
-            compositeState = OPSTATE_READY;
-        } else if (opStates.every((s) => { return s != OPSTATE_FAILED; })) {
-            // Not all states are "ready", but none of them has failed.
-            if (opStates.some((s) => { return s == OPSTATE_INIT; })) {
-                // One component is in the init state.
-                compositeState = OPSTATE_INIT;
-            } else {
-                // All components are loading.
-                compositeState = OPSTATE_LOADING;
-            }
-        } else {
-            // Some state is failed.
-            compositeState = OPSTATE_FAILED;
-        }
-
-        switch (compositeState) {
+        switch (compositeState(opStates)) {
         case OPSTATE_INIT:
         case OPSTATE_LOADING:
             return (
@@ -400,9 +382,11 @@ function mapDispatchToProps(dispatch) {
         menuSectionsLoading: () => dispatch(menuSectionsLoading()),
         menuSectionsReady: (menuSections) => dispatch(menuSectionsReady(menuSections)),
         menuSectionsFailed: () => dispatch(menuSectionsFailed()),
+	menuSectionsClear: () => dispatch(menuSectionsClear()),
         menuItemsLoading: () => dispatch(menuItemsLoading()),
         menuItemsReady: (menuItems) => dispatch(menuItemsReady(menuItems)),
-        menuItemsFailed: () => dispatch(menuItemsFailed())      
+        menuItemsFailed: () => dispatch(menuItemsFailed()),
+        menuItemsClear: () => dispatch(menuItemsClear())
     }
 }
 

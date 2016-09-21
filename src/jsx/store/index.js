@@ -8,6 +8,22 @@ export const OPSTATE_READY = 'READY';
 export const OPSTATE_FAILED = 'FAILED';
 
 
+const _OPSTATE_TO_SCORE = {
+    FAILED: 0,
+    INIT: 1,
+    LOADING: 2,
+    READY: 3
+};
+
+
+const _SCORE_TO_OPSTATE = [OPSTATE_FAILED, OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY];
+
+
+export function compositeState(opStates) {
+    return _SCORE_TO_OPSTATE[Math.min(...opStates.map((s) => _OPSTATE_TO_SCORE[s]))];
+}
+
+
 export const identityLoading = createAction('IDENTITY_LOADING');
 export const identityReady = createAction('IDENTITY_READY', (accessToken, user) => { return { accessToken, user }; });
 export const identityFailed = createAction('IDENTITY_FAILED');

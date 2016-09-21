@@ -4,7 +4,7 @@ import { Grid, Row, Col, Panel, Button, ButtonGroup, Input } from 'react-bootstr
 import { connect } from 'react-redux';
 
 import {
-    OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED,
+    OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED, compositeState,
     platformsWebsiteLoading, platformsWebsiteReady, platformsWebsiteFailed,
     platformsCallcenterLoading, platformsCallcenterReady, platformsCallcenterFailed,
     platformsEmailcenterLoading, platformsEmailcenterReady, platformsEmailcenterFailed } from '../store';
@@ -182,20 +182,8 @@ class Platforms extends React.Component {
             this.props.platformsCallcenter.opState,
             this.props.platformsEmailcenter.opState
         ];
-        
-        var compositeState;
-        if (opStates.every((s) => { return s == OPSTATE_READY; })) {
-           // All states are "ready".
-           compositeState = OPSTATE_READY;
-        } else if (opStates.every((s) => { return s != OPSTATE_FAILED; })) {
-           // Not all states are "ready", but all of them have not failed.
-           compositeState = OPSTATE_LOADING;
-        } else {
-           // Some state is failed.
-           compositeState = OPSTATE_FAILED;
-        }
 
-        switch (compositeState) {
+        switch (compositeState(opStates)) {
         case OPSTATE_INIT:
         case OPSTATE_LOADING:
             return (
