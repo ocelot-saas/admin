@@ -52,7 +52,7 @@ class Menu extends React.Component {
     }
 
     handleClickToItem(itemId, e) {
-        this.context.router.push(`/menu/item/${itemId}`);
+        this.context.router.push(`/menu/items/${itemId}`);
     }
 
     handleClickAddSection(e) {

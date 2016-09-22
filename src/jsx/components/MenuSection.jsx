@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {
     OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED,
     currentMenuSectionLoading, currentMenuSectionReady, currentMenuSectionFailed, currentMenuSectionClear } from '../store';
+import MenuItemSummary from './MenuItemSummary';
 import { inventoryService } from '../services';
 
 
@@ -76,6 +77,10 @@ class MenuSection extends React.Component {
         });
     }
 
+    handleClickToItem(itemId, e) {
+        this.context.router.push(`/menu/items/${itemId}`);
+    }
+
     handleSaveGeneral(e) {
         const menuSectionUpdateRequest = {
             name: this.state.name,
@@ -102,6 +107,10 @@ class MenuSection extends React.Component {
         });
     }
 
+    handleClickAddItem(e) {
+        this.context.router.push(`/menu/items/create/${this.props.currentMenuSection.currentMenuSection.id}`);
+    }
+
     render() {
         switch (this.props.currentMenuSection.opState) {
         case OPSTATE_INIT:
@@ -120,6 +129,9 @@ class MenuSection extends React.Component {
         case OPSTATE_FAILED:
             return (<div>{ this.props.currentMenuSection.errorMessage }</div>);
         case  OPSTATE_READY:
+            const menuItemSummaries = this.props.currentMenuSection.currentMenuSection.menuItems.map((mi) =>
+                <MenuItemSummary menuItem={ mi } onClick={ this.handleClickToItem.bind(this, mi.id) } />);
+
             return (
                 <ContentWrapper>
                     <h3>
@@ -183,7 +195,9 @@ class MenuSection extends React.Component {
                         <Col sm={ 12 }>
                             <div className="panel panel-default">
                                 <div className="panel-heading">
-                                    <Button bsClass="btn btn-sm btn-labeled btn-success mr pull-right">
+                                    <Button
+                                        bsClass="btn btn-sm btn-labeled btn-success mr pull-right"
+                                        onClick={ this.handleClickAddItem.bind(this) }>
                                         <span className="btn-label"><i className="icon-plus"></i></span> Add
                                     </Button>
                                     Food & Drinks
@@ -191,141 +205,7 @@ class MenuSection extends React.Component {
 
                                 <div className="panel-body">
                                     <div className="list-group">
-
-                                        <div className="media p mt0 list-group-item">
-                                            <span className="close">&times;</span>
-                                            <span className="pull-left">
-                                                <img src="/img/mood04.jpg" className="media-object img-circle thumb32" />
-                                            </span>
-                                            <Row>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Tomato Soup</strong>
-                                                            <br/>
-                                                            <small className="text-muted">A soup made from fresh tomatoes</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Tomato, Salt</strong>
-                                                            <br/>
-                                                            <small className="text-muted">And 2 other ingredients</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 4 }>
-                                                    <ul className="list-inline m0">
-                                                        <li><div className="badge bg-green">vegetarian</div></li>
-                                                        <li><div className="badge bg-green">italian</div></li>
-                                                        <li><div className="badge bg-purple">more</div></li>
-                                                    </ul>
-                                                </Col>
-                                            </Row>
-                                        </div>
-
-                                        <div className="media p mt0 list-group-item">
-                                            <span className="close">&times;</span>
-                                            <span className="pull-left">
-                                                <img src="/img/mood05.jpg" className="media-object img-circle thumb32" />
-                                            </span>
-                                            <Row>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Pasta Carbonara</strong>
-                                                            <br/>
-                                                            <small className="text-muted">Since carbonara pastas</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Pasta, Cream</strong>
-                                                            <br/>
-                                                            <small className="text-muted">And 5 other ingredients</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 4 }>
-                                                    <ul className="list-inline m0">
-                                                        <li><div className="badge bg-green">pasta</div></li>
-                                                        <li><div className="badge bg-green">italian</div></li>
-                                                        <li><div className="badge bg-purple">more</div></li>
-                                                    </ul>
-                                                </Col>
-                                            </Row>
-                                        </div>
-
-                                        <div className="media p mt0 list-group-item">
-                                            <span className="close">&times;</span>
-                                            <span className="pull-left">
-                                                <img src="/img/mood01.jpg" className="media-object img-circle thumb32" />
-                                            </span>
-                                            <Row>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Pasta Bolognese</strong>
-                                                            <br/>
-                                                            <small className="text-muted">Meaty pastas</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Pasta, Tomato Sauce</strong>
-                                                            <br/>
-                                                            <small className="text-muted">And 5 other ingredients</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 4 }>
-                                                    <ul className="list-inline m0">
-                                                        <li><div className="badge bg-green">italian</div></li>
-                                                        <li><div className="badge bg-green">pasta</div></li>
-                                                        <li><div className="badge bg-purple">more</div></li>
-                                                    </ul>
-                                                </Col>
-                                            </Row>
-                                        </div>
-    
-                                        <div className="media p mt0 list-group-item">
-                                            <span className="close">&times;</span>
-                                            <span className="pull-left">
-                                                <img src="/img/mood02.jpg" className="media-object img-circle thumb32" />
-                                            </span>
-                                            <Row>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Beck's</strong>
-                                                            <br/>
-                                                            <small className="text-muted">Dutch beer</small>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 3 }>
-                                                    <span className="media-body">
-                                                        <span className="media-heading">
-                                                            <strong>Regular Beer Ingredients</strong>
-                                                            <br/>
-                                                        </span>
-                                                    </span>
-                                                </Col>
-                                                <Col md={ 4 }>
-                                                    <ul className="list-inline m0">
-                                                        <li><div className="badge bg-green">alcoholic</div></li>
-                                                        <li><div className="badge bg-green">beer</div></li>
-                                                        <li><div className="badge bg-purple">more</div></li>
-                                                    </ul>
-                                                </Col>
-                                            </Row>
-                                        </div>
+                                        { menuItemSummaries }
                                     </div>
                                 </div>
 
@@ -346,6 +226,11 @@ class MenuSection extends React.Component {
             throw new Error('Invalid opState');
         }	
     }
+}
+
+
+MenuSection.contextTypes = {
+    router: React.PropTypes.object.isRequired
 }
 
 

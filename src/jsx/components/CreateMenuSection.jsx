@@ -59,55 +59,57 @@ class CreateMenuSection extends React.Component {
         } else {
             return (
                 <ContentWrapper>
-                <h3>Create A Menu Section</h3>
+                    <h3>Create A Menu Section</h3>
 
-                <Row>
-                <Col sm={ 12 }>
-                <div className="panel panel-default">
-                <div className="panel-heading">General</div>
-                <div className="panel-body">
-                <form className="form-horizontal">
-                <div className="form-group">
-                <label className="col-lg-2 control-label">Name</label>
+                    <Row>
+                        <Col sm={ 12 }>
+                            <div className="panel panel-default">
+                                <div className="panel-heading">General</div>
+                                <div className="panel-body">
+                                    <form className="form-horizontal">
+                                        <div className="form-group">
+                                            <label className="col-lg-2 control-label">Name</label>
 
-                <Col lg={ 10 }>
-                <Input
-                standalone
-                type="text"
-                value={ this.state.name }
-                onChange={ this.handleNameChange.bind(this) }
-                required="required"
-                placeholder="Name"
-                className="form-control" />
-                </Col>
-                </div>
+                                            <Col lg={ 10 }>
+                                                <Input
+                                                    standalone
+                                                    type="text"
+                                                    value={ this.state.name }
+                                                    onChange={ this.handleNameChange.bind(this) }
+                                                    required="required"
+                                                    placeholder="Name"
+                                                    className="form-control" />
+                                            </Col>
+                                        </div>
                 
-                <div className="form-group">
-                <label className="col-lg-2 control-label">Description</label>
-                <Col lg={ 10 }>
-                <textarea
-                value={ this.state.description }
-                onChange={ this.handleDescriptionChange.bind(this) }
-                required="required"
-                placeholder="Description"
-                rows="5"
-                className="form-control" />
-                </Col>
-                </div>
-                </form>
-                </div>
-                <div className="panel-footer">
-                    <Button bsClass="btn btn-labeled disabled mr">
-                        <span className="btn-label"><i className="fa fa-toggle-left"></i></span> Previous
-                    </Button>
-                    <Button bsClass="btn btn-labeled btn-primary mr" onClick={this.handleNext.bind(this)}>
-                        <span className="btn-label"><i className="fa fa-toggle-right"></i></span> Next
-                    </Button>
-                </div>
-                </div>
-                    </Col>
-                </Row>
-            </ContentWrapper>
+                                        <div className="form-group">
+                                            <label className="col-lg-2 control-label">Description</label>
+                
+                                            <Col lg={ 10 }>
+                                                <textarea
+                                                    value={ this.state.description }
+                                                    onChange={ this.handleDescriptionChange.bind(this) }
+                                                    required="required"
+                                                    placeholder="Description"
+                                                    rows="5"
+                                                    className="form-control" />
+                                            </Col>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div className="panel-footer">
+                                    <Button bsClass="btn btn-labeled disabled mr">
+                                        <span className="btn-label"><i className="fa fa-toggle-left"></i></span> Previous
+                                    </Button>
+                                    <Button bsClass="btn btn-labeled btn-primary mr" onClick={this.handleNext.bind(this)}>
+                                        <span className="btn-label"><i className="fa fa-toggle-right"></i></span> Next
+                                    </Button>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                </ContentWrapper>
             );
         }
     }

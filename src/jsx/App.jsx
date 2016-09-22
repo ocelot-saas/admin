@@ -10,8 +10,9 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import General from './components/General';
 import Menu from './components/Menu';
-import MenuSection from './components/MenuSection';
 import CreateMenuSection from './components/CreateMenuSection';
+import MenuSection from './components/MenuSection';
+import CreateMenuItem from './components/CreateMenuItem';
 import MenuItem from './components/MenuItem';
 import Orders from './components/Orders';
 import Order from './components/Order';
@@ -40,7 +41,8 @@ ReactDOM.render(
                     <Route path="/menu" component={Menu} />
                     <Route path="/menu/sections/create" component={CreateMenuSection} />
                     <Route path="/menu/sections/:sectionId" component={MenuSection} />
-                    <Route path="/menu/item/:itemId" component={MenuItem} />
+                    <Route path="/menu/items/create/:sectionId" component={CreateMenuItem} />
+                    <Route path="/menu/items/:itemId" component={MenuItem} />
                     <Route path="/orders/:orderId" component={Order} />
                     <Route path="/orders" component={Orders} />
                     <Route path="/platforms" component={Platforms} />
