@@ -130,7 +130,7 @@ class MenuSection extends React.Component {
                     <Row>
                         <Col sm={ 12 }>
                             <div className="panel panel-default">
-                                <div className="panel-heading">MenuSection</div>
+                                <div className="panel-heading">General</div>
                                 <div className="panel-body">
                                     <form className="form-horizontal">
                                         <div className="form-group">

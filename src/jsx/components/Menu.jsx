@@ -135,14 +135,6 @@ class Menu extends React.Component {
         super(props, context);
     }
 
-    handleClickToSection(sectionId, e) {
-        this.context.router.push(`/menu/sections/${sectionId}`);
-    }
-
-    handleClickToItem(itemId, e) {
-        this.context.router.push(`/menu/item/${itemId}`);
-    }
-
     componentDidMount() {
         if (this.props.menuSections.opState == OPSTATE_INIT
          && this.props.menuItems.opState == OPSTATE_INIT) {
@@ -170,6 +162,18 @@ class Menu extends React.Component {
         // TODO(horia141): cancel all pending requests
         this.props.menuSectionsClear();
         this.props.menuItemsClear();
+    }
+
+    handleClickToSection(sectionId, e) {
+        this.context.router.push(`/menu/sections/${sectionId}`);
+    }
+
+    handleClickToItem(itemId, e) {
+        this.context.router.push(`/menu/item/${itemId}`);
+    }
+
+    handleClickAddSection(e) {
+        this.context.router.push('/menu/sections/create');
     }
 
     render() {
@@ -215,7 +219,9 @@ class Menu extends React.Component {
                         <Col sm={ 12 }>
                             <div className="panel panel-default">
                                 <div className="panel-heading">
-                                    <Button bsClass="btn btn-sm btn-labeled btn-success mr pull-right">
+                                    <Button
+                                        bsClass="btn btn-sm btn-labeled btn-success mr pull-right"
+                                        onClick={ this.handleClickAddSection.bind(this) }>
                                         <span className="btn-label"><i className="icon-plus"></i></span> Add
                                     </Button>
                                     Sections

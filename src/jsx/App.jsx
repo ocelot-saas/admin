@@ -11,6 +11,7 @@ import Dashboard from './components/Dashboard';
 import General from './components/General';
 import Menu from './components/Menu';
 import MenuSection from './components/MenuSection';
+import CreateMenuSection from './components/CreateMenuSection';
 import MenuItem from './components/MenuItem';
 import Orders from './components/Orders';
 import Order from './components/Order';
@@ -37,6 +38,7 @@ ReactDOM.render(
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/general" component={General} />
                     <Route path="/menu" component={Menu} />
+                    <Route path="/menu/sections/create" component={CreateMenuSection} />
                     <Route path="/menu/sections/:sectionId" component={MenuSection} />
                     <Route path="/menu/item/:itemId" component={MenuItem} />
                     <Route path="/orders/:orderId" component={Order} />
