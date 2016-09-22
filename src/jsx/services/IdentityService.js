@@ -11,6 +11,9 @@ export class Auth0Widget {
             theme: {
                 logo: '/img/logo-single.png',
                 primaryColor: APP_COLORS['primary']
+            },
+            languageDictionary: {
+                title: 'Ocelot',
             }
         });
 
