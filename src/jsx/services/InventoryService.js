@@ -137,13 +137,13 @@ export class InventoryService {
             (resolve, reject) => {
                 $.ajax({
                     type: 'PUT',
-                    url: `http://${this._inventoryServiceDomain}/org/sections/${sectionId}`,
+                    url: `http://${this._inventoryServiceDomain}/org/menu/sections/${sectionId}`,
                     dataType: 'json',
                     data: JSON.stringify(updateMenuSectionRequest),
                     contentType: 'application/json',
                     headers: {'Authorization': `Bearer ${accessToken}`}
                 }).done((menuSectionResponse) => {
-                    resolve(menuSectionResponse.menuSectionResponse);
+                    resolve(menuSectionResponse.menuSection);
                 }).fail((xhr) => {
                     reject(xhr.status);
                 });
@@ -157,7 +157,7 @@ export class InventoryService {
             (resolve, reject) => {
                 $.ajax({
                     type: 'DELETE',
-                    url: `http://${this._inventoryServiceDomain}/org/sections/${sectionId}`,
+                    url: `http://${this._inventoryServiceDomain}/org/menu/sections/${sectionId}`,
                     headers: {'Authorization': `Bearer ${accessToken}`}
                 }).done((unused) => {
                     resolve({});
