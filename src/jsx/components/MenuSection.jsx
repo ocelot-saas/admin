@@ -3,7 +3,7 @@ import ContentWrapper from './ContentWrapper';
 import { Grid, Input, Row, Col, Panel, Button, Alert, Table } from 'react-bootstrap';
 import ImageGallery from './ImageGallery';
 
-class Section extends React.Component {
+class MenuSection extends React.Component {
 
     constructor(props, context) {
         super(props, context);
@@ -31,13 +31,13 @@ class Section extends React.Component {
                 <h3>
                     {/* parse sectionId */}
                     Soups
-                    <small>Section #{this.props.params.sectionId}</small>
+                    <small>MenuSection #{this.props.params.sectionId}</small>
                 </h3>
 
                 <Row>
                     <Col sm={ 12 }>
                         <div className="panel panel-default">
-                            <div className="panel-heading">Section</div>
+                            <div className="panel-heading">MenuSection</div>
                             <div className="panel-body">
                                 <form className="form-horizontal">
                                     <div className="form-group">
@@ -275,4 +275,4 @@ class Section extends React.Component {
     }
 }
 
-export default Section;
+export default MenuSection;

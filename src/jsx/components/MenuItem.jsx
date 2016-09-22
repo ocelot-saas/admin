@@ -14,7 +14,7 @@ import {
 import { inventoryService } from '../services';
 
 
-class FoodItem extends React.Component {
+class MenuItem extends React.Component {
 
     constructor(props, context) {
         super(props, context);
@@ -373,4 +373,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(FoodItem);
+export default connect(mapStateToProps, mapDispatchToProps)(MenuItem);
