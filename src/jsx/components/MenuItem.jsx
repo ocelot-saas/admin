@@ -133,11 +133,13 @@ class MenuItem extends React.Component {
     }
 
     handleSaveGeneral(e) {
+        const wsRe = /^s*$/;
+	
         const menuItemUpdateRequest = {
             name: this.state.name,
             description: this.state.description,
-            keywords: this.state.keywordsStr.split(","),
-            ingredients: this.state.ingredientsStr.split(",")
+            keywords: this.state.keywordsStr.split(",").filter((k) => !wsRe.test(k)),
+            ingredients: this.state.ingredientsStr.split(",").filter((k) => !wsRe.test(k))
         };
 
         inventoryService

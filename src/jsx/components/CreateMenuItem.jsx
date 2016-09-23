@@ -20,7 +20,8 @@ class CreateMenuItem extends React.Component {
         super(props, context);
         this.state = {
             screen: 'GENERAL',
-            name: 'Horia\'s Kitchen',
+            name: 'Tomato Soup',
+	    description: '',
             keywordsStr: '',
             ingredientsStr: '',
             imageSet: []
@@ -78,12 +79,14 @@ class CreateMenuItem extends React.Component {
     }
 
     handleImageSetNext(e) {
+        const wsRe = /^s*$/;
+	
         var menuItemCreationRequest = {
-            sectionId: this.props.params.sectionId,
+            sectionId: parseInt(this.props.params.sectionId),
             name: this.state.name,
             description: this.state.description,
-            keywords: this.state.keywordsStr.split(","),
-            ingredients: this.state.ingredientsStr.split(","),
+            keywords: this.state.keywordsStr.split(",").filter((k) => !wsRe.test(k)),
+            ingredients: this.state.ingredientsStr.split(",").filter((k) => !wsRe.test(k)),
 	    imageSet: this.state.imageSet
         };
 

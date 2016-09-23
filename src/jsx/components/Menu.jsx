@@ -87,9 +87,9 @@ class Menu extends React.Component {
             }
         case OPSTATE_READY:
             const menuSectionSummaries = this.props.menuSections.menuSections.map((ms) =>
-                <MenuSectionSummary menuSection={ ms } onClick={ this.handleClickToSection.bind(this, ms.id) } />);
+                <MenuSectionSummary key={ ms.id } menuSection={ ms } onClick={ this.handleClickToSection.bind(this, ms.id) } />);
             const menuItemSummaries = this.props.menuItems.menuItems.map((mi) =>
-                <MenuItemSummary menuItem={ mi } onClick={ this.handleClickToItem.bind(this, mi.id) } />);
+                <MenuItemSummary key={ mi.id } menuItem={ mi } onClick={ this.handleClickToItem.bind(this, mi.id) } />);
                 
             return (
                 <ContentWrapper>
@@ -112,7 +112,7 @@ class Menu extends React.Component {
 
                                 <div className="panel-body">
                                     <div className="list-group">
-                                        { menuSectionSummaries }
+				        { menuSectionSummaries }
                                     </div>
                                 </div>
 
@@ -140,7 +140,7 @@ class Menu extends React.Component {
     
                                 <div className="panel-body">
                                     <div className="list-group">
-                                        { menuItemSummaries }
+				        { menuItemSummaries}
                                     </div>
                                 </div>
 
