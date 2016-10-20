@@ -298,6 +298,9 @@ gulp.task('browsersync', function() {
                 publicPath: webpackConfig.output.publicPath,
                 stats: {
                     colors: true
+                },
+                devServer: {
+                    port: 10000
                 }
             }),
             webpackHotMiddleware(bundler)
