@@ -6,6 +6,7 @@
 
 # Setuptools distribution folder as well as gulp output files.
 /dist/
+/dist-cache/
 
 # Python egg metadata, regenerated from source files by setuptools.
 /src/*.egg-info

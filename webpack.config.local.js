@@ -2,43 +2,44 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-    entry: [
-        'webpack/hot/dev-server',
-        'webpack-hot-middleware/client',
-        path.resolve(__dirname, 'src/jsx/App')
-    ],
+    entry: './src/jsx/App.jsx',
     output: {
-        path: path.resolve(__dirname, 'build'),
-        publicPath: '/dist/',
+        path: '/',
+        publicPath: '/',
         filename: 'app.bundle.js'
     },
-    resolve: {
-        extensions: ['', '.js', '.jsx']
-    },
-    plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-    ],
     module: {
         loaders: [{
-            test: /\.jsx?$/,
-            exclude: /node_modules/,
-            loaders: ['react-hot']
-        }, {
-            test: /\.jsx?$/,
-            exclude: /node_modules/,
+            test: /\.(js|jsx)$/,
+            include: [path.resolve(__dirname, 'src')],
+	    exclude: [path.resolve(__dirname, 'src', 'server')],
             loader: 'babel',
             query: {
+                cacheDirectory: path.resolve(__dirname, 'dist-cache'),
                 presets: ['es2015', 'react'],
-                compact: false
+                plugins: ['transform-runtime']
             }
         }, {
             test: /\.css$/,
             loader: "style-loader!css-loader"
         }, {
-            test: /\.woff|\.woff2|\.svg|.eot|\.ttf/,
-            loader: 'url?prefix=font/&limit=10000'
+            test: /\.(svg|woff|woff2|otf|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            include: [
+                path.resolve(__dirname, 'src', 'fonts'),
+                path.resolve(__dirname, 'node_modules', 'bootstrap', 'fonts'),
+                path.resolve(__dirname, 'node_modules', 'font-awesome', 'fonts'),
+            ],
+            loader: 'file?name=fonts/[name].[ext]'
         }]
+    },
+    plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.NoErrorsPlugin()
+    ],
+    resolve: {
+        extensions: ['', '.js', '.jsx', '.css', '.less', '.scss'],
+	root: [
+	    path.resolve(__dirname, 'src')
+	]
     }
 };

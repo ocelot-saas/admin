@@ -81,9 +81,6 @@ var source = {
         watch: [paths.app + paths.styles + '**/*', '!' + paths.app + paths.styles + 'themes/*']
     },
     images: [paths.app + 'img/**/*'],
-    fonts: [
-        paths.app + 'fonts/*.{ttf,woff,woff2,eof,svg}'
-    ],
     serverAssets: [paths.app + 'server/**/*']
 };
 
@@ -248,12 +245,6 @@ gulp.task('styles:themes', function() {
         }));
 });
 
-gulp.task('fonts', function() {
-    return gulp.src(source.fonts)
-        .pipe($.flatten())
-        .pipe(gulp.dest(build.fonts))
-})
-
 gulp.task('images', function() {
     return gulp.src(source.images)
         .pipe(gulp.dest(build.images))
@@ -355,7 +346,6 @@ gulp.task('default', gulpsync.sync([
 ]));
 
 gulp.task('assets:app', [
-    'fonts',
     'images',
     'server-assets',
     'scripts:app',
