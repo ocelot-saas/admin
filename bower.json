@@ -25,7 +25,6 @@
         "animo.js": "ThrivingKings/animo.js#1.0.2",
         "jquery-localize-i18n": "*",
         "simple-line-icons": "2.2.3",
-        "moment": "2.11.1",
         "eonasdan-bootstrap-datetimepicker": "4.17.37"
     },
     "resolutions": {
