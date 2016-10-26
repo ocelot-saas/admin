@@ -60,12 +60,6 @@ class Header extends React.Component {
                         { /* END Left navbar */ }
                         { /* START Right Navbar */ }
                         <ul className="nav navbar-nav navbar-right">
-                            { /* Fullscreen (only desktops) */ }
-                            <li className="visible-lg">
-                                <a href="#" data-toggle-fullscreen="">
-                                    <em className="fa fa-expand"></em>
-                                </a>
-                            </li>
                             { /* START Alert menu */ }
                             <NavDropdown noCaret eventKey={ 3 } title={ ddAlertTitle } id="basic-nav-dropdown" >
                                 <MenuItem className="animated flipInX" eventKey={3.2}>Profile</MenuItem>
