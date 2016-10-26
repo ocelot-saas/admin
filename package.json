@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ocelot-saas/admin#readme",
   "dependencies": {
+    "animate.css": "^3.5.2",
     "auth0-js": "^7.0.4",
     "auth0-lock": "^10.0.0-rc.1",
     "bootstrap": "^3.3.7",
