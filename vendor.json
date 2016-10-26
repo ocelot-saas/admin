@@ -6,11 +6,5 @@
   "bower_components/jquery-localize-i18n/dist/jquery.localize.js",
   "bower_components/moment/min/moment-with-locales.min.js",
   "bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
-  "bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css",
-  "bower_components/Flot/jquery.flot.js",
-  "bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js",
-  "bower_components/Flot/jquery.flot.resize.js",
-  "bower_components/Flot/jquery.flot.pie.js",
-  "bower_components/Flot/jquery.flot.time.js",
-  "bower_components/Flot/jquery.flot.categories.js"
+  "bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
 ]
