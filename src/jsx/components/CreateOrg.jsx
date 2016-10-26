@@ -3,7 +3,6 @@ import ContentWrapper from './ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import update from 'react-addons-update';
-import 'bootstrap-tagsinput';
 
 import { HoursRange } from './HoursRange';
 import { ExtractHours } from '../common/hours';
@@ -45,10 +44,6 @@ class CreateOrg extends React.Component {
         };
     }
     
-    componentDidMount() {
-        $("[data-role='tagsinput']").tagsinput()    
-    }
-
     handleNameChange(e) {
         this.setState({name: e.target.value});
     }
@@ -187,7 +182,7 @@ class CreateOrg extends React.Component {
                                                             Keywords
                                                         </label>
                                                         <Col lg={ 10 }>
-                                                            <input type="text" data-role="tagsinput" defaultValue="italian,family friendly,dog friendly" className="form-control" />
+                                                            <input type="text" defaultValue="italian,family friendly,dog friendly" className="form-control" />
                                                         </Col>
                                                     </div>
 

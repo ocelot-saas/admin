@@ -42,8 +42,6 @@ class MenuSection extends React.Component {
     }
 
     componentDidMount() {
-        $("[data-role='tagsinput']").tagsinput()
-
 	if (this.props.currentMenuSection.opState == OPSTATE_INIT) {
 	    inventoryService
 	        .getMenuSection(this.props.params.sectionId)

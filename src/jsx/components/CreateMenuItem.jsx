@@ -3,7 +3,6 @@ import ContentWrapper from './ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import update from 'react-addons-update';
-import 'bootstrap-tagsinput';
 
 import { inventoryService } from '../services';
 import ImageGallery from './ImageGallery';
@@ -26,10 +25,6 @@ class CreateMenuItem extends React.Component {
             ingredientsStr: '',
             imageSet: []
         };
-    }
-
-    componentDidMount() {
-        $("[data-role='tagsinput']").tagsinput()    
     }
 
     handleNameChange(e) {
@@ -162,7 +157,6 @@ class CreateMenuItem extends React.Component {
                                                 <Col lg={ 10 }>
                                                     <input
                                                         type="text"
-                                                        data-role="tagsinput"
                                                         value={ this.state.keywordsStr}
                                                         onChange={ this.handleKeywordsStrChange.bind(this) }
                                                         placeholder="Keywords"
@@ -177,7 +171,6 @@ class CreateMenuItem extends React.Component {
                                                 <Col lg={ 10 }>
                                                     <input
                                                         type="text"
-                                                        data-role="tagsinput"
                                                         value={ this.state.ingredientsStr}
                                                         onChange={ this.handleIngredientsStrChange.bind(this) }
                                                         placeholder="Ingredients"

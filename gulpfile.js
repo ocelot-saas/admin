@@ -268,7 +268,6 @@ gulp.task('browsersync', function() {
 
 // build for production (no watch)
 gulp.task('build:app', gulpsync.sync([
-    'vendor',
     'assets:app'
 ]));
 
@@ -291,7 +290,6 @@ gulp.task('usesources', function() {
 
 // default (no minify)
 gulp.task('default', gulpsync.sync([
-    'vendor',
     'assets:app',
     'watch'
 ]));

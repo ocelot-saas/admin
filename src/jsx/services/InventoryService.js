@@ -1,3 +1,6 @@
+import $ from 'jquery';
+
+
 export class InventoryService {
 
     constructor(inventoryServiceDomain, identityService) {

@@ -4,7 +4,6 @@ import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from '
 import { connect } from 'react-redux';
 import update from 'react-addons-update';
 import SweetAlert from 'react-swal';
-import 'bootstrap-tagsinput';
 
 import { HoursRange } from './HoursRange';
 import ImageGallery from './ImageGallery';
@@ -74,8 +73,6 @@ class General extends React.Component {
     }
 
     componentDidMount() {
-        $("[data-role='tagsinput']").tagsinput();
-
         if (this.props.restaurant.opState == OPSTATE_INIT) {
             inventoryService
                 .getRestaurantFromService()
@@ -336,7 +333,7 @@ class General extends React.Component {
                                                Keywords
                                            </label>
                                            <Col lg={ 10 }>
-                                               <input type="text" data-role="tagsinput" defaultValue="italian,family friendly,dog friendly" className="form-control" />
+                                               <input type="text" defaultValue="italian,family friendly,dog friendly" className="form-control" />
                                            </Col>
                                        </div>
    

@@ -4,7 +4,6 @@ import { Grid, Input, Row, Col, Panel, Button, Alert, Table } from 'react-bootst
 import { connect } from 'react-redux';
 import update from 'react-addons-update';
 import SweetAlert from 'react-swal';
-import 'bootstrap-tagsinput';
 
 
 import ImageGallery from './ImageGallery';
@@ -58,8 +57,6 @@ class MenuItem extends React.Component {
     }
 
     componentDidMount() {
-        $("[data-role='tagsinput']").tagsinput()
-
         if (this.props.currentMenuItem.opState == OPSTATE_INIT) {
             inventoryService
                 .getMenuItem(this.props.params.itemId)
@@ -282,7 +279,6 @@ class MenuItem extends React.Component {
                                             <Col lg={ 10 }>
                                                 <input
                                                     type="text"
-                                                    data-role="tagsinput"
                                                     value={ this.state.keywordsStr}
                                                     onChange={ this.handleKeywordsStrChange.bind(this) }
                                                     placeholder="Keywords"
@@ -297,7 +293,6 @@ class MenuItem extends React.Component {
                                             <Col lg={ 10 }>
                                                 <input
                                                     type="text"
-                                                    data-role="tagsinput"
                                                     value={ this.state.ingredientsStr}
                                                     onChange={ this.handleIngredientsStrChange.bind(this) }
                                                     placeholder="Ingredients"

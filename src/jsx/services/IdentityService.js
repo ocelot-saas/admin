@@ -1,5 +1,7 @@
-import Auth0 from 'auth0-js'
-import Auth0Lock from 'auth0-lock'
+import Auth0 from 'auth0-js';
+import Auth0Lock from 'auth0-lock';
+import $ from 'jquery';
+
 import { APP_COLORS} from './../common/constants';
 
 
