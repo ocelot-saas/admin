@@ -33,6 +33,7 @@ module.exports = {
                 path.resolve(__dirname, 'src', 'fonts'),
                 path.resolve(__dirname, 'node_modules', 'bootstrap', 'fonts'),
                 path.resolve(__dirname, 'node_modules', 'font-awesome', 'fonts'),
+                path.resolve(__dirname, 'node_modules', 'simple-line-icons', 'fonts'),
             ],
             loader: 'file?name=fonts/[name].[ext]'
         }]
