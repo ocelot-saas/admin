@@ -51,10 +51,6 @@ class Header extends React.Component {
                         { /* START Left navbar */ }
                         <ul className="nav navbar-nav">
                             <li>
-                                { /* Button used to collapse the left sidebar. Only visible on tablet and desktops */ }
-                                <a href="#" data-trigger-resize="" data-toggle-state="aside-collapsed" className="hidden-xs">
-                                    <em className="fa fa-navicon"></em>
-                                </a>
                                 { /* Button to show/hide the sidebar on mobile. Visible on mobile only. */ }
                                 <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" className="visible-xs sidebar-toggle">
                                     <em className="fa fa-navicon"></em>
