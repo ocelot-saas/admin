@@ -1,13 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux'; 
-import SidebarRun from './Sidebar.run';
 
 class Sidebar extends React.Component {
-
-    componentDidMount() {
-        SidebarRun();
-    }
 
     routeActive(paths) {
         paths = Array.isArray(paths) ? paths : [paths];
