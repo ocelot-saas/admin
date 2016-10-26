@@ -1,26 +1,27 @@
+import 'classlist-polyfill';
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import HeaderRun from './Header.run'
 import { NavDropdown, MenuItem } from 'react-bootstrap';
+
 import { identityService } from '../services';
 import { identityClear } from '../store';
 
 
 class Header extends React.Component {
     
-    componentDidMount() {
-        HeaderRun();
-    }
-
-    onDashboardClick() {
+    handleDashboardClick() {
         this.context.router.push('/dashboard');
     }
 
-    onLogoutClick() {
+    handleLogoutClick() {
         identityService.logout();
 	this.context.router.push('/login');
 	this.props.identityClear();    
+    }
+
+    handleToggleMenu() {
+        document.body.classList.toggle('aside-toggled');
     }
 
     render() {
@@ -52,7 +53,7 @@ class Header extends React.Component {
                         <ul className="nav navbar-nav">
                             <li>
                                 { /* Button to show/hide the sidebar on mobile. Visible on mobile only. */ }
-                                <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" className="visible-xs sidebar-toggle">
+                                <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" className="visible-xs sidebar-toggle" onClick={this.handleToggleMenu.bind(this)}>
                                     <em className="fa fa-navicon"></em>
                                 </a>
                             </li>
@@ -63,9 +64,9 @@ class Header extends React.Component {
                             { /* START Alert menu */ }
                             <NavDropdown noCaret eventKey={ 3 } title={ ddAlertTitle } id="basic-nav-dropdown" >
                                 <MenuItem className="animated flipInX" eventKey={3.2}>Profile</MenuItem>
-                                <MenuItem className="animated flipInX" eventKey={3.3} onSelect={this.onDashboardClick.bind(this)}>Dashboard</MenuItem>
+                                <MenuItem className="animated flipInX" eventKey={3.3} onSelect={this.handleDashboardClick.bind(this)}>Dashboard</MenuItem>
                                 <MenuItem divider />
-                                <MenuItem className="animated flipInX" eventKey={3.3} onSelect={this.onLogoutClick.bind(this)}>Logout</MenuItem>
+                                <MenuItem className="animated flipInX" eventKey={3.3} onSelect={this.handleLogoutClick.bind(this)}>Logout</MenuItem>
                             </NavDropdown>
                             { /* END Alert menu */ }
                         </ul>
