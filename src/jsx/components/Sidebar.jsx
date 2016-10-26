@@ -16,24 +16,19 @@ class Sidebar extends React.Component {
     render() {
         return (
             <aside className='aside'>
-                { /* START Sidebar (left) */ }
                 <div className="aside-inner">
-                    <nav data-sidebar-anyclick-close="" className="sidebar">
+                    <nav className="sidebar">
 
-                        { /* START Sidebar nav */ }
                         <ul className="nav">
 
-                            { /* User info */ }
                             <li className="has-user-block">
                                 <div className="item user-block">
-                                    { /* User picture */ }
                                     <div className="user-block-picture">
                                         <div className="user-block-status">
                                             <img src={ this.props.user.pictureUrl } alt="Avatar" width="60" height="60" className="img-thumbnail img-circle" />
                                             <div className="circle circle-success circle-lg"></div>
                                         </div>
                                     </div>
-                                    { /* Name and Job */ }
                                     <div className="user-block-info">
                                         <span className="user-block-name">Hello, { this.props.user.name }</span>
                                         <span className="user-block-role">Administrator</span>
@@ -42,77 +37,69 @@ class Sidebar extends React.Component {
                             </li>
 
                             <li className="nav-heading ">
-                                <span data-localize="sidebar.heading.HEADER">Overview</span>
+                                <span>Overview</span>
                             </li>
 
-                            { /* Dashboard */ }
                             <li className={ this.routeActive('dashboard') ? 'active' : '' }>
                                 <Link to="/dashboard" title="Dashboard">
                                     <em className="icon-speedometer"></em>
-                                    <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                                    <span>Dashboard</span>
                                 </Link>
                             </li>
 
                             <li className="nav-heading ">
-                                <span data-localize="sidebar.heading.HEADER">Restaurant</span>
+                                <span>Restaurant</span>
                             </li>
 
-                            { /* General */}
                             <li className={ this.routeActive('general') ? 'active' : '' }>
                                 <Link to="/general" title="General">
                                     <em className="icon-cup"></em>
-                                    <span data-localize="sidebar.nav.GENERAL">General</span>
+                                    <span>General</span>
                                 </Link>
                             </li>
 
-                            { /* Menu */}
                             <li className={ this.routeActive('menu') ? 'active' : '' }>
                                 <Link to="/menu" title="Menu">
                                     <em className="icon-book-open"></em>
-                                    <span data-localize="sidebar.nav.MENU">Menu</span>
+                                    <span>Menu</span>
                                 </Link>
                             </li>
 
                             <li className="nav-heading ">
-                                <span data-localize="sidebar.heading.PLATFORMS">Platforms</span>
+                                <span>Platforms</span>
                             </li>
 
-                            { /* Platforms */}
                             <li className={ this.routeActive('platforms') ? 'active' : '' }>
                                 <Link to="/platforms" title="Platforms">
                                     <em className="icon-rocket"></em>
-                                    <span data-localize="sidebar.nav.PLATFORMS">Platforms</span>
+                                    <span>Platforms</span>
                                 </Link>
                             </li>
 
                             <li className="nav-heading ">
-                                <span data-localize="sidebar.heading.HEADER">Users</span>
+                                <span>Users</span>
                             </li>
 
-                            { /* Orders */}
                             <li className={ this.routeActive('orders') ? 'active' : '' }>
                                 <Link to="/orders" title="Orders">
                                     <em className="icon-list"></em>
-                                    <span data-localize="sidebar.nav.ORDERS">Orders</span>
+                                    <span>Orders</span>
                                 </Link>
                             </li>
 
                             <li className="nav-heading ">
-                                <span data-localize="sidebar.heading.HEADER">Analytics</span>
+                                <span>Analytics</span>
                             </li>
 
-                            { /* Reports */}
                             <li className={ this.routeActive('reports') ? 'active' : '' }>
                                 <Link to="/reports" title="Reports">
                                     <em className="icon-graph"></em>
-                                    <span data-localize="sidebar.nav.REPORTS">Reports</span>
+                                    <span>Reports</span>
                                 </Link>
                             </li>
                         </ul>
-                        { /* END Sidebar nav */ }
                     </nav>
                 </div>
-                { /* END Sidebar (left) */ }
             </aside>
         );
     }

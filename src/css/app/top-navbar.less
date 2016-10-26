@@ -106,23 +106,6 @@
     }
   }
 
-  // the button to toggle search
-  .navbar-nav > li > [data-toggle='navbar-search'] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 20;
-    font-size: 16px;
-    line-height: @navbar-height;
-    color: #fff;
-    padding-top: 0;
-    padding-bottom: 0;
-    .transition(color .3s ease);
-    @media @tablet {
-      color: @nav-top-item-desktop;
-    }
-  }
-
   @media @upto-tablet {
     .navbar-text {
       margin: 10px;
@@ -264,11 +247,6 @@
       &:hover, &:focus {
         color: @nav-top-item-desktop-active;
       }
-    }
-
-    // relocate search toggle button
-    .navbar-nav > li > [data-toggle='navbar-search'] {
-      position: static;
     }
 
   } // .topnavbar
