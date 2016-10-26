@@ -26,14 +26,7 @@ module.exports = {
                 path.resolve(__dirname, 'src'),
                 path.resolve(__dirname, 'node_modules')
             ],
-	    loader: 'style!css!less',
-	}, {
-	    test: /\.scss$/,
-            include: [
-                path.resolve(__dirname, 'src'),
-                path.resolve(__dirname, 'node_modules')
-            ],
-	    loader: ExtractTextPlugin.extract('style', 'css!sass')
+	    loader: ExtractTextPlugin.extract('style', 'css!less')
 	}, {
             test: /\.(svg|woff|woff2|otf|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
             include: [
@@ -50,6 +43,6 @@ module.exports = {
         new webpack.NoErrorsPlugin()
     ],
     resolve: {
-        extensions: ['', '.js', '.jsx', '.css', '.less', '.scss']
+        extensions: ['', '.js', '.jsx', '.css', '.less']
     }
 };

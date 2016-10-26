@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, Link, IndexRedirect, Redirect, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
-import '../sass/app';
+import '../css/app';
 import App from './components/App';
 import Base from './components/Base';
 import BasePage from './components/BasePage';

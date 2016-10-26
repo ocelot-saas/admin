@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import './App.less';
 import { auth0Widget, identityService } from '../services';
 import { OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED, identityLoading, identityReady, identityFailed, identityClear } from '../store';
 import BasePage from './BasePage';

@@ -2,6 +2,9 @@ import React from 'react';
 import ContentWrapper from './ContentWrapper';
 import { Table } from 'react-bootstrap';
 
+import './Orders.less';
+
+
 class Orders extends React.Component {
 
     constructor(props, context) {
