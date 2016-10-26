@@ -1,5 +1,4 @@
 [
-  "bower_components/modernizr/modernizr.custom.js",
   "bower_components/jquery/dist/jquery.js",
   "bower_components/jQuery-Storage-API/jquery.storageapi.js",
   "bower_components/jquery.easing/js/jquery.easing.js",
