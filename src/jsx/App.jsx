@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, Link, IndexRedirect, Redirect, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
+import '../sass/app';
 import App from './components/App';
 import Base from './components/Base';
 import BasePage from './components/BasePage';
@@ -20,6 +21,7 @@ import Platforms from './components/Platforms';
 import Reports from './components/Reports';
 import CreateOrg from './components/CreateOrg';
 import { store } from './store';
+
 
 
 ReactDOM.render(

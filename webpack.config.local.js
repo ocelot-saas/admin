@@ -1,5 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/jsx/App.jsx',
@@ -20,9 +21,20 @@ module.exports = {
                 plugins: ['transform-runtime']
             }
         }, {
-            test: /\.css$/,
-            loader: "style-loader!css-loader"
-        }, {
+	    test: /\.(less|css)$/,
+            include: [
+                path.resolve(__dirname, 'src'),
+                path.resolve(__dirname, 'node_modules')
+            ],
+	    loader: 'style!css!less',
+	}, {
+	    test: /\.scss$/,
+            include: [
+                path.resolve(__dirname, 'src'),
+                path.resolve(__dirname, 'node_modules')
+            ],
+	    loader: ExtractTextPlugin.extract('style', 'css!sass')
+	}, {
             test: /\.(svg|woff|woff2|otf|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
             include: [
                 path.resolve(__dirname, 'src', 'fonts'),
@@ -33,13 +45,11 @@ module.exports = {
         }]
     },
     plugins: [
+        new ExtractTextPlugin('app.bundle.css'),        
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.NoErrorsPlugin()
     ],
     resolve: {
-        extensions: ['', '.js', '.jsx', '.css', '.less', '.scss'],
-	root: [
-	    path.resolve(__dirname, 'src')
-	]
+        extensions: ['', '.js', '.jsx', '.css', '.less', '.scss']
     }
 };

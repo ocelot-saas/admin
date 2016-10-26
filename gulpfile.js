@@ -198,53 +198,6 @@ gulp.task('vendor', function() {
 
 });
 
-// APP LESS
-gulp.task('styles:app', function() {
-    log('Building application styles..');
-    return gulp.src(source.styles.app)
-        .pipe($.if(useSourceMaps, $.sourcemaps.init()))
-        .pipe(useSass ? $.sass() : $.less())
-        .on("error", handleError)
-        .pipe($.if(isProduction, $.cssnano(cssnanoOpts)))
-        .pipe($.if(useSourceMaps, $.sourcemaps.write()))
-        .pipe(gulp.dest(build.styles))
-        .pipe(reload({
-            stream: true
-        }));
-});
-
-// APP RTL
-gulp.task('styles:app:rtl', function() {
-    log('Building application RTL styles..');
-    return gulp.src(source.styles.app)
-        .pipe($.if(useSourceMaps, $.sourcemaps.init()))
-        .pipe(useSass ? $.sass() : $.less())
-        .on("error", handleError)
-        .pipe($.rtlcss())
-        .pipe($.if(isProduction, $.cssnano(cssnanoOpts)))
-        .pipe($.if(useSourceMaps, $.sourcemaps.write()))
-        .pipe($.rename(function(path) {
-            path.basename += "-rtl";
-            return path;
-        }))
-        .pipe(gulp.dest(build.styles))
-        .pipe(reload({
-            stream: true
-        }));
-});
-
-// LESS THEMES
-gulp.task('styles:themes', function() {
-    log('Building application theme styles..');
-    return gulp.src(source.styles.themes)
-        .pipe(useSass ? $.sass() : $.less())
-        .on("error", handleError)
-        .pipe(gulp.dest(build.styles))
-        .pipe(reload({
-            stream: true
-        }));
-});
-
 gulp.task('images', function() {
     return gulp.src(source.images)
         .pipe(gulp.dest(build.images))
@@ -270,8 +223,6 @@ gulp.task('watch', function() {
     log('Watching source files..');
 
     gulp.watch(source.scripts.app.src, ['scripts:app']);
-    gulp.watch(source.styles.watch, ['styles:app', 'styles:app:rtl']);
-    gulp.watch(source.styles.themes, ['styles:themes']);
     gulp.watch(source.templates.index, ['templates:index']);
     gulp.watch(vendor.source, ['vendor']);
 
@@ -349,9 +300,6 @@ gulp.task('assets:app', [
     'images',
     'server-assets',
     'scripts:app',
-    'styles:app',
-    'styles:app:rtl',
-    'styles:themes',
     'templates:index'
 ]);
 

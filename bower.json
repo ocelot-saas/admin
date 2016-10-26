@@ -11,7 +11,6 @@
         "**/.*"
     ],
     "dependencies": {
-        "bootstrap": "3.3.6",
         "Flot": "flot/flot#0.8.3",
         "flot-spline": "*",
         "flot.tooltip": "0.8.5",
@@ -25,6 +24,7 @@
         "animo.js": "ThrivingKings/animo.js#1.0.2",
         "jquery-localize-i18n": "*",
         "simple-line-icons": "2.2.3",
+        "moment": "2.11.1",
         "eonasdan-bootstrap-datetimepicker": "4.17.37"
     },
     "resolutions": {

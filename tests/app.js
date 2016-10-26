@@ -22,4 +22,3 @@ describe('fizzbuzz', function() {
         assert.equal(fizzbuzz(7), '7');
     });
 });
-

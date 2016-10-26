@@ -87,7 +87,7 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         var chartNode = ReactDom.findDOMNode(this.refs.chartSpline);
-        $.plot(chartNode, datav3, options);
+        //$.plot(chartNode, datav3, options);
     }
 
     render() {
