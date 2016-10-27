@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link, IndexRedirect, Redirect, browserHistory } from 'react-router';
+import { Router, Route, Link, IndexRedirect, Redirect, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 
 import '../css/app';
@@ -35,8 +35,8 @@ ReactDOM.render(
 
 	        {/* Depend on there being an Org */}
                 <Route path="/" component={Base}>
-                    
-                    <IndexRedirect to="/dashboard" />
+
+		    <IndexRoute component={Dashboard} />
                     
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/general" component={General} />
