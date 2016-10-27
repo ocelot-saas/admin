@@ -4,10 +4,10 @@ import { Col } from 'react-bootstrap';
 export class HoursRange extends React.Component {
 
     componentDidMount() {
-        $(`#dtp-start-${this.props.xid}`).datetimepicker({format: 'hh:mm A'});
-        $(`#dtp-start-${this.props.xid}`).on('dp.change', this.handleStartChange.bind(this));
-        $(`#dtp-end-${this.props.xid}`).datetimepicker({format: 'LT'});
-        $(`#dtp-end-${this.props.xid}`).on('dp.change', this.handleEndChange.bind(this));
+        // $(`#dtp-start-${this.props.xid}`).datetimepicker({format: 'hh:mm A'});
+        // $(`#dtp-start-${this.props.xid}`).on('dp.change', this.handleStartChange.bind(this));
+        // $(`#dtp-end-${this.props.xid}`).datetimepicker({format: 'LT'});
+        // $(`#dtp-end-${this.props.xid}`).on('dp.change', this.handleEndChange.bind(this));
     }
 
     handleNonStopChange(e) {

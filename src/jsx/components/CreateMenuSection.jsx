@@ -103,7 +103,7 @@ class CreateMenuSection extends React.Component {
                                         <span className="btn-label"><i className="fa fa-toggle-left"></i></span> Previous
                                     </Button>
                                     <Button bsClass="btn btn-labeled btn-primary mr" onClick={this.handleNext.bind(this)}>
-                                        <span className="btn-label"><i className="fa fa-toggle-right"></i></span> Next
+                                        <span className="btn-label"><i className="fa fa-toggle-right"></i></span> Create
                                     </Button>
                                 </div>
                             </div>
