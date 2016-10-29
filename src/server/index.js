@@ -6,6 +6,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const config = require('./config');
 const webpackConfig = require('../../webpack.config');
 
+
 const app = express();
 
 if (config.ENV == 'LOCAL') {
@@ -15,15 +16,14 @@ if (config.ENV == 'LOCAL') {
     });
     
     app.use(middleware);
-    app.use('/', express.static('./src/static'));
-    app.get('*', (req, res) => {
-	res.write(middleware.fileSystem.readFileSync(path.join(process.cwd(), 'dist/index.html')));
+    app.get('*', function (req, res) {
+	res.write(middleware.fileSystem.readFileSync(path.join(process.cwd(), 'dist', 'index.html')));
 	res.end();
     });
 } else {
-    app.use(express.static('./dist'));
-    app.get('*', (req, res) => {
-	res.sendFile(path.join(process.cwd(), 'dist/index.html'));
+    app.use('/dist', express.static('./dist'));
+    app.get('*', function (req, res) {
+	res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
     });
 }
 

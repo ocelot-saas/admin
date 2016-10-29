@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 
+
 module.exports = {
     entry: [
         path.resolve(__dirname, 'tests/app.js')

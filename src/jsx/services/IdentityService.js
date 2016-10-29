@@ -2,7 +2,8 @@ import Auth0 from 'auth0-js';
 import Auth0Lock from 'auth0-lock';
 import $ from 'jquery';
 
-import { APP_COLORS} from './../common/constants';
+import { APP_COLORS} from '../common/constants';
+import LogoSingle from '../../static/img/logo-single.png';
 
 
 export class Auth0Widget {
@@ -11,7 +12,7 @@ export class Auth0Widget {
 	this.lock = new Auth0Lock(clientId, domain,  {
             closable: false,
             theme: {
-                logo: '/img/logo-single.png',
+                logo: LogoSingle,
                 primaryColor: APP_COLORS['primary']
             },
             languageDictionary: {

@@ -5,6 +5,9 @@ import { Table } from 'react-bootstrap';
 import './Orders.less';
 
 
+import UserImage from '../../static/img/user.png';
+
+
 class Orders extends React.Component {
 
     constructor(props, context) {
@@ -39,7 +42,7 @@ class Orders extends React.Component {
                             <td className="orders-data-cell">
                                 <div className="media-box">
                                     <div className="pull-left">
-                                        <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                                        <img src={UserImage} className="img-responsive media-box-object img-circle thumb32" />
                                     </div>
                                     <div className="media-box-body clearfix">
                                         <strong className="media-box-heading text-primary">
@@ -77,7 +80,7 @@ class Orders extends React.Component {
                             <td className="orders-data-cell">
                                 <div className="media-box">
                                     <div className="pull-left">
-                                        <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                                        <img src={UserImage} className="img-responsive media-box-object img-circle thumb32" />
                                     </div>
                                     <div className="media-box-body clearfix">
                                         <strong className="media-box-heading text-primary">
@@ -134,7 +137,7 @@ class Orders extends React.Component {
                             <td className="orders-data-cell">
                                 <div className="media-box">
                                     <div className="pull-left">
-                                        <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                                        <img src={UserImage} className="img-responsive media-box-object img-circle thumb32" />
                                     </div>
                                     <div className="media-box-body clearfix">
                                         <strong className="media-box-heading text-primary">
@@ -172,7 +175,7 @@ class Orders extends React.Component {
                             <td className="orders-data-cell">
                                 <div className="media-box">
                                     <div className="pull-left">
-                                        <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                                        <img src={UserImage} className="img-responsive media-box-object img-circle thumb32" />
                                     </div>
                                     <div className="media-box-body clearfix">
                                         <strong className="media-box-heading text-primary">
@@ -229,7 +232,7 @@ class Orders extends React.Component {
                             <td className="orders-data-cell">
                                 <div className="media-box">
                                     <div className="pull-left">
-                                        <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                                        <img src={UserImage} className="img-responsive media-box-object img-circle thumb32" />
                                     </div>
                                     <div className="media-box-body clearfix">
                                         <strong className="media-box-heading text-primary">
@@ -267,7 +270,7 @@ class Orders extends React.Component {
                             <td className="orders-data-cell">
                                 <div className="media-box">
                                     <div className="pull-left">
-                                        <img src="/img/user.png" className="img-responsive media-box-object img-circle thumb32" />
+                                        <img src={UserImage} className="img-responsive media-box-object img-circle thumb32" />
                                     </div>
                                     <div className="media-box-body clearfix">
                                         <strong className="media-box-heading text-primary">

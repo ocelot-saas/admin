@@ -8,6 +8,10 @@ import { identityService } from '../services';
 import { identityClear } from '../store';
 
 
+import LogoSingle from '../../static/img/logo-single.png';
+import Logo from '../../static/img/logo.png';
+
+
 class Header extends React.Component {
     
     handleDashboardClick() {
@@ -37,10 +41,10 @@ class Header extends React.Component {
                     <div className="navbar-header">
                         <a href="#/" className="navbar-brand">
                             <div className="brand-logo">
-                                <img src="/img/logo.png" alt="App Logo" className="img-responsive" />
+                                <img src={Logo} alt="App Logo" className="img-responsive" />
                             </div>
                             <div className="brand-logo-collapsed">
-                                <img src="/img/logo-single.png" alt="App Logo" className="img-responsive" />
+                                <img src={LogoSingle} alt="App Logo" className="img-responsive" />
                             </div>
                         </a>
                     </div>
