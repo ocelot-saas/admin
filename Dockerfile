@@ -11,9 +11,6 @@ RUN apt-get update -y && \
             npm && \
     apt-get clean
 
-RUN npm install -g bower
-RUN npm install -g gulp
-
 # Setup directory structure.
 
 RUN mkdir /ocelot
@@ -29,9 +26,6 @@ RUN groupadd ocelot && \
 
 COPY package.json /ocelot/pack/package.json
 RUN cd /ocelot/pack && npm install --progress=false
-COPY bower.json /ocelot/pack/bower.json
-COPY vendor.json /ocelot/pack/vendor.json
-RUN cd /ocelot/pack && npm run-script prestart
 
 # Copy source code.
 
@@ -39,11 +33,13 @@ COPY . /ocelot/pack
 
 # Setup the runtime environment for the application.
 
-ENV ENVIRON LOCAL
+ENV ENV LOCAL
+ENV ADDRESS 0.0.0.0
+ENV PORT 10000
 
 RUN chown -R ocelot:ocelot /ocelot
 VOLUME ["/ocelot/pack/src"]
 WORKDIR /ocelot/pack
 EXPOSE 10000
 USER ocelot
-ENTRYPOINT ["gulp", "serve"]
+ENTRYPOINT ["npm", "run", "serve"]
