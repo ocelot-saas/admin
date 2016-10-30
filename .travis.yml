@@ -6,32 +6,28 @@ node_js:
 cache:
   directories:
   - node_modules
-  - bower_components
+
+env:
+  global:
+  - ENV=TEST
+  - ADDRESS=0.0.0.0
+  - PORT=10000
 
 install:
 - npm install --progress=false
-- npm run-script prestart
+- npm run build
 
 script:
-- npm run-script test-travis
+- npm run test-travis
 
 after_success: 
 - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-
-before_deploy:
-- gulp build:app
 
 deploy:
 - provider: script
   skip_cleanup: true
   script: bin/togemfury.sh
-- provider: s3
-  access_key_id:
-    secure: "lHx7ejp43ZDK7glm9Rk9vUISbEUR/Cuao7dCQx8D3+RD5+G9vXYPpGnxUYieSW1ycW7uqjq88HOolh2Ju+jv/LcbZwodDEPGJ5W73Ttou7EeCMSafzDLEKHbJtyx9J/qtCNnBTjCMMIXjrFUiLUMVsUIKeZ875cpAaaE3euKH6MubEtdybZsquFTrXrFTitxpIZUxT+S9vqDL575FVpzOfBRtGKvdLUuH7LKcSe9XwrwBD/VLG6sj7xsh6V4w7a8dzMqRl7n4umiFy/MkowrU5ysZs/yQNKRs1zldRkIjsaJmG+Rb2vNimtev/kmhMrHCJBVbU1lNPjTprI9U6NnepRIWnW56TTDhD8ydUanmQg71wUvYcWGFk1HXSBRat/jvFI0epe7DGGnZYLlbgFKSbSMqvSrbh2dGXvUt9sdJCh0elYWUI75sd87a4L2wOYfG77PZGkSobO48zZ6/9GlG64csmPLZRCOSTkPycdH7KLDxw/BX71NnKHmyTJqibuKuOJz8P3Y1InpsWMB36QEZwRc7tVkIrC1aTGKOvJesZCky2hJWo5wlFwy7BapirGmCUGFlcL3MNpRBXkeX7pLg1UoeFcZ8t4Xd37K3bAt28d5SZzNNIOeup/fiWOF4Xde3rbRJ+/gzMXxOFsOi2fw7jpFSTKDg959sYlFNpoE7FA="
-  secret_access_key:
-    secure: "RIHs2N03hSmatAAAQ5iU1qOvl+ngzVLxs9ZcCDZudZ2p4ayi6pXbUO+LBWOSkC7fPyXiRTLyjV73b8YsTeoLRvMaS+2CX6CkAuDNrN2jilHj3jc7Mw2aFC19Cipbs+++KjFWuHD2/34OZgvB0oEdKC6GUswYZUlEG5uSDDVbnMNBR58wSH9vqYFi4DAa8NKWQ3hrATqEyfI8q0OjtCGluIoQV3cDa/wN043rw0eV8XS2cvVnOLiUbaOFB5pfxvu7a4GMjWKVCG4NEl9t+l7jHfUnn/OEQShtmI7b2+MkwVWSzRoZuEyUoW/h/d5//vVvjEH7nfDuexmSG60evfC6UeI74wZJfqPngkMiUiro73ES0/YXMqWSM+rJWL8/7saZeNJtR/41NnHr8t0HUyvcN6iehnoK4K1BDPzBz0xz9Nr9MGc2JFEg9EGMsb+Y6lJ5xgtQQ/oE16+5JVpPQsRyZDTsax8tqKDsTwbL4UENBCFmkRDb+ORiAHEjBhMUAQakLd5lkU/dDTzMfjmrDFAanjXLpcUeuwOA0WhHk3D7EpcYw0ibQb8k71ixkX1RFcvmhm6I1wqT6q369FwfDXhWfEu+MHdXwg4e46ThX+m5LbH83qmN1smD6PYV+36GZrpCc13pJ0KWjD1XDgSg7+imMVeRkGzWdIN/RfYXUKBg7Hg="
-  bucket: bucketeer-0657d779-f6ef-4fbe-8f88-5dfe9e308bbb
-  skip_cleanup: true
-  acl: public_read
-  region: eu-west-1
-  local_dir: dist
+- provider: heroku
+  app: ocelot-saas-admin
+  api_key:
+    secure: "U6x1sexAKAkPjPzkQD7x8OvqdhFUZNjmM+DJwT4eOxh8pJdaUTktwMBZtNBs3OZ+m0BFtPYGrEU5UrYHhDbvmfC4QXiGG0RsST2rPudMQ6o/pWClmVatBLWcfuNcw/tRjfOTWudkSLhc1Y09fzC5BfN7GQk6+oPoPHBlUwGmQEQbmevSXq4ODYLk8rk9GQTGbF5sEtVZxFkonbSKTSiiG/5JNZ2TE6EW5KunFFR9lAilk8RV1v0wj40fdZHSOBVYJX66nkn0jVBDHhN6FUdowpWJkYYUS7LpTXEgtiGJmXJT+X6BtCfMnKRW/Da3MhZPr+X/GNS38Nk9OYfMEiMFIYxtXu9bCSQP87T23SkU+bdSrlpMqHBEBCbXzLujUcit/WwdJduqLnuaZQZaaHZV9KXhSkHT0V6uJ5BSkH0Em8uGu6kOugTUI8OJfBelzy3B6BNVlYL2PlThpe6gPYJp5Wz+PePRolimDi0xZAHHVnagflVU9M1WMELh2BI1Vdt2sC/T5xBtDxEHkvpT1ToJ7nAp6KOsCEnyPQT+6mJRog/Rei43V68ZZMrGD6OYh+mwfxJIU4FiPwsKIKK6AIPm+ybBcchuskcboaXVGwznkboGFnqdo/4H3tpxxcXOECjfFzruh8bp4fJADZw/W0GSwM3cQbbLjFRi6wfcSJpWBsE="
