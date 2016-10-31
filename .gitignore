@@ -14,10 +14,12 @@
 
 # Node and bower packages
 /node_modules/
-/bower_components/
 
 # Output of coverage tools.
 /coverage/
 
 # Anything containing .DS_Store
 .DS_Store
+
+# Secrets files
+secrets.json

@@ -12,6 +12,11 @@ env:
   - ENV=TEST
   - ADDRESS=0.0.0.0
   - PORT=10000
+  - AUTH0_KEY=null
+  - AUTH0_DOMAIN=null
+  - FILESTACK_KEY=null
+  - IDENTITY_SERVICE_PUBLIC_DOMAIN=null
+  - INVENTORY_SERVICE_PUBLIC_DOMAIN=null
 
 install:
 - npm install --progress=false

@@ -36,9 +36,15 @@ COPY . /ocelot/pack
 ENV ENV LOCAL
 ENV ADDRESS 0.0.0.0
 ENV PORT 10000
+ENV AUTH0_KEY null # Provided by secrets
+ENV AUTH0_DOMAIN null # Provided by secrets
+ENV FILESTACK_KEY null # Provided by secrets
+ENV IDENTITY_SERVICE_PUBLIC_DOMAIN localhost:10001
+ENV INVENTORY_SERVICE_PUBLIC_DOMAIN localhost:10002
 
 RUN chown -R ocelot:ocelot /ocelot
 VOLUME ["/ocelot/pack/src"]
+VOLUME ["/ocelot/var/secrets.json"]
 WORKDIR /ocelot/pack
 EXPOSE 10000
 USER ocelot
