@@ -1,10 +1,9 @@
 {
   "name": "admin",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "The admin interface users use to manage their account with us, as an NPM package.",
   "author": "Horia Coman <horia141@gmail.com>",
   "scripts": {
-    "postinstall": "webpack",
     "build": "webpack",
     "serve": "node src/server/index.js",
     "test": "true",
@@ -20,7 +19,12 @@
     "url": "https://github.com/ocelot-saas/admin/issues"
   },
   "homepage": "https://github.com/ocelot-saas/admin#readme",
-  "files": ["dist"],
+  "files": [
+      "dist",
+      "src",
+      "Procfile",
+      "webpack.config.js"
+  ],
   "dependencies": {
     "animate.css": "^3.5.2",
     "auth0-js": "^7.0.4",
