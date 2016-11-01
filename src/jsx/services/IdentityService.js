@@ -9,7 +9,7 @@ import LogoSingle from '../../static/img/logo-single.png';
 export class Auth0Widget {
 
     constructor(clientId, domain) {
-	this.lock = new Auth0Lock(clientId, domain,  {
+        this.lock = new Auth0Lock(clientId, domain,  {
             closable: false,
             theme: {
                 logo: LogoSingle,
@@ -25,17 +25,17 @@ export class Auth0Widget {
     }
 
     showLoginWidget() {
-	this.lock.show();
+        this.lock.show();
     }
 
     // TODO(horia141): better error handling
     _authorizationError(error) {
-	console.log('Authentication Error', error);
+        console.log('Authentication Error', error);
     }
 
     // TODO(horia141): better error handling    
     _unrecoverableError(error) {
-	console.log('Unrecoverable Error', error);
+        console.log('Unrecoverable Error', error);
     }
 }
 
@@ -47,16 +47,16 @@ export class IdentityService {
 
         const authResult = auth0.parseHash(window.location.hash);
 
-	var accessToken = null;
+        var accessToken = null;
 
         if (authResult && authResult.accessToken && authResult.idToken) {
-	    accessToken = authResult.accessToken;
+            accessToken = authResult.accessToken;
             this._setAccessToken(authResult.accessToken);
         } else {
-	    accessToken = this.getAccessToken();
-	}
-	    
-	this._accessToken = accessToken; // Might be null!
+            accessToken = this.getAccessToken();
+        }
+            
+        this._accessToken = accessToken; // Might be null!
         this._identityServiceDomain = identityServiceDomain
     }
 
@@ -69,11 +69,11 @@ export class IdentityService {
         const accessToken = this._accessToken;
         return new Promise(
             (resolve, reject) => {
-		if (accessToken == null) {
-		    reject(401);
-		    return;
-		}
-		
+                if (accessToken == null) {
+                    reject(401);
+                    return;
+                }
+                
                 $.get({
                     url: `http://${this._identityServiceDomain}/user`,
                     dataType: 'json',

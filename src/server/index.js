@@ -1,5 +1,7 @@
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
+const Mustache = require('mustache');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 
@@ -14,16 +16,30 @@ if (config.ENV == 'LOCAL') {
 	publicPath: webpackConfig.output.publicPath,
 	serverSideRender: false
     });
-    
+
+    app.get('/dist/app.bundle.js', function (req, res) {
+        const templateAppJsFile = middleware.fileSystem.readFileSync(path.join(process.cwd(), 'dist', 'app.bundle.js'), 'utf8');
+        const appJsFile = Mustache.render(templateAppJsFile, config);
+        res.write(appJsFile);
+        res.end();
+    });
     app.use(middleware);
     app.get('*', function (req, res) {
 	res.write(middleware.fileSystem.readFileSync(path.join(process.cwd(), 'dist', 'index.html')));
 	res.end();
     });
 } else {
+    const templateAppJsFile = fs.readFileSync(path.join(process.cwd(), 'dist', 'app.bundle.js'), 'utf8');
+    const appJsFile = Mustache.render(templateAppJsFile, config);
+    const indexFile = fs.readFileSync(path.join(process.cwd(), 'dist', 'index.html'), 'utf8');
+    app.get('/dist/app.bundle.js', function (req, res) {
+        res.write(appJsFile);
+        res.end();
+    });
     app.use('/dist', express.static('./dist'));
     app.get('*', function (req, res) {
-	res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+        res.write(indexFile);
+        res.end();
     });
 }
 

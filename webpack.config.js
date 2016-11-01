@@ -67,17 +67,7 @@ module.exports = {
         }]
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'ENV': JSON.stringify(config.ENV),
-            'process.env.NODE_ENV': config.ENV === 'LOCAL' ? '"development"' : '"production"',
-            'ADDRESS': JSON.stringify(config.ADDRESS),
-            'PORT': config.PORT,
-            'AUTH0_KEY': JSON.stringify(config.AUTH0_KEY),
-            'AUTH0_DOMAIN': JSON.stringify(config.AUTH0_DOMAIN),
-            'FILESTACK_KEY': JSON.stringify(config.FILESTACK_KEY),
-            'IDENTITY_SERVICE_PUBLIC_DOMAIN': JSON.stringify(config.IDENTITY_SERVICE_PUBLIC_DOMAIN),
-            'INVENTORY_SERVICE_PUBLIC_DOMAIN': JSON.stringify(config.INVENTORY_SERVICE_PUBLIC_DOMAIN)
-        }),
+        new webpack.DefinePlugin({'process.env.NODE_ENV': config.ENV === 'LOCAL' ? '"development"' : '"production"'}),
         new ExtractTextPlugin('app.bundle.css'),        
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.NoErrorsPlugin()

@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "The admin interface users use to manage their account with us, as an NPM package.",
   "author": "Horia Coman <horia141@gmail.com>",
   "scripts": {
@@ -20,10 +20,10 @@
   },
   "homepage": "https://github.com/ocelot-saas/admin#readme",
   "files": [
-      "dist",
-      "src",
-      "Procfile",
-      "webpack.config.js"
+    "dist",
+    "src",
+    "Procfile",
+    "webpack.config.js"
   ],
   "dependencies": {
     "animate.css": "^3.5.2",
@@ -39,6 +39,7 @@
     "jquery": "^3.1.1",
     "jwt-decode": "^2.0.1",
     "loaders.css": "^0.1.2",
+    "mustache": "^2.2.1",
     "react": "^15.3.0",
     "react-addons-css-transition-group": "^15.3.0",
     "react-addons-update": "^15.3.0",

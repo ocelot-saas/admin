@@ -1,4 +1,9 @@
 Dockerfile
+.dockerignore
+
+# Git
+.gitignore
+.git
 
 # Emacs backup files.
 *~
