@@ -6,7 +6,7 @@ exports.ADDRESS = process.env.ADDRESS;
 exports.PORT = parseInt(process.env.PORT);
 
 if (exports.ENV == 'LOCAL') {
-    const secrets = JSON.parse(fs.readFileSync('/ocelot/var/secrets.json', 'utf-8'));
+    const secrets = JSON.parse(fs.readFileSync('/ocelot-saas/var/secrets.json', 'utf-8'));
     exports.AUTH0_KEY = secrets.AUTH0_KEY;
     exports.AUTH0_DOMAIN = secrets.AUTH0_DOMAIN;
     exports.FILESTACK_KEY = secrets.FILESTACK_KEY;

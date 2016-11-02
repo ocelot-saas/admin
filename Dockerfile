@@ -13,23 +13,23 @@ RUN apt-get update -y && \
 
 # Setup directory structure.
 
-RUN mkdir /ocelot
-RUN mkdir /ocelot/pack
-RUN mkdir /ocelot/var
+RUN mkdir /ocelot-saas
+RUN mkdir /ocelot-saas/pack
+RUN mkdir /ocelot-saas/var
 
 # Setup users and groups.
 
-RUN groupadd ocelot && \
-    useradd -ms /bin/bash -g ocelot ocelot
+RUN groupadd ocelot-saas && \
+    useradd -ms /bin/bash -g ocelot-saas ocelot-saas
 
 # Install package requirements.
 
-COPY package.json /ocelot/pack/package.json
-RUN cd /ocelot/pack && npm install --progress=false
+COPY package.json /ocelot-saas/pack/package.json
+RUN cd /ocelot-saas/pack && npm install --progress=false
 
 # Copy source code.
 
-COPY . /ocelot/pack
+COPY . /ocelot-saas/pack
 
 # Setup the runtime environment for the application.
 
@@ -42,10 +42,10 @@ ENV FILESTACK_KEY null # Provided by secrets
 ENV IDENTITY_SERVICE_PUBLIC_DOMAIN localhost:10001
 ENV INVENTORY_SERVICE_PUBLIC_DOMAIN localhost:10002
 
-RUN chown -R ocelot:ocelot /ocelot
-VOLUME ["/ocelot/pack/src"]
-VOLUME ["/ocelot/var/secrets.json"]
-WORKDIR /ocelot/pack
+RUN chown -R ocelot-saas:ocelot-saas /ocelot-saas
+VOLUME ["/ocelot-saas/pack/src"]
+VOLUME ["/ocelot-saas/var/secrets.json"]
+WORKDIR /ocelot-saas/pack
 EXPOSE 10000
-USER ocelot
+USER ocelot-saas
 ENTRYPOINT ["npm", "run", "serve"]
