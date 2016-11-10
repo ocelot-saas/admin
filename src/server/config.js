@@ -4,6 +4,7 @@ const fs = require('fs');
 exports.ENV = process.env.ENV;
 exports.ADDRESS = process.env.ADDRESS;
 exports.PORT = parseInt(process.env.PORT);
+exports.MASTER_DOMAIN = process.env.MASTER_DOMAIN;
 
 if (exports.ENV == 'LOCAL') {
     const secrets = JSON.parse(fs.readFileSync('/ocelot-saas/var/secrets.json', 'utf-8'));

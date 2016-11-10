@@ -3,6 +3,7 @@ import ContentWrapper from './ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
+import { MASTER_DOMAIN } from '../config';
 import {
     OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED, compositeState,
     platformsWebsiteLoading, platformsWebsiteReady, platformsWebsiteFailed,
@@ -231,7 +232,7 @@ class Platforms extends React.Component {
                                                     required="required"
                                                     placeholder="Subdomain"
                                                     className="form-control"
-                                                    addonAfter=".ocelot.com" />
+                                                    addonAfter={ `.${ MASTER_DOMAIN }` } />
                                             </Col>
                                         </div>
                                     </form>
@@ -308,7 +309,7 @@ class Platforms extends React.Component {
                                                     required="required"
                                                     placeholder="Email"
                                                     className="form-control"
-                                                    addonAfter={ `@${ this.state.websiteSubdomain }.ocelot.com` } />
+                                                    addonAfter={ `@${ this.state.websiteSubdomain }.${ MASTER_DOMAIN }` } />
                                             </Col>
                                         </div>
                                     </form>

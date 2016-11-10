@@ -12,6 +12,7 @@ env:
   - ENV=TEST
   - ADDRESS=0.0.0.0
   - PORT=10000
+  - MASTER_DOMAIN=ocelot.com
   - AUTH0_KEY=null
   - AUTH0_DOMAIN=null
   - FILESTACK_KEY=null

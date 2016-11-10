@@ -36,6 +36,7 @@ COPY . /ocelot-saas/pack
 ENV ENV LOCAL
 ENV ADDRESS 0.0.0.0
 ENV PORT 10000
+ENV MASTER_DOMAIN ocelot.com
 ENV AUTH0_KEY null # Provided by secrets
 ENV AUTH0_DOMAIN null # Provided by secrets
 ENV FILESTACK_KEY null # Provided by secrets
