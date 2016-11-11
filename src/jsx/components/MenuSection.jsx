@@ -127,8 +127,9 @@ class MenuSection extends React.Component {
         case OPSTATE_FAILED:
             return (<div>{ this.props.currentMenuSection.errorMessage }</div>);
         case  OPSTATE_READY:
-            const menuItemSummaries = this.props.currentMenuSection.currentMenuSection.menuItems.map((mi) =>
-                <MenuItemSummary menuItem={ mi } onClick={ this.handleClickToItem.bind(this, mi.id) } />);
+	    const menuItems = this.props.currentMenuSection.currentMenuSection.items;
+            const menuItemSummaries = Object.keys(menuItems).map((mik) =>
+                <MenuItemSummary key={ mik} menuItem={ menuItems[mik] } onClick={ this.handleClickToItem.bind(this, mik) } />);
 
             return (
                 <ContentWrapper>
