@@ -25,7 +25,7 @@ RUN groupadd ocelot-saas && \
 # Install package requirements.
 
 COPY package.json /ocelot-saas/pack/package.json
-RUN cd /ocelot-saas/pack && npm install --progress=false
+RUN cd /ocelot-saas/pack && npm install --registry=https://npm-proxy.fury.io/vsRAKKMwEs5p1RhfMGiF/ocelot-saas/ --progress=false
 
 # Copy source code.
 

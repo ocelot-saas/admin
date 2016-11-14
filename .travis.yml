@@ -20,7 +20,7 @@ env:
   - INVENTORY_SERVICE_PUBLIC_DOMAIN=null
 
 install:
-- npm install --progress=false
+- npm install --registry=https://npm-proxy.fury.io/vsRAKKMwEs5p1RhfMGiF/ocelot-saas/ --progress=false
 - npm run build
 
 script:
