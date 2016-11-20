@@ -9,7 +9,7 @@ import { HoursRange } from './HoursRange';
 import ImageGallery from './ImageGallery';
 import { ToHours, ExtractHours } from '../common/hours';
 import { OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED, restaurantLoading, restaurantReady, restaurantFailed } from '../store';
-import { inventoryService } from '../services';
+import { identityService, inventoryService } from '../services';
 
 class General extends React.Component {
 
@@ -74,8 +74,9 @@ class General extends React.Component {
 
     componentDidMount() {
         if (this.props.restaurant.opState == OPSTATE_INIT) {
+            const accessToken = identityService.getAccessToken();
             inventoryService
-                .getRestaurantFromService()
+                .getRestaurant(accessToken)
                 .then((restaurant) => {
                     this.props.restaurantReady(restaurant);
                 })
@@ -159,15 +160,14 @@ class General extends React.Component {
     }
 
     handleSaveGeneral(e) {
-        const restaurantUpdateRequest = {
-            name: this.state.name,
-            description: this.state.description,
-            keywords: [],
-            address: this.state.address
-        };
+        const accessToken = identityService.getAccessToken();
+        const name = this.state.name;
+        const description = this.state.description;
+        const keywords = [];
+        const address = this.state.address;
 
         inventoryService
-            .updateRestaurantFromService(restaurantUpdateRequest)
+            .updateRestaurantGeneral(accessToken, name, description, keywords, restaurant)
             .then((restaurant) => {
                 this.props.restaurantReady(restaurant);
             })
@@ -188,16 +188,15 @@ class General extends React.Component {
     }
 
     handleSaveHours(e) {
-        const restaurantUpdateRequest = {
-            openingHours: {
-                weekday: ExtractHours(this.state.weekdayHours),
-                saturday: ExtractHours(this.state.saturdayHours),
-                sunday: ExtractHours(this.state.sundayHours)
-            }
+        const accessToken = identityService.getAccessToken();
+        const openingHours = {
+            weekday: ExtractHours(this.state.weekdayHours),
+            saturday: ExtractHours(this.state.saturdayHours),
+            sunday: ExtractHours(this.state.sundayHours)
         };
 
         inventoryService
-            .updateRestaurantFromService(restaurantUpdateRequest)
+            .updateRestaurantOpeningHours(accessToken, openingHours)
             .then((restaurant) => {
                 this.props.restaurantReady(restaurant);
             })
@@ -236,12 +235,11 @@ class General extends React.Component {
     }
 
     _handleSaveImages() {
-        const restaurantUpdateRequest = {
-            imageSet: this.state.imageSet
-        };
+        const accessToken = identityService.getAccessToken();
+        const imageSet = this.state.imageSet;
 
         inventoryService
-            .updateRestaurantFromService(restaurantUpdateRequest)
+            .updateRestaurantImageSet(accessToken, imageSet)
             .then((restaurant) => {
                 this.props.restaurantReady(restaurant);
             })

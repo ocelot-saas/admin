@@ -8,7 +8,7 @@ import { HoursRange } from './HoursRange';
 import { ExtractHours } from '../common/hours';
 import ImageGallery from './ImageGallery';
 import { OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED, orgLoading, orgReady, orgFailed, orgClear } from '../store';
-import { inventoryService } from '../services';
+import { identityService, inventoryService } from '../services';
 
 
 class CreateOrg extends React.Component {
@@ -107,21 +107,20 @@ class CreateOrg extends React.Component {
     }
 
     handleImageSetNext(e) {
-        var orgCreationRequest = {
-            name: this.state.name,
-            description: this.state.description,
-            keywords: [],
-            address: this.state.address,
-            openingHours: {
-                weekday: ExtractHours(this.state.weekdayHours),
-                saturday: ExtractHours(this.state.saturdayHours),
-                sunday: ExtractHours(this.state.sundayHours)
-            },
-	    imageSet: this.state.imageSet
+        const accessToken = identityService.getAccessToken();
+        const name = this.state.name;
+        const description = this.state.description;
+        const keywords = [];
+        const address = this.state.address;
+        const openingHours = {
+            weekday: ExtractHours(this.state.weekdayHours),
+            saturday: ExtractHours(this.state.saturdayHours),
+            sunday: ExtractHours(this.state.sundayHours)
         };
+	const imageSet = this.state.imageSet;
 
         inventoryService
-            .createOrgOnService(orgCreationRequest)
+            .createOrg(accessToken, name, description, keywords, address, openingHours, imageSet)
             .then((org) => {
                 this.context.router.push('/dashboard');
                 this.props.orgReady(org);

@@ -10,7 +10,7 @@ import ImageGallery from './ImageGallery';
 import {
     OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED,
     currentMenuItemLoading, currentMenuItemReady, currentMenuItemFailed, currentMenuItemClear } from '../store';
-import { inventoryService } from '../services';
+import { identityService, inventoryService } from '../services';
 
 
 class MenuItem extends React.Component {
@@ -58,8 +58,11 @@ class MenuItem extends React.Component {
 
     componentDidMount() {
         if (this.props.currentMenuItem.opState == OPSTATE_INIT) {
+            const accessToken = identityService.getAccessToken();
+            const itemId = this.props.params.itemId;
+            
             inventoryService
-                .getMenuItem(this.props.params.itemId)
+                .getMenuItem(accessToken, itemId)
                 .then((menuItem) => {
                     this.props.currentMenuItemReady(menuItem);
                 })
@@ -131,16 +134,15 @@ class MenuItem extends React.Component {
 
     handleSaveGeneral(e) {
         const wsRe = /^s*$/;
-	
-        const menuItemUpdateRequest = {
-            name: this.state.name,
-            description: this.state.description,
-            keywords: this.state.keywordsStr.split(",").filter((k) => !wsRe.test(k)),
-            ingredients: this.state.ingredientsStr.split(",").filter((k) => !wsRe.test(k))
-        };
-
+        const accessToken = identityService.getAccessToken();
+        const itemId = this.props.params.itemId;
+        const name = this.state.name;
+        const description = this.state.description;
+        const keywords = this.state.keywordsStr.split(",").filter((k) => !wsRe.test(k));
+        const ingredients = this.state.ingredientsStr.split(",").filter((k) => !wsRe.test(k));
+        
         inventoryService
-            .updateMenuItem(this.props.params.itemId, menuItemUpdateRequest)
+            .updateMenuItemGeneral(accessToken, itemId, name, description, keywords, ingredients)
             .then((menuItem) => {
                 this.props.currentMenuItemReady(menuItem);
             })
@@ -180,12 +182,12 @@ class MenuItem extends React.Component {
     }
 
     _handleSaveImages() {
-        const menuItemUpdateRequest = {
-	    imageSet: this.state.imageSet
-	};
+        const accessToken = identityService.getAccessToken();
+        const itemId = this.props.params.itemId;
+        const imageSet = this.state.imageSet;
 
 	inventoryService
-	    .updateMenuItem(this.props.params.itemId, menuItemUpdateRequest)
+	    .updateMenuItemImageSet(accessToken, itemId, imageSet)
 	    .then((menuItem) => {
                 this.props.currentMenuItemReady(menuItem);
             })

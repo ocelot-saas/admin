@@ -4,7 +4,7 @@ import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from '
 import { connect } from 'react-redux';
 import update from 'react-addons-update';
 
-import { inventoryService } from '../services';
+import { identityService, inventoryService } from '../services';
 import ImageGallery from './ImageGallery';
 
 
@@ -75,18 +75,16 @@ class CreateMenuItem extends React.Component {
 
     handleImageSetNext(e) {
         const wsRe = /^s*$/;
-	
-        var menuItemCreationRequest = {
-            sectionId: parseInt(this.props.params.sectionId),
-            name: this.state.name,
-            description: this.state.description,
-            keywords: this.state.keywordsStr.split(",").filter((k) => !wsRe.test(k)),
-            ingredients: this.state.ingredientsStr.split(",").filter((k) => !wsRe.test(k)),
-	    imageSet: this.state.imageSet
-        };
-
+        const accessToken = identityService.getAccessToken();
+        const sectionId = parseInt(this.props.params.sectionId);
+        const name = this.state.name;
+        const description = this.state.description;
+        const keywords = this.state.keywordsStr.split(",").filter((k) => !wsRe.test(k));
+        const ingredients = this.state.ingredientsStr.split(",").filter((k) => !wsRe.test(k));
+        const imageSet = this.state.imageSet;
+        
         inventoryService
-            .createMenuItem(menuItemCreationRequest)
+            .createMenuItem(accessToken, sectionId, name, description, keywords, ingredients, imageSet)
             .then((menuItem) => {
                 this.context.router.push(`/menu/items/${menuItem.id}`);
             })

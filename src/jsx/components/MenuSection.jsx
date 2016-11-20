@@ -7,7 +7,7 @@ import {
     OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED,
     currentMenuSectionLoading, currentMenuSectionReady, currentMenuSectionFailed, currentMenuSectionClear } from '../store';
 import MenuItemSummary from './MenuItemSummary';
-import { inventoryService } from '../services';
+import { identityService, inventoryService } from '../services';
 
 
 class MenuSection extends React.Component {
@@ -43,8 +43,11 @@ class MenuSection extends React.Component {
 
     componentDidMount() {
 	if (this.props.currentMenuSection.opState == OPSTATE_INIT) {
+            const accessToken = identityService.getAccessToken();
+            const sectionId = this.props.params.sectionId;
+            
 	    inventoryService
-	        .getMenuSection(this.props.params.sectionId)
+	        .getMenuSection(accessToken, sectionId)
 		.then((menuSection) => {
 		    this.props.currentMenuSectionReady(menuSection);
 		})
@@ -80,13 +83,13 @@ class MenuSection extends React.Component {
     }
 
     handleSaveGeneral(e) {
-        const menuSectionUpdateRequest = {
-            name: this.state.name,
-            description: this.state.description
-        };
+        const accessToken = identityService.getAccessToken();
+        const sectionId = this.props.params.sectionId;
+        const name = this.state.name;
+        const description = this.state.description;
 
         inventoryService
-            .updateMenuSection(this.props.params.sectionId, menuSectionUpdateRequest)
+            .updateMenuSection(accessToken, sectionId, name, description)
             .then((menuSection) => {
                 this.props.currentMenuSectionReady(menuSection);
             })

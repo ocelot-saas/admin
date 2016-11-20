@@ -9,7 +9,7 @@ import {
     menuItemsLoading, menuItemsReady, menuItemsFailed, menuItemsClear} from '../store';
 import MenuSectionSummary from './MenuSectionSummary';
 import MenuItemSummary from './MenuItemSummary';
-import { inventoryService } from '../services';
+import { identityService, inventoryService } from '../services';
 
 
 class Menu extends React.Component {
@@ -20,9 +20,10 @@ class Menu extends React.Component {
 
     componentDidMount() {
         if (this.props.menuSections.opState == OPSTATE_INIT
-         && this.props.menuItems.opState == OPSTATE_INIT) {
-            const getAllMenuSections = inventoryService.getAllMenuSections();
-            const getAllMenuItems = inventoryService.getAllMenuItems();
+            && this.props.menuItems.opState == OPSTATE_INIT) {
+            const accessToken = identityService.getAccessToken();
+            const getAllMenuSections = inventoryService.getAllMenuSections(accessToken);
+            const getAllMenuItems = inventoryService.getAllMenuItems(accessToken);
 
             Promise
                 .all([getAllMenuSections, getAllMenuItems])

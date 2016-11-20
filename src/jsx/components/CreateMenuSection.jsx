@@ -3,7 +3,7 @@ import ContentWrapper from './ContentWrapper';
 import { Grid, Row, Col, Panel, Button, ButtonGroup, Input, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { inventoryService } from '../services';
+import { identityService, inventoryService } from '../services';
 
 
 class CreateMenuSection extends React.Component {
@@ -26,13 +26,12 @@ class CreateMenuSection extends React.Component {
     }
 
     handleNext(e) {
-        var menuSectionCreationRequest = {
-            name: this.state.name,
-            description: this.state.description
-        };
+        const accessToken = identityService.getAccessToken();
+        const name = this.state.name;
+        const description = this.state.description;
 
         inventoryService
-            .createMenuSection(menuSectionCreationRequest)
+            .createMenuSection(accessToken, name, description)
             .then((menuSection) => {
                 this.context.router.push(`/menu/sections/${menuSection.id}`);
             })

@@ -9,7 +9,7 @@ import {
     platformsWebsiteLoading, platformsWebsiteReady, platformsWebsiteFailed,
     platformsCallcenterLoading, platformsCallcenterReady, platformsCallcenterFailed,
     platformsEmailcenterLoading, platformsEmailcenterReady, platformsEmailcenterFailed } from '../store';
-import { inventoryService } from '../services';
+import { identityService, inventoryService } from '../services';
 
 class Platforms extends React.Component {
 
@@ -54,11 +54,12 @@ class Platforms extends React.Component {
 
     componentDidMount() {
         if (this.props.platformsWebsite.opState == OPSTATE_INIT
-         && this.props.platformsCallcenter.opState == OPSTATE_INIT
-         && this.props.platformsEmailcenter.opState == OPSTATE_INIT) {
-            const getPlatformsWebsite = inventoryService.getPlatformsWebsiteFromService();
-            const getPlatformsCallcenter = inventoryService.getPlatformsCallcenterFromService();
-            const getPlatformsEmailcenter = inventoryService.getPlatformsEmailcenterFromService();
+            && this.props.platformsCallcenter.opState == OPSTATE_INIT
+            && this.props.platformsEmailcenter.opState == OPSTATE_INIT) {
+            const accessToken = identityService.getAccessToken();
+            const getPlatformsWebsite = inventoryService.getPlatformsWebsite(accessToken);
+            const getPlatformsCallcenter = inventoryService.getPlatformsCallcenter(accessToken);
+            const getPlatformsEmailcenter = inventoryService.getPlatformsEmailcenter(accessToken);
 
             Promise
                 .all([getPlatformsWebsite, getPlatformsCallcenter, getPlatformsEmailcenter])
@@ -105,12 +106,11 @@ class Platforms extends React.Component {
     }
 
     handleSaveWebsite(e) {
-        const platformsWebsiteUpdateRequest = {
-            subdomain: this.state.websiteSubdomain
-        };
+        const accessToken = identityService.getAccessToken();
+        const subdomain = this.state.websiteSubdomain;
 
         inventoryService
-            .updatePlatformsWebsiteFromService(platformsWebsiteUpdateRequest)
+            .updatePlatformsWebsite(accessToken, subdomain)
             .then((platformsWebsite) => {
                 this.props.platformsWebsiteReady(platformsWebsite);
             })
@@ -129,12 +129,11 @@ class Platforms extends React.Component {
     }
 
     handleSaveCallcenter(e) {
-        const platformsCallcenterUpdateRequest = {
-            phoneNumber: this.state.callcenterPhoneNumber
-        };
+        const accessToken = identityService.getAccessToken();
+        const phoneNumber = this.state.callcenterPhoneNumber;
 
         inventoryService
-            .updatePlatformsCallcenterFromService(platformsCallcenterUpdateRequest)
+            .updatePlatformsCallcenterFromService(accessToken, phoneNumber)
             .then((platformsCallcenter) => {
                 this.props.platformsCallcenterReady(platformsCallcenter);
             })
@@ -154,12 +153,11 @@ class Platforms extends React.Component {
 
 
     handleSaveEmailcenter(e) {
-        const platformsEmailcenterUpdateRequest = {
-            emailName: this.state.emailcenterEmailName
-        };
+        const accessToken = identityService.getAccessToken();
+        const emailName = this.state.emailcenterEmailName;
 
         inventoryService
-            .updatePlatformsEmailcenterFromService(platformsEmailcenterUpdateRequest)
+            .updatePlatformsEmailcenterFromService(accessToken, emailName)
             .then((platformsEmailcenter) => {
                 this.props.platformsEmailcenterReady(platformsEmailcenter);
             })

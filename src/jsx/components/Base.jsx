@@ -7,14 +7,15 @@ import Header from './Header'
 import Sidebar from './Sidebar'
 import Footer from './Footer'
 import { OPSTATE_INIT, OPSTATE_LOADING, OPSTATE_READY, OPSTATE_FAILED, orgLoading, orgReady, orgFailed, orgClear } from '../store';
-import { inventoryService } from '../services';
+import { identityService, inventoryService } from '../services';
 
 
 class Base extends React.Component {
 
     componentDidMount() {
+        const accessToken = identityService.getAccessToken();
         inventoryService
-            .getOrgFromService()
+            .getOrg(accessToken)
             .then((org) => {
                 this.props.orgReady(org);
             })
