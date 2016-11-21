@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "0.5.11",
+  "version": "0.5.12",
   "description": "The admin interface users use to manage their account with us, as an NPM package.",
   "author": "Horia Coman <horia141@gmail.com>",
   "scripts": {
@@ -35,6 +35,7 @@
     "express": "^4.14.0",
     "filepicker-js": "^2.4.17",
     "font-awesome": "^4.7.0",
+    "identity-sdk-js": "^0.0.3",
     "inventory-sdk-js": "^0.5.2",
     "history": "^2.0.0-rc2",
     "jquery": "^3.1.1",

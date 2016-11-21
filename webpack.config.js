@@ -28,7 +28,10 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.(js|jsx)$/,
-            include: [path.resolve(__dirname, 'src')],
+            include: [
+		path.resolve(__dirname, 'src'),
+		path.resolve(__dirname, 'node_modules', 'identity-sdk-js', 'src')
+	    ],
 	    exclude: [path.resolve(__dirname, 'src', 'server')],
             loader: 'babel',
             query: {
