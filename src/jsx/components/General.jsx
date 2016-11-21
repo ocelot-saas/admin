@@ -167,7 +167,7 @@ class General extends React.Component {
         const address = this.state.address;
 
         inventoryService
-            .updateRestaurantGeneral(accessToken, name, description, keywords, restaurant)
+            .updateRestaurantGeneral(accessToken, name, description, keywords, address)
             .then((restaurant) => {
                 this.props.restaurantReady(restaurant);
             })

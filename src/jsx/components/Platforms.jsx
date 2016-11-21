@@ -133,7 +133,7 @@ class Platforms extends React.Component {
         const phoneNumber = this.state.callcenterPhoneNumber;
 
         inventoryService
-            .updatePlatformsCallcenterFromService(accessToken, phoneNumber)
+            .updatePlatformsCallcenter(accessToken, phoneNumber)
             .then((platformsCallcenter) => {
                 this.props.platformsCallcenterReady(platformsCallcenter);
             })
@@ -157,7 +157,7 @@ class Platforms extends React.Component {
         const emailName = this.state.emailcenterEmailName;
 
         inventoryService
-            .updatePlatformsEmailcenterFromService(accessToken, emailName)
+            .updatePlatformsEmailcenter(accessToken, emailName)
             .then((platformsEmailcenter) => {
                 this.props.platformsEmailcenterReady(platformsEmailcenter);
             })
