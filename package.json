@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "0.5.12",
+  "version": "0.5.13",
   "description": "The admin interface users use to manage their account with us, as an NPM package.",
   "author": "Horia Coman <horia141@gmail.com>",
   "scripts": {
@@ -27,8 +27,6 @@
   ],
   "dependencies": {
     "animate.css": "^3.5.2",
-    "auth0-js": "^7.0.4",
-    "auth0-lock": "^10.0.0-rc.1",
     "bootstrap": "^3.3.7",
     "classlist-polyfill": "^1.0.3",
     "classnames": "^2.2.3",
@@ -38,7 +36,6 @@
     "identity-sdk-js": "^0.0.3",
     "inventory-sdk-js": "^0.5.2",
     "history": "^2.0.0-rc2",
-    "jquery": "^3.1.1",
     "jwt-decode": "^2.0.1",
     "loaders.css": "^0.1.2",
     "mustache": "^2.2.1",
